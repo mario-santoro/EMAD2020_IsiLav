@@ -1,6 +1,6 @@
 # isiLav
 Progetto per l'esame Enterprise Mobile Application Devolopment del corso di laurea magistrale di Informatica.
-<b>Tutor</b><br>
+<br><b>Tutor</b><br>
 Prof.ssa Rita Francese <br>
 Dott. Alessandro Belmonte
 <br><b>studenti di informatica </b>
