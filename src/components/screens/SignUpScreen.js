@@ -20,15 +20,15 @@ const SignUpScreen = ({ navigation }) => {
   const [numCarta, setNumCarta] = React.useState('');
   const registrazione = (email, pasw, paswConfirm, nome, cognome, codFiscale) => {
     const regE = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-    if(regE.test(email)){
+    if (regE.test(email)) {
 
       alert("email ok")
     } else {
-        alert("email formato errato")
-      }
-    
+      alert("email formato errato")
+    }
+
     const regP = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/);
-        const isOk = regP.test(pasw);
+    const isOk = regP.test(pasw);
     if (isOk) {
       alert('pass');
       if (pasw === paswConfirm) {
@@ -36,21 +36,23 @@ const SignUpScreen = ({ navigation }) => {
       } else {
         alert("password diverse")
       }
-  
+
     } else {
       alert('fail');
     }
-   
+
   }
   return (
     <View
-      style={{ flex: 1, backgroundColor: 'white' }}
+      style={{ flexDirection: "column", flex: 1, backgroundColor: 'white' }}
     >
-      <StatusBar
-        backgroundColor="#6AA84F"
-        barStyle="light-content"
-      />
-      <BackButton onPress={() => navigation.navigate('Login')}></BackButton>
+      <View style={{ flex: 1, }}>
+        <StatusBar
+          backgroundColor="#6AA84F"
+          barStyle="light-content"
+        />
+        <BackButton onPress={() => navigation.navigate('Login')}></BackButton>
+      </View>
       <View style={styles.bottom}>
 
         <Hr testo="Credenziali utente" />
@@ -79,17 +81,18 @@ const SignUpScreen = ({ navigation }) => {
         <TextInputCustomer placeholder="Numero Carta"
           value={numCarta}
           onChangeText={numCarta => setNumCarta(numCarta)} />
-    
-      </View>
-      <View
-        style={{ alignItems: "center", justifyContent: 'center', backgroundColor: 'white' }}
-      >
-        <GenericButton
+
+           <GenericButton
           testo="Registrati"
           onPress={() => registrazione(email, pasw, paswConfirm, nome, cognome, codFiscale)}
-        >
+        />
 
-        </GenericButton>
+      </View>
+      <View
+        style={{  alignItems: "center" , }}
+      >
+     
+        
       </View>
     </View>
   );
@@ -99,11 +102,11 @@ const styles = StyleSheet.create({
 
 
   bottom: {
-    flex: 1,
+    flex: 8,
     alignItems: "center",
     justifyContent: "center",
-
-
+  
+    position: 'absolute', height: 100,  right:0, left:0, bottom:50, top:350
   },
 
 
