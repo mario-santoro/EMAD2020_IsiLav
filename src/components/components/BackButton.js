@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 
 const BackButton = ({onPress}) => {
     return (
-        <View style={{ flexDirection: "row", paddingTop: 20}}>
+        <View style={{ flexDirection: "row", paddingTop: 20,  }}>
             <View style={{ flex: 1 }}>
                 <TouchableOpacity onPress={onPress} style={styles.button}>
                     <Icon name="arrow-back" color="lightgrey"></Icon>
