@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     baseText: {
         fontSize: 14,
         color: 'black',
-      
+    
 
     },
     container: {

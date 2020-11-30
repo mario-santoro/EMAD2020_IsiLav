@@ -4,7 +4,7 @@ import { Link } from '@react-navigation/native';
 import EmailTextInput from '../components/EmailTextInput';
 import PasswordTextInput from '../components/PasswordTextInput';
 import GenericButton from '../components/GenericButton';
-import SignupButton from '../components/SignupButton';
+import SignupButton from '../components/ReverseButton';
 import LogoNome from '../components/LogoNome';
 const LoginScreen = ({navigation}) => {
   
@@ -22,8 +22,8 @@ const LoginScreen = ({navigation}) => {
       <EmailTextInput placeholder="Email" ic="mail"/>
       <PasswordTextInput placeholder="Password"/>
       
-      <GenericButton testo="Accedi" onPress={() => navigation.navigate('Home')} />
-      <SignupButton onPress={() => navigation.navigate('SignUp')} />
+      <GenericButton testo="Accedi" onPress={() => navigation.navigate('MyProfile')} />
+      <SignupButton onPress={() => navigation.navigate('SignUp')} testo="Registrazione"/>
       
       <Link style={styles.linkP} to="/RetrivePassw">Hai dimenticato la password?</Link>
     </View>
