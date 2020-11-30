@@ -59,7 +59,9 @@ const styles = {
   },
   title: {
       fontSize: 22,
-      alignSelf: 'center'
+      alignSelf: 'center',
+        color: '#6AA84F',
+
   },
   tcP: {
       marginTop: 10,

@@ -1,32 +1,35 @@
-import React, { useState } from 'react';
-import {View, StyleSheet } from 'react-native'
-
+import React, { useState, useCallback } from 'react';
+import {View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import PropTypes from 'prop-types';
 import MonthYearPicker from 'react-native-simple-month-year-picker';
 const SelectYM = () => {
-    const [isShow, setIsShow] = useState(true);
+var  month;
+  const [show, setShow] = useState(false);
+  const [year, setYear] = useState("");
+  const showPicker = useCallback((value) => setShow(value), []);
+
   return (
     <View  >
    
+      <Text>Scegli data di scadenza</Text>
+      
+      <TouchableOpacity onPress={() => showPicker(true)}><Text>premi</Text></TouchableOpacity>
+      {show && (
          <MonthYearPicker
-    isShow={isShow}
-    close={() => setIsShow(false)} //setState isShow to false
-    onChangeYear={(year) => console.log(year)}
+    isShow={show}
+   
+    close={() => setShow(false)} //setState isShow to false
+    onChangeYear={(year) => setYear(year)}
     onChangeMonth={(month) => console.log(month)}
-/>
+/>  )}
+<Text>Anno: {year}, Mese: {month} </Text>
 </View>
   );
 };
 
 const styles = StyleSheet.create({
  
-    button: {
-    flex:1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
-    flexDirection:"column",
-    width: "80%",
-  },
+  
 
   text: {
     padding: 7,
@@ -34,5 +37,7 @@ const styles = StyleSheet.create({
     color: "#6AA84F",
   }
 });
+
+
 
 export default SelectYM;
