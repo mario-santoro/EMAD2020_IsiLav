@@ -1,43 +1,11 @@
 import React from 'react';
-import { View, Text, StatusBar, FlatList, StyleSheet, Image } from 'react-native';
-import { Header, SearchBar } from 'react-native-elements';
+import { View, FlatList, StyleSheet } from 'react-native';
 import CategoryItem from '../components/CategoryItem';
 import TopBar from '../components/TopBar';
+import * as API from '../services/API';
 
-const categories = [ //Da ottenere dinamicamente con API
-  {
-    id: '0',
-    name: 'Bagno',
-    image: require("../../images/bagno.jpg")
-  },
-  {
-    id: '1',
-    name: 'Letto',
-    image: require("../../images/letto.jpg")
-  },
-  {
-    id: '2',
-    name: 'Tavola',
-    image: require("../../images/tavola.jpg")
-  },
-  /*
-  {
-    id: '3',
-    name: 'CategoriaX',
-    image: require("../../images/bagno.jpg")
-  },
-  {
-    id: '4',
-    name: 'CategoriaY',
-    image: require("../../images/letto.jpg")
-  },
-  {
-    id: '5',
-    name: 'CategoriaZ',
-    image: require("../../images/tavola.jpg")
-  },
-  */
-];
+//Ottengo le categorie disponibili dall'API
+const categories = API.getCategories();
 
 const HomeScreen = ({navigation}) => {
 
@@ -47,29 +15,28 @@ const HomeScreen = ({navigation}) => {
     >
     
     <TopBar />
-
+    
+    
     <FlatList
     data={categories}
     renderItem={({item}) => (
-      <CategoryItem name={item.name} image={item.image} onPress={() => onPress(item.id)} />
+      <CategoryItem name={item.name} image={item.image} onPress={() => onCategoryPress(navigation, item.id)} />
     )}
     keyExtractor={item => item.id}
-
     />
 
     </View>
   );
 };
 
-const onPress = (itemID) => {
-  alert(itemID);
+const onCategoryPress = (navigation, itemID) => {
+  navigation.navigate('Category')
 };
  
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: 'white'
   }
   
 });
