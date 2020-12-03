@@ -161,5 +161,8 @@ const styles = StyleSheet.create({
 
 
   },
+  label: {
+    margin: 8,
+  },
 });
 export default SignUpScreen;
