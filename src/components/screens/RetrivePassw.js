@@ -13,7 +13,7 @@ const LoginScreen = ({ navigation }) => {
         >
             <View style={{ flex: 1, }}>
                 <StatusBar
-                    backgroundColor="#6AA84F"
+                    backgroundColor="#5f9747"
                     barStyle="light-content"
                 />
 

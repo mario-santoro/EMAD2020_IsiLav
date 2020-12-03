@@ -5,7 +5,7 @@ import PasswordTextInput from '../components/PasswordTextInput';
 import GenericButton from '../components/GenericButton';
 import BackButton from '../components/BackButton';
 
-const LoginScreen = ({ navigation }) => {
+const ChangePassw = ({ navigation }) => {
     const [isFocus, setFocus] = useState(false);
     return (
         <View
@@ -13,7 +13,7 @@ const LoginScreen = ({ navigation }) => {
         >
             <View style={{ flex: 1, }}>
                 <StatusBar
-                    backgroundColor="#6AA84F"
+                    backgroundColor="#5f9747"
                     barStyle="light-content"
                 />
 
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default LoginScreen;
+export default ChangePassw;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, StatusBar } from 'react-native';
 import GenericButton from '../components/GenericButton';
-
+import TopBar from '../components/TopBar';
 const ConfirmSignUpScreen = ({ navigation }) => {
 
     return (
@@ -9,25 +9,25 @@ const ConfirmSignUpScreen = ({ navigation }) => {
         <View
             style={{ flex: 1, backgroundColor: 'white' }}
         >
-
-
-
-            <View style={{ flex: 1, alignItems: "center", justifyContent: 'center' }}>
-                <StatusBar
+<StatusBar
                     backgroundColor="#5f9747"
                     barStyle="light-content"
                 />
-                <Text style={styles.baseText}>I suoi dati saranno presi in esame, riceverà un e-mail alla conferma.</Text>
+               <TopBar/>
+
+
+            <View style={{ flex:1, alignItems: "center", justifyContent: 'center' }}>
+                
                 <Image
                     style={styles.logo}
-                    source={require('C:/Users/mario/Desktop/DInfUniSa/MagistraleMatricola_866/2anno/Enterprise Mobile Application Development/IsiLav/image/check.png')}
+                    source={require('../../image/check.png')}
                 />
-                <Text style={styles.baseText}>Grazie!</Text>
+                <Text style={styles.baseText}>L'operazione è stata completata con successo!</Text>
 
             </View>
             <View style={{  alignItems: "center", justifyContent: 'center' }}>
 
-                <GenericButton onPress={() => navigation.navigate('Login')} testo="Torna al Login" />
+                <GenericButton onPress={() => navigation.navigate('Home')} testo="Torna alla home" />
             </View>
 
 

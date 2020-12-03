@@ -8,7 +8,8 @@ import GenericButton from '../components/GenericButton';
 import BackButton from '../components/BackButton';
 import Hr from '../components/HorizLine';
 import SelectYM from '../components/SelectMY';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input } from 'react-native-elements';
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -18,10 +19,11 @@ const SignUpScreen = ({ navigation }) => {
   const [pasw, setPasw] = React.useState('');
   const [paswConfirm, setPaswConfirm] = React.useState('');
   const [nome, setNome] = React.useState('');
-  const [cognome, setCognome] = React.useState('');
   const [codFiscale, setCodFiscale] = React.useState('');
   const [numCarta, setNumCarta] = React.useState('');
-  const registrazione = (email, pasw, paswConfirm, nome, cognome, codFiscale) => {
+  const [nomeAtt, setNomeAtt] = React.useState('');
+  const [piva, setPiva] = React.useState('');
+  const registrazione = (email, pasw, paswConfirm, nome, codFiscale) => {
     const regE = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     if (regE.test(email)) {
 
@@ -47,11 +49,11 @@ const SignUpScreen = ({ navigation }) => {
   }
   return (
     <View
-      style={{ flexDirection: "column", flex: 1, backgroundColor: 'white' }}
+      style={{ height: "100%", flexDirection: "column", flex: 1, backgroundColor: 'white' }}
     >
-      <View style={{ flex: 1, alignItems: "center", }}>
+      <View style={{  alignItems: "center", }}>
         <StatusBar
-          backgroundColor="#6AA84F"
+          backgroundColor="#5f9747"
           barStyle="light-content"
         />
         <BackButton onPress={() => navigation.navigate('Login')}></BackButton>
@@ -59,8 +61,8 @@ const SignUpScreen = ({ navigation }) => {
       </View>
 
       <ScrollView style={{
-        height: height * .8, marginTop: 30,
-        marginBottom: 15, position: 'absolute', top: 90, right: 0, left: 0, bottom: 0,
+        height: height * .80,  width: "100%",
+
       }}>
         <View style={styles.bottom}>
 
@@ -72,38 +74,53 @@ const SignUpScreen = ({ navigation }) => {
 
           <Hr testo="Dati anagrafici" />
           <TextInputCustomer
-            placeholder="Nome"
+            placeholder="Nome e cognome"
             value={nome}
-            onChangeText={nome => setNome(nome)} />
-
-          <TextInputCustomer
-            placeholder="Cognome"
-            value={cognome}
-            onChangeText={cognome => setCognome(cognome)} />
+            onChangeText={nome => setNome(nome)} />          
 
           <TextInputCustomer
             placeholder="Codice fiscale"
             value={codFiscale}
             onChangeText={codFiscale => setCodFiscale(codFiscale)} />
 
+          <TextInputCustomer
+            placeholder="Nome attività"
+            value={nomeAtt}
+            onChangeText={nomeAtt => setNomeAtt(nomeAtt)} />
+
+          <TextInputCustomer
+            placeholder="Partita IVA"
+            value={piva}
+            onChangeText={piva => setPiva(piva)} />
+
           <Hr testo="Metodo di pagamento" />
           <TextInputCustomer placeholder="Numero Carta"
             value={numCarta}
             onChangeText={numCarta => setNumCarta(numCarta)} />
-          <SelectYM placeholder="inserisci" />
+
+          {/*  
+ 
+          <Input
+            placeholder="es: paolo.rossi@yahoo.com"
+            rightIcon={{ type: 'font-awesome', name: 'user' }}
+            label="Inserisci email"
+            onChangeText={value => this.setState({ comment: value })}
+            errorStyle={{ color: 'red' }}
+            errorMessage='EMAIL NON VALIDA'
+          />
+        */}
+          {/* <Text>Is CheckBox selected: {isSelected ? "👍" : "👎"}</Text> */}
           <View style={styles.checkboxContainer}>
             <CheckBox
               value={isSelected}
               onValueChange={setSelection}
               style={styles.checkbox}
             />
-            <Text style={styles.label}>Accetto i termini e condizioni(<Link style={styles.linkP} to="/TermAndCondition">leggi tutte le condizioni</Link>)</Text>
+            <Text style={styles.label}>Accetto i termini e condizioni (<Link style={styles.linkP} to="/TermAndCondition">leggi tutte le condizioni</Link>)</Text>
           </View>
-          <Text>Is CheckBox selected: {isSelected ? "👍" : "👎"}</Text>
-
           <GenericButton
             testo="Registrati"
-            onPress={() => registrazione(email, pasw, paswConfirm, nome, cognome, codFiscale)}
+            onPress={() => registrazione(email, pasw, paswConfirm, nome, codFiscale)}
           />
 
         </View>
@@ -117,22 +134,20 @@ const styles = StyleSheet.create({
 
   bottom: {
 
-    flex: 9,
+ 
     alignItems: "center",
     justifyContent: "center",
 
   },
   checkboxContainer: {
     flexDirection: "row",
-    marginBottom: 20,
+    marginTop: 30,
     width: "80%",
   },
   checkbox: {
     alignSelf: "center",
   },
-  label: {
-    margin: 8,
-  },
+
   linkP: {
 
     color: "#6AA84F",

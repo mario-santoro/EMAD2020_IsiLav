@@ -13,7 +13,7 @@ const LoginScreen = ({navigation}) => {
     style={{flex: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white'}}
     >
       <StatusBar
-      backgroundColor="#6AA84F"
+      backgroundColor="#5f9747"
       barStyle="light-content"
       />
 
@@ -22,7 +22,7 @@ const LoginScreen = ({navigation}) => {
       <EmailTextInput placeholder="Email" ic="mail"/>
       <PasswordTextInput placeholder="Password"/>
       
-      <GenericButton testo="Accedi" onPress={() => navigation.navigate('MyProfile')} />
+      <GenericButton testo="Accedi" onPress={() => navigation.navigate('Home')} />
       <SignupButton onPress={() => navigation.navigate('SignUp')} testo="Registrazione"/>
       
       <Link style={styles.linkP} to="/RetrivePassw">Hai dimenticato la password?</Link>

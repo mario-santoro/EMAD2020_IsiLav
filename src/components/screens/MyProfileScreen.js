@@ -1,7 +1,7 @@
 import React from 'react';
-import {Dimensions, StyleSheet, View, Text, ScrollView, StatusBar } from 'react-native';
-import BackButton from '../components/BackButtonReverse';
-import ReverseButton from '../components/ReverseButton';
+import { TouchableOpacity, Dimensions, StyleSheet, View, Text, SafeAreaView, StatusBar } from 'react-native';
+import { Icon } from 'react-native-elements';
+import TopBar from '../components/TopBar';
 import Hr from '../components/HorizLine';
 import TextInputCustomer from '../components/TextInputCustomer';
 import GenericButton from '../components/GenericButton';
@@ -9,62 +9,69 @@ const MyProfileScreen = ({ navigation }) => {
 
     return (
         <View
-            style={{ flexDirection: "column", flex: 1, backgroundColor: 'white' }}
+            style={{ height: "100%", flexDirection: "column", flex: 1, backgroundColor: "white" }}
         >
-            <View style={{ flex: 1, }}>
+            <View style={{ alignItems: "center", }}>
                 <StatusBar
-                    backgroundColor="#6AA84F"
+                    backgroundColor="#5f9747"
                     barStyle="light-content"
                 />
-                <BackButton onPress={() => navigation.navigate('Login')}></BackButton>
+              <TopBar navigation={navigation}/>
+
+                <View style={{
+                    alignItems: "center", marginTop: 15,
+                }}>
+                    <Text style={styles.titolo}>Il mio profilo</Text>
+                </View>
             </View>
-            
-      <ScrollView style={{
-        height: height * .8, 
-        marginBottom: 15, position: 'absolute', top: 90, right: 0, left: 0, bottom: 0,
-      }}> 
-            <View style={styles.bottom}>
-
-           
-
-                <Text style={styles.titolo}>Il mio profilo</Text>
-               
-                <Hr testo="Modifica Credenziali utente" />
-                 <ReverseButton
-                    testo="Modifica Password"
-                    onPress={() => navigation.navigate('RetrivePassw')}
-                />
-                <Hr testo="Modifica Dati anagrafici" />
-                <TextInputCustomer
-                    placeholder="Nome"
-                   
-                    onChangeText={nome => setNome(nome)} />
-
-                <TextInputCustomer
-                    placeholder="Cognome"
-                   
-                    onChangeText={cognome => setCognome(cognome)} />
-
-                <TextInputCustomer
-                    placeholder="Codice fiscale"
-                    
-                    onChangeText={codFiscale => setCodFiscale(codFiscale)} />
-
-                <Hr testo="Metodo di pagamento" />
-                <TextInputCustomer placeholder="Numero Carta"
-               
-                    onChangeText={numCarta => setNumCarta(numCarta)} />
-               
-              
-
-                <GenericButton
-                    testo="Conferma"
-                    onPress={() => navigation.navigate('Login')}
-                />
-                
-            </View>
-            </ScrollView>
-
+            <SafeAreaView style={styles.container}>
+                <TouchableOpacity  onPress={() => navigation.navigate('ChangePassword2')}  style={styles.item}>
+                    <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "column", flex: 8 }}>
+                        <Text style={styles.baseTextBold}>Credenziali utente:</Text>
+                            <View style={{ flexDirection: "row" ,marginLeft:10}}>
+                               
+                                <Text style={styles.baseText}>Password: ******</Text>
+                            </View>
+                        </View>
+                        <View style={{ flex: 2, justifyContent: "center" }}>
+                            <Icon name="navigate-next" color="lightgrey" size={50} ></Icon>
+                        </View>
+                    </View>                    
+                </TouchableOpacity>
+                <TouchableOpacity  onPress={() => navigation.navigate('ChangeAnagrafica')}  style={styles.item}>
+                    <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "column", flex: 8 }}>
+                        <Text style={styles.baseTextBold}>Dati anagrafici:</Text>
+                            <View style={{ flexDirection: "column", marginLeft:10 }}>
+                               
+                                <Text style={styles.baseText}>Nome e Cognome: Mario Rossi</Text>
+                                <Text style={styles.baseText}>Codice Fiscale: RSIMRA12FGR85</Text>
+                                <Text style={styles.baseText}>Nome attività: Hotel Fantastico</Text>
+                                <Text style={styles.baseText}>P.IVA: HDHF4385HF3J</Text>
+                            </View>
+                        </View>
+                        <View style={{ flex: 2, justifyContent: "center" }}>
+                            <Icon name="navigate-next" color="lightgrey" size={50} ></Icon>
+                        </View>
+                    </View>                    
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.item}>
+                    <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "column", flex: 8 }}>
+                        <Text style={styles.baseTextBold}>Metodo di pagamento:</Text>
+                            <View style={{ flexDirection: "column" ,marginLeft:10}}>
+                            <Text style={styles.baseText}>Tipo carta: Master Card</Text>
+                                <Text style={styles.baseText}>N° Carta: ********654</Text>
+                                <Text style={styles.baseText}>Data scadenza: 12/2025</Text>
+                            </View>
+                        </View>
+                        <View style={{ flex: 2, justifyContent: "center" }}>
+                            <Icon name="navigate-next" color="lightgrey" size={50} ></Icon>
+                        </View>
+                    </View>                    
+                </TouchableOpacity>
+            </SafeAreaView>
         </View>
     );
 }
@@ -74,17 +81,47 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#6AA84F',
         fontWeight: "bold"
-        
-    },
-    bottom: {
-        
-        flex: 9,
-        alignItems: "center",
-        justifyContent: "center",
 
-        //position: 'absolute', height: 100, right: 0, left: 0, bottom: 50, top: 350
     },
+  
+  
+    textButton: {
+        padding: 7,
+        fontSize: 20,
+        color: "#6AA84F",
+    },
+    container: {
+        flex: 3,
+        // marginTop: StatusBar.currentHeight || 0,
+    },
+    item: {
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+        borderWidth: 2,
+        borderColor: "lightgrey",
+        borderRadius: 10,
+    },
+    baseText: {
+        fontSize: 14,
+    },
+    baseTextBold: {
+        fontWeight: "bold",
+        fontSize: 14,
 
+    },
+    titolo: {
+        fontSize: 20,
+        color: '#6AA84F',
+        fontWeight: "bold"
+
+    },
+    icon: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingRight: 10,
+    },
 
 });
 
