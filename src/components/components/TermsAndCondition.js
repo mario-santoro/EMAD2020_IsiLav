@@ -41,7 +41,7 @@ Unauthorised use of this website may give rise to a claim for damages and/or be 
                 <Text style={styles.tcP}>The use of this website is subject to the following terms of use</Text>
             </ScrollView>
               
-            <TouchableOpacity disabled={ !this.state.accepted } onPress={ ()=>alert("Terms and conditions accepted") } style={ this.state.accepted ? styles.button : styles.buttonDisabled }><Text style={styles.buttonLabel}>Accept</Text></TouchableOpacity>
+           {/* <TouchableOpacity disabled={ !this.state.accepted } onPress={ ()=>alert("Terms and conditions accepted") } style={ this.state.accepted ? styles.button : styles.buttonDisabled }><Text style={styles.buttonLabel}>Accept</Text></TouchableOpacity>*/}
       </View>
     );
   }
@@ -81,7 +81,7 @@ const styles = {
   tcContainer: {
       marginTop: 15,
       marginBottom: 15,
-      height: height * .7
+      height: height * .77
   },
 
   button:{
