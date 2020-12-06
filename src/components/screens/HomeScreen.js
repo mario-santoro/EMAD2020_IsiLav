@@ -52,7 +52,7 @@ const HomeScreen = ({navigation}) => {
     data={categories}
     renderItem={({item}) => (
     
-      <CategoryItem name={item.name} image={item.image}    onPress={() => navigation.navigate('MyProfile')} 
+      <CategoryItem name={item.name} image={item.image}    onPress={() => navigation.navigate('Category')} 
       //onPress={() => onPress(item.id)}
        />
       

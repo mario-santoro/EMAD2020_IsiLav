@@ -56,7 +56,7 @@ const MyProfileScreen = ({ navigation }) => {
                         </View>
                     </View>                    
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.item}>
+                <TouchableOpacity onPress={() => navigation.navigate('ChangePayMethod')}  style={styles.item}>
                     <View style={{ flexDirection: "row" }}>
                         <View style={{ flexDirection: "column", flex: 8 }}>
                         <Text style={styles.baseTextBold}>Metodo di pagamento:</Text>

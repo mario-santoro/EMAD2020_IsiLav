@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Text, StyleSheet, View, StatusBar, ScrollView } from 'react-native';
 import GenericButton from '../components/GenericButton';
 import TopBar from '../components/TopBar';
-import InputElement from '../components/InputElement'
+import InputElement from '../components/InputElement';
+import Select from '../components/SelectMY';
 const LoginScreen = ({ navigation }) => {
     const [isFocus, setFocus] = useState(false);
     return (
@@ -16,24 +17,19 @@ const LoginScreen = ({ navigation }) => {
                 />
 
                 <TopBar navigation={navigation} />
-                <Text style={styles.titolo}>Cambia anagrafica</Text>
+                <Text style={styles.titolo}>Cambia metodo di pagamento</Text>
             </View>
 
             <ScrollView>
                 <View style={{ alignItems: "center", }}>
                     <View style={styles.container}>
-                        <InputElement placeholder="Nome e cognome"
-                            value="Mario Rossi"
-                            label="Nome e Cognome" />
-                        <InputElement placeholder="Codice fiscale"
-                            value="RSIMRA12FGR85"
-                            label="Codice fiscale" />
-                        <InputElement placeholder="Nome attività"
-                            value="Hotel Fantastico"
-                            label="Nome attività" />
-                        <InputElement placeholder="Partita IVA"
-                            value="HDHF4385HF3J"
-                            label="Partita IVA" />
+                        <InputElement placeholder="Numero Carta"
+                            value="********654"
+                            label="Numero Carta" />
+                        <View style={{ marginLeft: -60 }}>
+                            <Select />
+
+                        </View>
                     </View>
                     <GenericButton testo="Cambia" onPress={() => navigation.navigate('SuccessScreen')} />
                 </View>

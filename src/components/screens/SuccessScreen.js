@@ -13,7 +13,7 @@ const ConfirmSignUpScreen = ({ navigation }) => {
                     backgroundColor="#5f9747"
                     barStyle="light-content"
                 />
-               <TopBar/>
+               <TopBar navigation={navigation}/>
 
 
             <View style={{ flex:1, alignItems: "center", justifyContent: 'center' }}>
