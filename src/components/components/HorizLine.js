@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
   
     baseText: {
-      fontSize: 16,
+      fontSize: 18,
       color: '#6AA84F',
       width: "40%"
     }

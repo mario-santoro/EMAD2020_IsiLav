@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     name: {
-        alignSelf: 'flex-end',
+        alignSelf: 'flex-start',
         color: 'white',
-        padding: 3,
+        padding: 5,
         fontSize: 30,
+        marginLeft: 10,
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
     },
