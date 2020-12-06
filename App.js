@@ -14,6 +14,10 @@ import ListaOrdini from './src/screens/ListaOrdiniScreen';
 import ChangePassword2 from './src/screens/ChangePassword2';
 import SuccessScreen from './src/screens/SuccessScreen';
 import ChangeAnagrafica from './src/screens/ChangeAnagrafica';
+import DettaglioProdotto from './src/screens/DettaglioProdotto';
+import CategoryScreen from './src/screens/CategoryScreen';
+import Giacenza from './src/screens/Giacenza';
+import ChangePayMethod from './src/screens/ChangePayMethod';
 const RootStack = createStackNavigator();
  
 const App = () => {
@@ -32,6 +36,10 @@ const App = () => {
         <RootStack.Screen name="ChangePassword2" component={ChangePassword2} options={{headerShown: false}}/>
         <RootStack.Screen name="SuccessScreen" component={SuccessScreen} options={{headerShown: false}}/>
         <RootStack.Screen name="ChangeAnagrafica" component={ChangeAnagrafica} options={{headerShown: false}}/>
+        <RootStack.Screen name="DettaglioProdotto" component={DettaglioProdotto} options={{headerShown: false}}/>
+        <RootStack.Screen name="Category" component={CategoryScreen} options={{headerShown: false}}/>
+        <RootStack.Screen name="Giacenza" component={Giacenza} options={{headerShown: false}}/>
+        <RootStack.Screen name="ChangePayMethod" component={ChangePayMethod} options={{headerShown: false}}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );
