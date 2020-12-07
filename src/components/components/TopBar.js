@@ -1,10 +1,14 @@
+import { setStatusBarHidden } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native';
-import { Header, SearchBar, Overlay, Icon, ListItem } from 'react-native-elements';
+import { Header, SearchBar, Overlay, Icon, ListItem, Badge, withBadge } from 'react-native-elements';
 
 
 
-const TopBar = ({ navigation }) => {
+const TopBar = ({ navigation, quantità }) => {
+   
+     
+ 
     const list = [
         {
             name: 'Il mio profilo',
@@ -62,10 +66,22 @@ const TopBar = ({ navigation }) => {
                     <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                         <Image source={require('../../image/icona-bianca.png')} style={{ height: 35, width: 35 }} />
                         <Text style={{ color: "white", marginLeft: 2, fontSize: 28, fontWeight: "bold" }}>IsiLav</Text>
+
                     </View>
                 </TouchableOpacity></View>}
                 //centerComponent={{ text: 'IsiLav', style: { color: '#FFFFFF', fontSize: 25 } }}
-                rightComponent={{ icon: 'shopping-cart', size: 30, color: '#FFFFFF' }}
+                rightComponent={
+                    <View>
+                        <Icon name='shopping-cart' color='#FFFFFF'   size={30} ></Icon>
+                        {quantità>0 && (
+
+                            <Badge value={quantità} status="error" containerStyle={{ position: 'absolute', top: -4, right: -4 }} />
+                        )
+
+                        }
+
+                    </View>
+                }
             />
 
 
