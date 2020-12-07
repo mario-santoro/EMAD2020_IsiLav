@@ -10,10 +10,9 @@ import Lis from '../components/ListaGiacenza';
 const giacenza = API.getGiacenza();
 
 
-const dat = API.getDate();
 
 const Giacenza = ({ navigation }) => {
-    const [shouldShow, setShouldShow] = useState(true);
+ 
 
     return (
         <View  
@@ -30,21 +29,7 @@ const Giacenza = ({ navigation }) => {
                 data={giacenza}
                 renderItem={({ item }) => (
 
-                    <ListItem onPress={() => setShouldShow(!shouldShow)} bottomDivider>
-                        <View style={{flexDirection:"column"}}>
-                        <View style={{flexDirection:"row", width:380,  }}>
-                        <Image source={item.image} resizeMethod='auto' resizeMode='cover' style={{ width: 125, height: 128 }} />
-                        <ListItem.Content>
-                            <ListItem.Title style={{ color: "#6AA84F", fontWeight: 'bold', marginBottom: 30, marginLeft:10 }}>{item.name}</ListItem.Title>
-                            <ListItem.Title style={{  marginLeft:10 }}>Q.tà: <Text style={{ fontWeight: 'bold', }}>{item.quantità}</Text></ListItem.Title>                                                    
-                        </ListItem.Content>
-                        <Icon style={{marginTop:50,}} name="expand-more" color="lightgrey" size={32} ></Icon>
-                        </View>
-                      
-                        <Lis shouldShow={shouldShow} />
-                        </View>
-
-                    </ListItem>
+                   <Lis item={item}/>
 
                 )
 

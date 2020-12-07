@@ -26,7 +26,7 @@ const LoginScreen = ({ navigation }) => {
                         <InputElement placeholder="Numero Carta"
                             value="********654"
                             label="Numero Carta" />
-                        <View style={{ marginLeft: -60 }}>
+                        <View style={{ flex:1, width:"100%",   }}>
                             <Select />
 
                         </View>

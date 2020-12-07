@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { Dimensions, ScrollView, View, Text, StatusBar, StyleSheet, Image } from 'react-native';
+import { Dimensions, ScrollView, View, Text, StatusBar, StyleSheet, Image,  } from 'react-native';
 import GenericButton from '../components/GenericButton';
 import TopBar from '../components/TopBar';
 import RNPickerSelect from 'react-native-picker-select';
 
+
 const DettaglioProdotto = ({ navigation }) => {
-    const [selectedValue, setSelectedValue] = useState("1");
-    const { width, height } = Dimensions.get('window');
+    const [quantità, setQuantità] = useState(0);
+    const { width, height } = Dimensions.get('window');        
+    function addCarrello(){
+            setQuantità(quantità+1);
+            console.log(quantità);
+       
+    }
     return (
 
         <View
@@ -18,7 +24,7 @@ const DettaglioProdotto = ({ navigation }) => {
                     barStyle="light-content"
                 />
 
-                <TopBar navigation={navigation} />
+                <TopBar navigation={navigation} quantità={quantità} />
 
             </View>
             <ScrollView style={{
@@ -114,7 +120,7 @@ const DettaglioProdotto = ({ navigation }) => {
                 </View>
 
                 <View style={styles.bottom}>
-                    <GenericButton testo="Aggiungi al carrello" onPress={() => navigation.navigate('Login')} />
+                    <GenericButton testo="Aggiungi al carrello"  onPress={() => addCarrello()} />
                 </View>
 
             </ScrollView>
