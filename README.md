@@ -23,8 +23,8 @@ Attualmente la lavanderia industriale “SNB S.R.L.” è sprovvista di un appli
 Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile, che permetta ai clienti dell’azienda in maniera rapida e user friendly di noleggiare i loro prodotti. Per la parte amministrativa invece verrà realizzato un applicativo web che permetta la gestione e amministrazione dei clienti, delle forniture e di tenere traccia degli ordini ricevuti e gli eventuali ritardi sulle restituzioni da parte dei clienti.
 ## Tecnologie
 ### Pacchetti
-Select: $ npm install react-native-picker-select </br>
-React Native Element: $ npm install react-native-elements </br>
-Qr code: $ npm install react-native-svg --save e $ npm install react-native-qrcode-svg --save </br>
-Date: $ npm install 
+<b>Select</b>: $ npm install react-native-picker-select </br>
+<b>React Native Element</b>: $ npm install react-native-elements </br>
+<b>Qr code</b>: $ npm install react-native-svg --save e $ npm install react-native-qrcode-svg --save </br>
+<b>Date</b>: $ npm install 
 
