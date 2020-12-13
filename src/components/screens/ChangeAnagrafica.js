@@ -46,9 +46,10 @@ const LoginScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     titolo: {
-        fontSize: 18,
-        color: '#6AA84F',
+        fontSize: 24,
+        color: '#70D0AE',
         margin: 20,
+        fontWeight:"bold",
         textAlign: "center"
 
     },

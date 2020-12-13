@@ -30,7 +30,7 @@ const SignUpScreen = ({ navigation }) => {
     if (isOk) {
       alert('pass');
       if (pasw === paswConfirm) {
-        navigation.navigate('ConfirmSignUp')
+        navigation.navigate('ConfirmSignUp',{msg:"I suoi dati saranno presi in esame, riceverà un e-mail alla conferma."})
       } else {
         alert("password diverse")
       }
@@ -44,7 +44,7 @@ const SignUpScreen = ({ navigation }) => {
     >
       <View style={{ alignItems: "center", }}>
         <StatusBar
-          backgroundColor="#5f9747"
+          backgroundColor="#70D0AE"
           barStyle="light-content"
         />
         <BackButton onPress={() => navigation.navigate('Login')}></BackButton>
@@ -79,7 +79,7 @@ const SignUpScreen = ({ navigation }) => {
           <TextInputCustomer placeholder="Numero Carta"
             value={numCarta}
             onChangeText={numCarta => setNumCarta(numCarta)} />
-          <View style={{ marginLeft: -100 }}>
+          <View style={{ marginLeft: -80 }}>
             <Select />
 
           </View>
@@ -110,22 +110,23 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: "row",
     marginTop: 30,
-    width: "80%",
+    width: "70%",
   },
   checkbox: {
     alignSelf: "center",
   },
   linkP: {
-    color: "#6AA84F",
+    color: "#9DE7CD",
     marginTop: 10,
   },
   titolo: {
-    fontSize: 20,
-    color: '#6AA84F',
+    fontSize: 24,
+    color: '#70D0AE',
     fontWeight: "bold"
   },
   label: {
     margin: 8,
+    fontSize: 18,
   },
 });
 export default SignUpScreen;

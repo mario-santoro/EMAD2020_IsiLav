@@ -1,88 +1,91 @@
 import React, { useState } from "react";
-import {  Dimensions, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TopBar from '../components/TopBar';
 import { Icon } from 'react-native-elements';
+ 
+ 
+ 
 const DATA = [
   {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53ab28",
+    id: "bd7a-c1b1-46c2-aed5",
     data: "01/12/2020",
     tot: "100",
     Stato: "IN PREPARAZIONE"
 
   },
   {
-    id: "3Oc68afc-c605-48d3-a4f8-fb91a97f",
+    id: "3Oc6-c605-48d3-a4f8",
     data: "01/12/2020",
     tot: "100",
     Stato: "IN PREPARAZIONE"
   },
   {
-    id: "18694a0f-3da1-471f-bd96-1455719d",
+    id: "1869-3da1-471f-bd96",
     data: "01/12/2020",
     tot: "100",
     Stato: "IN PREPARAZIONE"
   },
   {
-    id: "3ac6afc-c605-48d3-a4f8-fbd91aa7",
+    id: "3ac6-c605-48d3-a4f8",
     data: "01/12/2020",
     tot: "100",
     Stato: "IN PREPARAZIONE"
   },
   {
-    id: "58694a0f-3da1-471f-bd96-1455712",
+    id: "5819-3da1-471f-bd96",
     data: "01/12/2020",
     tot: "100",
     Stato: "IN PREPARAZIONE"
   },
   {
-    id: "3ac68af-c605-48d3-a4f8-fbd91a97",
+    id: "3ac9-c605-48d3-a4f8",
     data: "01/12/2020",
     tot: "100",
     Stato: "IN PREPARAZIONE"
   },
   {
-    id: "58694a0f-3da1-471f-bd96-14571e29",
+    id: "5869-3da1-471f-bd96",
     data: "01/12/2020",
     tot: "100",
     Stato: "IN PREPARAZIONE"
   },
   {
-    id: "3ac68afc-c605-48d-a4f8-fbd91a97f",
+    id: "3aM6-c605-48d-a4f8",
     data: "01/12/2020",
     tot: "100",
     Stato: "IN PREPARAZIONE"
   },
   {
-    id: "58694a0f-3da1-471f-d96-14557129d7",
+    id: "52s69-3da1-471f-d961",
     data: "01/12/2020",
     tot: "100",
     Stato: "IN PREPARAZIONE"
   },
 ];
 
-const Item = ({ item, onPress, style }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
+const Item = ({ item, onPress }) => (
+  <TouchableOpacity  onPress={onPress} style={styles.item}>
     <View style={{ flexDirection: "row" }}>
       <View style={{ flexDirection: "column", flex: 8 }}>
-         <View style={{ flexDirection: "column" }}>
-           <Text style={styles.baseTextBold}>N° Ordine:</Text>
-           <Text style={styles.baseText}>{item.id}</Text>
+        <View style={{ flexDirection: "column" }}>
+          <Text style={styles.baseTextBold}>N° Ordine:</Text>
+          <Text style={styles.baseText}>{item.id}</Text>
         </View>
         <View style={{ flexDirection: "row" }}>
-        <Text style={styles.baseTextBold}>Data:</Text>
-        <Text style={styles.baseText}> {item.data}</Text>
+          <Text style={styles.baseTextBold}>Data:</Text>
+          <Text style={styles.baseText}> {item.data}</Text>
         </View>
         <View style={{ flexDirection: "row" }}>
-        <Text style={styles.baseTextBold}>Totale:</Text>
-        <Text style={styles.baseText}> {item.tot}€</Text>
+          <Text style={styles.baseTextBold}>Totale:</Text>
+          <Text style={styles.baseText}> {item.tot}€</Text>
         </View>
         <View style={{ flexDirection: "row" }}>
-        <Text style={styles.baseTextBold}>Stato:</Text>
-        <Text style={styles.baseText}> {item.Stato}</Text>
+          <Text style={styles.baseTextBold}>Stato:</Text>
+          <Text style={styles.baseText}> {item.Stato}</Text>
         </View>
       </View>
       <View style={{ flex: 2, justifyContent: "center" }}>
-        <Icon name="navigate-next" color="lightgrey" size={50} ></Icon>
+        <Icon name="navigate-next" color="#E9EBED" size={50} ></Icon>
       </View>
     </View>
   </TouchableOpacity>
@@ -90,16 +93,17 @@ const Item = ({ item, onPress, style }) => (
 
 const ListaOrdini = ({ navigation }) => {
   const [selectedId, setSelectedId] = useState(null);
-
+  
   const renderItem = ({ item }) => {
     const backgroundColor = item.id === selectedId ? "white" : "white";
 
     return (
 
-      <Item
+      <Item 
         item={item}
-        onPress={() => setSelectedId(item.id)}
-        style={{ backgroundColor }}
+      
+        onPress={()=>navigation.navigate("DettaglioOrdine", {id: item.id})}
+      
       />
 
     );
@@ -114,7 +118,7 @@ const ListaOrdini = ({ navigation }) => {
           backgroundColor="#5f9747"
           barStyle="light-content"
         />
-        <TopBar navigation={navigation}/>
+        <TopBar navigation={navigation} />
         <View style={{
           alignItems: "center", marginTop: 15,
         }}>
@@ -123,7 +127,7 @@ const ListaOrdini = ({ navigation }) => {
       </View>
 
       <SafeAreaView style={styles.container}>
-        <FlatList
+        <FlatList 
           data={DATA}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
@@ -131,9 +135,7 @@ const ListaOrdini = ({ navigation }) => {
         />
 
       </SafeAreaView>
-
-
-
+  
     </View>
 
   );
@@ -149,20 +151,22 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     borderWidth: 2,
-    borderColor: "lightgrey",
+    borderColor: "#E9EBED",
     borderRadius: 10,
+    backgroundColor:"#F8FFFC"
   },
   baseText: {
-    fontSize: 14,
+    fontSize: 20,
+    color:"#3E4349"
   },
   baseTextBold: {
     fontWeight: "bold",
-    fontSize: 14,
-
+    fontSize: 20,
+    color:"#3E4349"
   },
   titolo: {
-    fontSize: 20,
-    color: '#6AA84F',
+    fontSize: 24,
+    color: '#70D0AE',
     fontWeight: "bold"
 
   },

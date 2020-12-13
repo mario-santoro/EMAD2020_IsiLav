@@ -35,7 +35,7 @@ const MyProfileScreen = ({ navigation }) => {
                             </View>
                         </View>
                         <View style={{ flex: 2, justifyContent: "center" }}>
-                            <Icon name="navigate-next" color="lightgrey" size={50} ></Icon>
+                            <Icon name="navigate-next" color="#E9EBED" size={50} ></Icon>
                         </View>
                     </View>                    
                 </TouchableOpacity>
@@ -52,7 +52,7 @@ const MyProfileScreen = ({ navigation }) => {
                             </View>
                         </View>
                         <View style={{ flex: 2, justifyContent: "center" }}>
-                            <Icon name="navigate-next" color="lightgrey" size={50} ></Icon>
+                            <Icon name="navigate-next" color="#E9EBED" size={50} ></Icon>
                         </View>
                     </View>                    
                 </TouchableOpacity>
@@ -67,7 +67,7 @@ const MyProfileScreen = ({ navigation }) => {
                             </View>
                         </View>
                         <View style={{ flex: 2, justifyContent: "center" }}>
-                            <Icon name="navigate-next" color="lightgrey" size={50} ></Icon>
+                            <Icon name="navigate-next" color="#E9EBED" size={50} ></Icon>
                         </View>
                     </View>                    
                 </TouchableOpacity>
@@ -77,18 +77,14 @@ const MyProfileScreen = ({ navigation }) => {
 }
 const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
-    titolo: {
-        fontSize: 20,
-        color: '#6AA84F',
-        fontWeight: "bold"
-
-    },
+  
   
   
     textButton: {
         padding: 7,
         fontSize: 20,
         color: "#6AA84F",
+      
     },
     container: {
         flex: 3,
@@ -99,20 +95,22 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16,
         borderWidth: 2,
-        borderColor: "lightgrey",
+        borderColor: "#E9EBED",
         borderRadius: 10,
+        backgroundColor:"#F8FFFC"
     },
     baseText: {
-        fontSize: 14,
+        fontSize: 20,
+        color: '#3E4349',
     },
     baseTextBold: {
         fontWeight: "bold",
-        fontSize: 14,
-
+        fontSize: 20,
+        color: '#3E4349',
     },
     titolo: {
-        fontSize: 20,
-        color: '#6AA84F',
+        fontSize: 24,
+        color: '#70D0AE',
         fontWeight: "bold"
 
     },

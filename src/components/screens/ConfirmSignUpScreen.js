@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, StatusBar } from 'react-native';
 import GenericButton from '../components/GenericButton';
 
-const ConfirmSignUpScreen = ({ navigation }) => {
-
+const ConfirmSignUpScreen = ({ navigation, route }) => {
+    var msg=route.params.msg;
     return (
 
         <View
@@ -14,10 +14,10 @@ const ConfirmSignUpScreen = ({ navigation }) => {
 
             <View style={{ flex: 1, alignItems: "center", justifyContent: 'center' }}>
                 <StatusBar
-                    backgroundColor="#5f9747"
+                    backgroundColor="#70D0AE"
                     barStyle="light-content"
                 />
-                <Text style={styles.baseText}>I suoi dati saranno presi in esame, riceverà un e-mail alla conferma.</Text>
+                <Text style={styles.baseText}>{msg}</Text>
                 <Image
                     style={styles.logo}
                     source={require('C:/Users/mario/Desktop/DInfUniSa/MagistraleMatricola_866/2anno/Enterprise Mobile Application Development/IsiLav/image/check.png')}
@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
     },
 
     baseText: {
-        fontSize: 16,
-        color: '#6AA84F',
+        fontSize: 20,
+        color: '#70D0AE',
         paddingRight: "10%",
         paddingLeft: "10%",
         textAlign: 'center'

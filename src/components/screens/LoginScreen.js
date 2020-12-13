@@ -13,7 +13,7 @@ const LoginScreen = ({navigation}) => {
     style={{flex: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white'}}
     >
       <StatusBar
-      backgroundColor="#5f9747"
+      backgroundColor="#70D0AE"
       barStyle="light-content"
       />
 
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
   linkP: {
     
-    color:"#6AA84F",
+    color:"#70D0AE",
     marginTop:10,
 
   },

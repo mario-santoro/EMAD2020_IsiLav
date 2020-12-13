@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, ScrollView, View, Text, StatusBar, StyleSheet, Image,  } from 'react-native';
+import { Dimensions, ScrollView, View, Text, StatusBar, StyleSheet, Image, } from 'react-native';
 import GenericButton from '../components/GenericButton';
 import TopBar from '../components/TopBar';
 import RNPickerSelect from 'react-native-picker-select';
@@ -7,11 +7,11 @@ import RNPickerSelect from 'react-native-picker-select';
 
 const DettaglioProdotto = ({ navigation }) => {
     const [quantità, setQuantità] = useState(0);
-    const { width, height } = Dimensions.get('window');        
-    function addCarrello(){
-            setQuantità(quantità+1);
-            console.log(quantità);
-       
+    const { width, height } = Dimensions.get('window');
+    function addCarrello() {
+        setQuantità(quantità + 1);
+        console.log(quantità);
+
     }
     return (
 
@@ -30,84 +30,71 @@ const DettaglioProdotto = ({ navigation }) => {
             <ScrollView style={{
                 height: height * .80, width: "100%",
             }}>
-                <Text style={styles.nomeProdotto} >Lenzuolo</Text>
-               
-                    <Image
+                <Text style={styles.nomeProdotto} >Lenzuola</Text>
+                <Text style={styles.sottoTitolo}>Lenzuola matrimoniali bianche 100% cotone</Text>
+                <Image
                     resizeMode="center"
-                        style={styles.imgProdotto}
-                        source={require('../../image/lenzuola.jpg')}
-                    />
-              
+                    style={styles.imgProdotto}
+                    source={require('../../image/lenzuola.jpg')}
+                />
+
                 <View style={{ flexDirection: "row", alignContent: "center" }}>
                     <Text style={styles.quantitaText} >Q.tà: </Text>
-                    <RNPickerSelect
-                        style={{
-                            inputIOS: {
-                                marginTop: 10,
-                                width: 80,
-                                fontSize: 18,
-                                paddingVertical: 12,
-                                paddingHorizontal: 10,
-                                borderWidth: 1,
-                                borderColor: 'gray',
-                                borderRadius: 4,
-                                color: 'black',
-                                paddingRight: 30, // to ensure the text is never behind the icon
-                            },
-                            inputAndroid: {
-                                marginTop: 10,
-                                width: 80,
-                                fontSize: 18,
-                                paddingHorizontal: 10,
-                                paddingVertical: 8,
-                                borderWidth: 0.5,
-                                borderColor: 'purple',
-                                borderRadius: 8,
-                                color: 'black',
-                                paddingRight: 30, // to ensure the text is never behind the icon
-                            },
-                        }}
-                        onValueChange={(value) => console.log(value)}
-                        items={[
-                            { label: '1', value: '1' },
-                            { label: '2', value: '2' },
-                            { label: '3', value: '3' },
-                            { label: '4', value: '4' },
-                            { label: '5', value: '5' },
-                            { label: '6', value: '6' },
-                            { label: '7', value: '7' },
-                            { label: '8', value: '8' },
-                            { label: '9', value: '9' },
-                            { label: '10', value: '10' },
+                    <View style={{ backgroundColor: "#E9EBED", marginTop: 20, elevation: 2, borderRadius: 4, borderColor: "black", borderWidth: 0.5, height: 30, width: 90, }}>
+                        <RNPickerSelect
 
-                        ]}
-                        placeholder={{
-                            label: 'Seleziona quantità',
-                            value: null,
+                            pickerProps={{
+                                style: {
+                                    width: "100%",
+                                    color: 'black',
+                                    height: "100%",
+                                    
 
-                        }}
-                        value="1"
+                                }
+                            }}
+                            onValueChange={(value) => console.log(value)}
+                            items={[
+                                { label: '1', value: 1 },
+                                { label: '2', value: 2 },
+                                { label: '3', value: 3 },
+                                { label: '4', value: 4 },
+                                { label: '5', value: 5 },
+                                { label: '6', value: 6 },
+                                { label: '7', value: 7 },
+                                { label: '8', value: 8 },
+                                { label: '9', value: 9 },
+                                { label: '10', value: 10 },
+                                { label: '11', value: 11 },
+                                { label: '12', value: 12 },
 
-                    />
+                            ]}
+                            placeholder={{
+                                label: 'Q.tà',
+                                value: null,
 
+                            }}
+                            value={1}
+
+                        />
+                    </View>
                 </View>
 
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ marginTop: 10, flexDirection: "row" }}>
                     <Text style={styles.testoprezzo} >Prezzo: </Text>
                     <Text style={styles.prezzo} >22.97 €</Text>
 
 
                 </View>
                 <View
-      style={{
-          marginTop:15,
-          alignSelf:"center",
-        borderBottomColor: '#6AA84F',
-        borderBottomWidth: 1,
-        width: "90%",
-        
-      }}
-    />
+                    style={{
+                        marginTop: 15,
+                        alignSelf: "center",
+                        borderBottomColor: '#70D0AE',
+                        borderBottomWidth: 2,
+                        width: "90%",
+
+                    }}
+                />
                 <View>
 
                     <Text style={styles.desc} >Descrizione: </Text>
@@ -120,7 +107,7 @@ const DettaglioProdotto = ({ navigation }) => {
                 </View>
 
                 <View style={styles.bottom}>
-                    <GenericButton testo="Aggiungi al carrello"  onPress={() => addCarrello()} />
+                    <GenericButton testo="Aggiungi al carrello" onPress={() => addCarrello()} />
                 </View>
 
             </ScrollView>
@@ -142,7 +129,12 @@ const styles = StyleSheet.create({
 
 
     },
-
+    sottoTitolo:{
+        color:"#3E4349",
+        marginHorizontal:"5%",
+        fontSize:18,
+        marginBottom:"5%",
+    },
     bottom: {
 
         justifyContent: 'flex-end',
@@ -152,8 +144,8 @@ const styles = StyleSheet.create({
     },
 
     dettaglioText: {
-        fontSize: 16,
-        color: '#262626',
+        fontSize: 18,
+        color: '#3E4349',
         alignItems: "center",
         textAlign: "justify",
         marginRight: "5%",
@@ -161,28 +153,30 @@ const styles = StyleSheet.create({
     },
 
     quantitaText: {
-        marginTop:22,
-        marginLeft:22,
-        marginRight:25,
-        fontSize: 18,
-        color: '#6AA84F',
+        marginTop: 22,
+        marginLeft: 22,
+        marginRight: 25,
+        fontSize: 20,
+        color: '#70D0AE',
         alignItems: "center",
-
+        fontWeight: "bold",
     },
 
     nomeProdotto: {
-        margin: "5%",
-        fontSize: 22,
-        color: '#6AA84F',
+        marginHorizontal: "5%",
+        marginTop:"5%",
+        fontSize: 24,
+        color: '#70D0AE',
+        fontWeight:"bold",
         alignItems: "center",
 
     },
 
     prezzo: {
         marginLeft: 10,
-        fontWeight:"bold",
-        fontSize: 18,
-        color: '#262626',
+        fontWeight: "bold",
+        fontSize: 20,
+        color: '#3E4349',
         alignItems: "center",
 
     },
@@ -190,18 +184,18 @@ const styles = StyleSheet.create({
     testoprezzo: {
 
         marginLeft: 22,
-        fontSize: 18,
-        color: '#6AA84F',
+        fontSize: 20,
+        color: '#70D0AE',
         alignItems: "center",
-
+        fontWeight: "bold",
     },
     desc: {
         marginTop: 10,
         marginLeft: 22,
-        fontSize: 18,
-        color: '#6AA84F',
+        fontSize: 20,
+        color: '#70D0AE',
         alignItems: "center",
-
+        fontWeight: "bold",
     },
 
 

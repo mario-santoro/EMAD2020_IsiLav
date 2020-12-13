@@ -7,7 +7,7 @@ import * as API from '../services/API';
 
 //Ottengo le categorie disponibili dall'API
 const categories = API.getProductsFromCategory();
-
+var risultato="prova";
 const CategoryScreen = ({ navigation }) => {
 
   return (
@@ -16,18 +16,18 @@ const CategoryScreen = ({ navigation }) => {
     >
 
       <TopBar navigation={navigation} />
-
+      <Text style={styles.titolo}>Risultati per '{risultato.toUpperCase()}'</Text>
       <FlatList
         data={categories}
         renderItem={({ item }) => (
           <ListItem onPress={() => navigation.navigate("DettaglioProdotto")} bottomDivider>
             <Image source={item.image} resizeMethod='auto' resizeMode='cover' style={{ width: 125, height: 128 }} />
             <ListItem.Content>
-              <ListItem.Title style={{ color: "#6AA84F", fontWeight: 'bold' }}>{item.name}</ListItem.Title>
+              <ListItem.Title style={{ color: "#70D0AE", fontSize:18, fontWeight: 'bold' }}>{item.name}</ListItem.Title>
               <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
-              <ListItem.Title>Prezzo: <Text style={{ fontWeight: 'bold' }}>{parseFloat(item.price).toFixed(2)} €</Text></ListItem.Title>
+              <ListItem.Title style={{color:"#3E4349", }}>Prezzo: <Text style={{color:"#70D0AE", fontWeight: 'bold' }}>{parseFloat(item.price).toFixed(2)} €</Text></ListItem.Title>
             </ListItem.Content>
-            <ListItem.Chevron size={32} />
+            <ListItem.Chevron color="#E9EBED"  size={50} />
           </ListItem>
         )}
         keyExtractor={item => item.id}
@@ -46,6 +46,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white'
+  },
+  titolo:{
+    fontSize:24,
+    color:"#70D0AE",
+    fontWeight:"bold",
+    marginHorizontal:15,
+    marginTop:10,
   }
 
 });

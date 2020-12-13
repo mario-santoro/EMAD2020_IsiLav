@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
     },
 
     baseText: {
-        fontSize: 16,
-        color: '#6AA84F',
+        fontSize: 20,
+        color: '#70D0AE',
         paddingRight: "10%",
         paddingLeft: "10%",
         textAlign: 'center'

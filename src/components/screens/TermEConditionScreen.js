@@ -46,10 +46,10 @@ const SignUpScreen = ({ navigation }) => {
     >
       <View style={{ flex: 1, }}>
         <StatusBar
-          backgroundColor="#5f9747"
+          backgroundColor="#70D0AE"
           barStyle="light-content"
         />
-        <BackButton onPress={() => navigation.navigate('Login')}></BackButton>
+        <BackButton onPress={() => navigation.navigate('SignUp')}></BackButton>
       </View>
       <View style={styles.bottom}>
 
