@@ -7,7 +7,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import SignUpScreen from './src/screens/SignUpScreen';
 import ConfirmSignUpScreen from './src/screens/ConfirmSignUpScreen';
 import RetrivePassw from './src/screens/RetrivePassw';
-import ChangePassw from './src/screens/ChangePassw';
+import ChangePassw from './src/screens/PasswordDimenticata';
 import MyProfile from './src/screens/MyProfileScreen';
 import TermAndCondition from './src/screens/TermEConditionScreen';
 import ListaOrdini from './src/screens/ListaOrdiniScreen';
@@ -18,6 +18,10 @@ import DettaglioProdotto from './src/screens/DettaglioProdotto';
 import CategoryScreen from './src/screens/CategoryScreen';
 import Giacenza from './src/screens/Giacenza';
 import ChangePayMethod from './src/screens/ChangePayMethod';
+import Cart from './src/screens/Cart';
+import QrCode from './src/screens/QrCodeScreen';
+import DettaglioOrdine from './src/screens/DettaglioOrdine';
+import FAQ from './src/screens/FAQ';
 const RootStack = createStackNavigator();
  
 const App = () => {
@@ -40,6 +44,10 @@ const App = () => {
         <RootStack.Screen name="Category" component={CategoryScreen} options={{headerShown: false}}/>
         <RootStack.Screen name="Giacenza" component={Giacenza} options={{headerShown: false}}/>
         <RootStack.Screen name="ChangePayMethod" component={ChangePayMethod} options={{headerShown: false}}/>
+        <RootStack.Screen name="Cart" component={Cart} options={{headerShown: false}}/>
+        <RootStack.Screen name="QrCode" component={QrCode} options={{headerShown: false}}/>
+        <RootStack.Screen name="DettaglioOrdine" component={DettaglioOrdine} options={{headerShown: false}}/>
+        <RootStack.Screen name="FAQ" component={FAQ} options={{headerShown: false}}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );
