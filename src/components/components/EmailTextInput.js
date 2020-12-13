@@ -15,14 +15,14 @@ const EmailTextInput = ({placeholder, ic,  value, onChangeText}) => {
         autoCompleteType="off"
         autoCorrect={false}
         returnKeyType="next"
-        selectionColor="lightgreen"
+        selectionColor="#9DE7CD"
         value={value}
         onChangeText={onChangeText}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         onSubmitEditing={() => console.log("ciao")}
         />
-        <Icon style={styles.icon} name={ic} color="lightgreen"/>
+        <Icon style={styles.icon} name={ic} color="#9DE7CD"/>
     </View>
   );
 };
@@ -45,14 +45,14 @@ const styles = StyleSheet.create({
     },
     normal: {
         flex: 9,
-        fontSize: 16,
+        fontSize: 20,
         textAlign: 'left',
-        color: "black",
+        color: "#3E4349",
         margin: 5,
     },
     focus:{   
         borderBottomWidth: 2,
-        borderBottomColor: "lightgreen",
+        borderBottomColor: "#9DE7CD",
     },
 });
 

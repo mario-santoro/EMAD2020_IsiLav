@@ -40,14 +40,14 @@ const styles = StyleSheet.create({
   
     normal: {
         flex: 10,
-        fontSize: 16,
+        fontSize: 20,
         textAlign: 'left',
-        color: "black",
+        color: "#3E4349",
         margin: 5,
     },
     focus:{   
         borderBottomWidth: 2,
-        borderBottomColor: "lightgreen",
+        borderBottomColor: "#9DE7CD",
     },
 });
 

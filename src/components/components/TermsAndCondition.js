@@ -53,30 +53,36 @@ const { width , height } = Dimensions.get('window');
 const styles = {
 
   container:{
-    marginTop: 20,
+    marginTop: 10,
     marginLeft: 10,
     marginRight: 10
   },
   title: {
-      fontSize: 22,
+      fontSize: 24,
+      fontWeight:"bold",
       alignSelf: 'center',
-        color: '#6AA84F',
+        color: '#70D0AE',
 
   },
   tcP: {
       marginTop: 10,
       marginBottom: 10,
-      fontSize: 12
+      fontSize: 14,
+      marginHorizontal:5,
+      color:"#3E4349"
   },
   tcP:{
       marginTop: 10,
-      fontSize: 12
+      fontSize: 14,
+      marginHorizontal:5,
+      color:"#3E4349"
   },
   tcL:{
-      marginLeft: 10,
+     marginHorizontal:5,
       marginTop: 10,
       marginBottom: 10,
-      fontSize: 12
+      fontSize: 14,
+      color:"#3E4349"
   },
   tcContainer: {
       marginTop: 15,

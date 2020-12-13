@@ -7,7 +7,7 @@ const BackButton = ({onPress}) => {
         <View style={{ flexDirection: "row", paddingTop: 20,paddingBottom:20,  height:80  }}>
             <View style={{ flex: 1 }}>
                 <TouchableOpacity onPress={onPress} style={styles.button}>
-                    <Icon name="chevron-left" size={40} color="lightgrey"></Icon>
+                    <Icon name="chevron-left" size={40} color="#E9EBED"></Icon>
 
                 </TouchableOpacity >
             </View>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 
     logoText: {
         fontSize: 25,
-        color: '#006E2F',
+        color: '#48B08B',
         fontWeight: "bold"
     },
     text: {

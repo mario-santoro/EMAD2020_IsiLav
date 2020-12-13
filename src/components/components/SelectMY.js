@@ -22,16 +22,16 @@ const SelectYM = () => {
   console.log(year)
   return (
     <View style={{ marginTop: 5, alignSelf: "flex-start", }}>
-      <Text style={{ fontWeight: "bold", fontSize: 16, color: "black" }}>Data scadenza:</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 20, color: "#3E4349" }}>Data scadenza:</Text>
 
       <View style={{ flexDirection: "row" }} >
-        <View style={{ backgroundColor: "#E9EBED", marginTop: 8, elevation: 2, borderRadius: 4, borderColor: "black", borderWidth: 0.5, height: 30, width: 120,   }}>
+        <View style={{ backgroundColor: "#E9EBED", marginTop: 8, elevation: 2, borderRadius: 4, borderColor: "#3E4349", borderWidth: 0.5, height: 30, width: 120,   }}>
           <RNPickerSelect
 
             pickerProps={{
               style: {
                 width: "100%",
-                color: 'black',
+                color: '#3E4349',
                 height: "100%",
 
 
@@ -63,14 +63,14 @@ const SelectYM = () => {
           />
         </View>
         <Text style={styles.text}> / </Text>
-        <View style={{ backgroundColor: "#E9EBED", marginTop: 8, elevation: 2, borderRadius: 4, borderColor: "black", borderWidth: 0.5, height: 30, width: 120 }}>
+        <View style={{ backgroundColor: "#E9EBED", marginTop: 8, elevation: 2, borderRadius: 4, borderColor: "#3E4349", borderWidth: 0.5, height: 30, width: 120 }}>
           <RNPickerSelect
             pickerProps={{
               style: {
                 width: "100%",
-                color: 'black',
+                color: '#3E4349',
                 height: "100%",
-
+          
 
               }
             }}
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   text: {
     paddingTop: 8,
     fontSize: 22,
-    color: "black",
+    color: "#3E4349",
     fontWeight:"bold"
   }
 });

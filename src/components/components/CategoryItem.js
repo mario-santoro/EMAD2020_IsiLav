@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         margin: 15,
         borderRadius: 10,
         elevation: 10,
-        backgroundColor: '#6AA84F',
+        backgroundColor: '#9DE7CD',
         flexDirection: 'column',
     },
     image: {

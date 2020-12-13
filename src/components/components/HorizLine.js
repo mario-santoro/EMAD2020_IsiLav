@@ -11,7 +11,7 @@ const HorizLine = ({testo}) => {
 
     <View
       style={{
-        borderBottomColor: '#6AA84F',
+        borderBottomColor: '#70D0AE',
         borderBottomWidth: 2,
         width: "60%",
         
@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     },
   
     baseText: {
-      fontSize: 18,
-      color: '#6AA84F',
+      fontSize: 20,
+      color: '#70D0AE',
       width: "40%"
     }
   
