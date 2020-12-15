@@ -54,43 +54,52 @@ export function getProductsFromCategory(categoryID) {
       name: 'Lenzuola',
       price: 22.97,
       description: "Lenzuola matrimoniali bianche 100% cotone",
-      image: require("../../images/lenzuola.jpg")
+      image: require("../../images/lenzuola.jpg"),
+      quantity: 30
     },
     {
       id: '0',
       name: 'Copripiumino',
       price: 39.90,
       description: "Copripiumino Matrimoniale, Singolo, Una Piazza e Mezza, Paris",
-      image: require("../../images/copripiumino.jpg")
+      image: require("../../images/copripiumino.jpg"),
+      quantity: 15
     },
     {
       id: '4',
       name: 'Federa',
       price: 2.63,
       description: "Federa colorata Americana con Bottoni",
-      image: require("../../images/federa2.jpg")
+      image: require("../../images/federa2.jpg"),
+      quantity: 8
     },
     {
       id: '1',
       name: 'Federa',
       price: 1.70,
       description: "Federa cotone semplice senza pattella",
-      image: require("../../images/federa.jpg")
+      image: require("../../images/federa.jpg"),
+      quantity: 6
     },
     {
       id: '2',
       name: 'Scendiletto',
       price: 37.99,
       description: "Scendiletto shaggy, aspetto lanoso",
-      image: require("../../images/scendiletto.jpg")
+      image: require("../../images/scendiletto.jpg"),
+      quantity: 2
     },
     {
       id: '3',
       name: 'Copripiumino',
       price: 18.99,
       description: "Sacco Copripiumino in Microfibra con Motivo di Rami",
-      image: require("../../images/copripiumino2.jpg")
-    },
-    
+      image: require("../../images/copripiumino2.jpg"),
+      quantity: 8
+    }, 
   ]
 };
+
+export function getGiacenza(){
+  return getProductsFromCategory(0)
+}

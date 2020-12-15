@@ -14,8 +14,7 @@ const HomeScreen = ({navigation}) => {
     style={styles.container}
     >
     
-    <TopBar />
-    
+    <TopBar showSearchBar={true}/>
     
     <FlatList
     data={categories}

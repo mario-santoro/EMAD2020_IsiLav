@@ -25,7 +25,7 @@ const LoginScreen = ({navigation}) => {
       <EmailTextInput placeholder="Email"/>
       <PasswordTextInput />
       
-      <LoginButton onPress={() => navigation.navigate('Home')} />
+      <LoginButton onPress={() => navigation.navigate('Reso')} />
       <SignupButton onPress={test} />
 
       {/*<Picker

@@ -6,7 +6,7 @@ import TopBar from '../components/TopBar';
 import * as API from '../services/API';
 
 //Ottengo le categorie disponibili dall'API
-const categories = API.getProductsFromCategory();
+const products = API.getProductsFromCategory();
 
 const CategoryScreen = ({navigation}) => {
 
@@ -18,7 +18,7 @@ const CategoryScreen = ({navigation}) => {
     <TopBar />
 
     <FlatList
-    data={categories}
+    data={products}
     renderItem={({item}) => (
       <ListItem bottomDivider>
       <Image source={item.image} resizeMethod='auto' resizeMode='cover' style={{width: 125, height: 128}} />

@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, StatusBar } from 'react-native';
 import { Header, SearchBar } from 'react-native-elements';
 
-const TopBar = () => (
+const TopBar = ({showSearchBar=true}) => (
     <View>
         <StatusBar
-        backgroundColor="#5f9747"
+        backgroundColor="#70D0AE"
         barStyle="light-content"
         />
 
         <Header
-        backgroundColor="#6AA84F"
+        backgroundColor="#9DE7CD"
         barStyle="light-content"
         leftComponent={{ icon: 'menu', size: 30, color: '#FFFFFF', onPress: () => alert("ciao") }}
         centerComponent={<View style={{flexDirection: 'row', alignItems: 'center'}}><Image source={require('../../images/icona-bianca.png')} style={{height: 35, width: 35}} /><Text style={{color: "white", marginLeft: 2, fontSize: 28, fontWeight: "bold"}}>IsiLav</Text></View>}
@@ -18,21 +18,27 @@ const TopBar = () => (
         rightComponent={{ icon: 'shopping-cart', size: 30, color: '#FFFFFF' }}
         />
 
+        <View>
+        {!showSearchBar ? null : 
         <SearchBar
         platform='ios'
-        containerStyle={{backgroundColor: "#6AA84F", borderWidth: 0, marginTop: -11, paddingTop: 8}}
+        containerStyle={{backgroundColor: "#9DE7CD", borderWidth: 0, marginTop: -11, paddingTop: 8}}
         inputStyle={{backgroundColor: "white" }}
         inputContainerStyle={{backgroundColor: "white", padding: 0, paddingBottom: 0}}
         cancelButtonTitle="Annulla"
         placeholder="Cerca nel catalogo..."
         cancelButtonProps={{ color: "white"}}
         />
+        }
+        </View>
     </View>
   );
 
 
 const styles = StyleSheet.create({
-    
+    searchBar: {
+      opacity: 0
+    }
 });
 
 export default TopBar;
