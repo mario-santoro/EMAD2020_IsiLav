@@ -2,26 +2,34 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
  
-import LoginScreen from "./src/screens/LoginScreen";
-import HomeScreen from "./src/screens/HomeScreen";
-import SignUpScreen from './src/screens/SignUpScreen';
-import ConfirmSignUpScreen from './src/screens/ConfirmSignUpScreen';
-import RetrivePassw from './src/screens/RetrivePassw';
-import ChangePassw from './src/screens/PasswordDimenticata';
-import MyProfile from './src/screens/MyProfileScreen';
-import TermAndCondition from './src/screens/TermEConditionScreen';
-import ListaOrdini from './src/screens/ListaOrdiniScreen';
-import ChangePassword2 from './src/screens/ChangePassword2';
-import SuccessScreen from './src/screens/SuccessScreen';
-import ChangeAnagrafica from './src/screens/ChangeAnagrafica';
-import DettaglioProdotto from './src/screens/DettaglioProdotto';
-import CategoryScreen from './src/screens/CategoryScreen';
-import Giacenza from './src/screens/Giacenza';
-import ChangePayMethod from './src/screens/ChangePayMethod';
-import Cart from './src/screens/Cart';
-import QrCode from './src/screens/QrCodeScreen';
-import DettaglioOrdine from './src/screens/DettaglioOrdine';
-import FAQ from './src/screens/FAQ';
+import LoginScreen from "./src/cliente/screens/LoginScreen";
+import HomeScreen from "./src/cliente/screens/HomeScreen";
+import SignUpScreen from './src/cliente/screens/SignUpScreen';
+import ConfirmSignUpScreen from './src/cliente/screens/ConfirmSignUpScreen';
+import RetrivePassw from './src/cliente/screens/RetrivePassw';
+import ChangePassw from './src/cliente/screens/PasswordDimenticata';
+import MyProfile from './src/cliente/screens/MyProfileScreen';
+import TermAndCondition from './src/cliente/screens/TermEConditionScreen';
+import ListaOrdini from './src/cliente/screens/ListaOrdiniScreen';
+import ChangePassword2 from './src/cliente/screens/ChangePassword2';
+import SuccessScreen from './src/cliente/screens/SuccessScreen';
+import ChangeAnagrafica from './src/cliente/screens/ChangeAnagrafica';
+import DettaglioProdotto from './src/cliente/screens/DettaglioProdotto';
+import CategoryScreen from './src/cliente/screens/CategoryScreen';
+import Giacenza from './src/cliente/screens/Giacenza';
+import ChangePayMethod from './src/cliente/screens/ChangePayMethod';
+import Cart from './src/cliente/screens/Cart';
+import QrCode from './src/cliente/screens/QrCodeScreen';
+import DettaglioOrdine from './src/cliente/screens/DettaglioOrdine';
+import FAQ from './src/cliente/screens/FAQ';
+import HomeCorriere from './src/corriere/screens/HomeCorriere';
+import FAQCorriere from './src/corriere/screens/FAQCorriere';
+import MyProfileCorriere from './src/corriere/screens/MyProfileCorriere';
+import ChangeAnagraficaCorriere from './src/corriere/screens/ChangeAnagraficaCorriere';
+import DettaglioFermata from './src/corriere/screens/DettaglioFermata';
+import DettaglioCliente from './src/corriere/screens/DettaglioCliente';
+import SuccessScreenCorriere from './src/corriere/screens/SuccessScreenCorriere';
+import ChangePasswCorriere from './src/corriere/screens/ChangePasswCorriere';
 const RootStack = createStackNavigator();
  
 const App = () => {
@@ -48,6 +56,14 @@ const App = () => {
         <RootStack.Screen name="QrCode" component={QrCode} options={{headerShown: false}}/>
         <RootStack.Screen name="DettaglioOrdine" component={DettaglioOrdine} options={{headerShown: false}}/>
         <RootStack.Screen name="FAQ" component={FAQ} options={{headerShown: false}}/>
+        <RootStack.Screen name="HomeCorriere" component={HomeCorriere} options={{headerShown: false}}/>
+        <RootStack.Screen name="FAQCorriere" component={FAQCorriere} options={{headerShown: false}}/>
+        <RootStack.Screen name="MyProfileCorriere" component={MyProfileCorriere} options={{headerShown: false}}/>
+        <RootStack.Screen name="ChangeAnagraficaCorriere" component={ChangeAnagraficaCorriere} options={{headerShown: false}}/>
+        <RootStack.Screen name="DettaglioFermata" component={DettaglioFermata} options={{headerShown: false}}/>
+        <RootStack.Screen name="DettaglioCliente" component={DettaglioCliente} options={{headerShown: false}}/>
+        <RootStack.Screen name="SuccessScreenCorriere" component={SuccessScreenCorriere} options={{headerShown: false}}/>
+        <RootStack.Screen name="ChangePasswCorriere" component={ChangePasswCorriere} options={{headerShown: false}}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );
