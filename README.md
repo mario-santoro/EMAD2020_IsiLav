@@ -27,4 +27,5 @@ Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile
 <b>React Native Element</b>: $ npm install react-native-elements </br>
 <b>Qr code</b>: $ npm install react-native-svg --save e $ npm install react-native-qrcode-svg --save </br>
 <b>Date</b>: $ npm install @react-native-community/datetimepicker --save </br>
-
+<b>Scanner QR code</b>: $ expo install expo-camera </br>
+<b>Mapp</b>: $ expo install react-native-maps</br>
