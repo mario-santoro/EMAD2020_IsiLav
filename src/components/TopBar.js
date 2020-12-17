@@ -34,11 +34,4 @@ const TopBar = ({showSearchBar=true}) => (
     </View>
   );
 
-
-const styles = StyleSheet.create({
-    searchBar: {
-      opacity: 0
-    }
-});
-
 export default TopBar;

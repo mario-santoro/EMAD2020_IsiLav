@@ -58,6 +58,10 @@ const ResoScreen = ({navigation}) => {
         }))
     };
 
+    const dateToString = (data) => {
+        return data.getDate().toString()+"/"+(date.getMonth()+1).toString()+"/"+date.getFullYear()
+    }
+
     return (
     <View style={{flex: 1, backgroundColor: "#F8FFFC"}}>
         <TopBar showSearchBar={false} />
@@ -110,7 +114,7 @@ const ResoScreen = ({navigation}) => {
             containerStyle={{width: "80%"}}
             buttonStyle={{backgroundColor: "#9DE7CD", borderRadius: 15}}
             titleStyle={{color: "#F8FFFC"}}
-            title={date.getDate().toString()+"/"+(date.getMonth()+1).toString()+"/"+date.getFullYear()}
+            title={dateToString(date)}
             onPress={() => setShow(true)}
             />
 
@@ -169,13 +173,15 @@ const ResoScreen = ({navigation}) => {
 
         <View style={{width: "100%", borderTopWidth: 0.5, borderColor: "#9DE7CD", marginTop: 10}}>
         <Button
+            disabled={!selezionati.length>0}
             icon={<Icon size={24} name="keyboard-arrow-right" color="#F8FFFC" />}
             iconRight={true}
             containerStyle={{width: "45%", alignSelf: 'flex-end', padding: 5}}
             buttonStyle={{backgroundColor: "#9DE7CD", borderRadius: 15}}
             titleStyle={{color: "#F8FFFC", fontSize: 16}}
             title="CONTINUA"
-            onPress={() => navigation.navigate("ConfermaReso")}
+            //Passare props lista selezionati
+            onPress={() => navigation.navigate("ConfermaReso", {data: dateToString(date), luogo: "Via Mare, 4, Salerno (SA)", selezionati: selezionati})}
         />
         </View>
 
