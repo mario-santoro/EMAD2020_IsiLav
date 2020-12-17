@@ -7,18 +7,23 @@ import * as API from '../services/API';
 
 const giacenza = API.getGiacenza();
 
-const ResoScreen = ({navigation}) => {
+const ResoScreen = ({navigation, route}) => {
+    var luogo = null;
+    if (route.params?.luogo){
+        luogo = route.params.luogo;
+    }
+
     const oggi = new Date();
     const max = new Date().setDate(oggi.getDate()+365); //es. oggi + 365 giorni
 
     const [date, setDate] = useState(oggi);
-    const [show, setShow] = useState(false);
+    const [showPicker, setShowPicker] = useState(false);
     const [overlay, setOverlay] = useState(false);
     const [selezionati, setSelezionati] = useState([]);
 
     const onDateChange = (event, selectedDate) => {
         const newDate = selectedDate || date;
-        setShow(Platform.OS === 'ios'); //provare su iphone a cosa serve
+        setShowPicker(Platform.OS === 'ios'); //provare su iphone a cosa serve
         setDate(newDate);
     };
 
@@ -66,7 +71,7 @@ const ResoScreen = ({navigation}) => {
     <View style={{flex: 1, backgroundColor: "#F8FFFC"}}>
         <TopBar showSearchBar={false} />
         
-        {show? (
+        {showPicker? (
             <DateTimePicker
                 value={date}
                 minimumDate={oggi}
@@ -115,7 +120,7 @@ const ResoScreen = ({navigation}) => {
             buttonStyle={{backgroundColor: "#9DE7CD", borderRadius: 15}}
             titleStyle={{color: "#F8FFFC"}}
             title={dateToString(date)}
-            onPress={() => setShow(true)}
+            onPress={() => setShowPicker(true)}
             />
 
             <Text style={{width: "80%", fontSize: 16, color: '#3E4349', alignItems: 'flex-start', marginTop: 10}}>Seleziona luogo per il reso:</Text>
@@ -126,9 +131,10 @@ const ResoScreen = ({navigation}) => {
             buttonStyle={{backgroundColor: "#9DE7CD", borderRadius: 15}}
             titleStyle={{color: "#F8FFFC"}}
             title="Scegli sulla mappa"
-            onPress={() => alert("Questa è una mappa")}
+            onPress={() => navigation.navigate("Map", {luogo: luogo})}            
             />
-            <Text style={{width: "80%", fontSize: 16, fontWeight: 'bold', color: '#70D0AE', alignItems: 'flex-start', marginTop: 0}}>Selezionato: Via Mare, 4, Salerno (SA)</Text>
+            
+            <Text style={{width: "80%", fontSize: 16, fontWeight: 'bold', color: '#70D0AE', alignItems: 'flex-start', marginTop: 0}}>Selezionato: {luogo===null? "NESSUNO" : luogo.title}</Text>
 
             <Text style={{width: "80%", fontSize: 16, color: '#3E4349', alignItems: 'flex-start', marginTop: 10}}>Articoli che vuoi restituire:</Text>
 
@@ -173,15 +179,14 @@ const ResoScreen = ({navigation}) => {
 
         <View style={{width: "100%", borderTopWidth: 0.5, borderColor: "#9DE7CD", marginTop: 10}}>
         <Button
-            disabled={!selezionati.length>0}
+            disabled={!selezionati.length>0 && luogo!==null}
             icon={<Icon size={24} name="keyboard-arrow-right" color="#F8FFFC" />}
             iconRight={true}
             containerStyle={{width: "45%", alignSelf: 'flex-end', padding: 5}}
             buttonStyle={{backgroundColor: "#9DE7CD", borderRadius: 15}}
             titleStyle={{color: "#F8FFFC", fontSize: 16}}
             title="CONTINUA"
-            //Passare props lista selezionati
-            onPress={() => navigation.navigate("ConfermaReso", {data: dateToString(date), luogo: "Via Mare, 4, Salerno (SA)", selezionati: selezionati})}
+            onPress={() => navigation.navigate("ConfermaReso", {data: dateToString(date), luogo: luogo, selezionati: selezionati})}
         />
         </View>
 

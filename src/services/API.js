@@ -103,3 +103,23 @@ export function getProductsFromCategory(categoryID) {
 export function getGiacenza(){
   return getProductsFromCategory(0)
 }
+
+export function getLuoghi(){
+  return [
+    {
+        latitude: 40.6639841,
+        longitude: 14.7934572,
+        title: "Piazza Caduti Di Brescia"
+    },
+    {
+        latitude: 40.6601335,
+        longitude: 14.8026794,
+        title: "Parco del Mercatello"
+    },
+    {
+        latitude: 40.6775525,
+        longitude: 14.753176,
+        title: "Chiosco di Santa Teresa"
+    },
+  ]
+}
