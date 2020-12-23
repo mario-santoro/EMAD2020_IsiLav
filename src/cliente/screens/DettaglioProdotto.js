@@ -3,16 +3,15 @@ import { Dimensions, ScrollView, View, Text, StatusBar, StyleSheet, Image, } fro
 import GenericButton from '../components/GenericButton';
 import TopBar from '../components/TopBar';
 import RNPickerSelect from 'react-native-picker-select';
+import Carrello from '../services/Carrello';
 
-
-const DettaglioProdotto = ({ navigation }) => {
+const DettaglioProdotto = ({ navigation, route }) => {
     const [quantità, setQuantità] = useState(0);
+    const [pezzi, setPezzi] = useState(1);
     const { width, height } = Dimensions.get('window');
-    function addCarrello() {
-        setQuantità(quantità + 1);
-        console.log(quantità);
+    const item= route.params.item;
+ 
 
-    }
     return (
 
         <View
@@ -24,23 +23,23 @@ const DettaglioProdotto = ({ navigation }) => {
                     barStyle="light-content"
                 />
 
-                <TopBar navigation={navigation} quantità={quantità} />
+                <TopBar navigation={navigation} />
 
             </View>
             <ScrollView style={{
                 height: height * .80, width: "100%",
             }}>
-                <Text style={styles.nomeProdotto} >Lenzuola</Text>
-                <Text style={styles.sottoTitolo}>Lenzuola matrimoniali bianche 100% cotone</Text>
+                <Text style={styles.nomeProdotto} >{item.name}</Text>
+                <Text style={styles.sottoTitolo}>{item.description}</Text>
                 <Image
                     resizeMode="center"
                     style={styles.imgProdotto}
-                    source={require('../../../image/lenzuola.jpg')}
+                    source={item.image}
                 />
 
                 <View style={{ flexDirection: "row", alignContent: "center" }}>
                     <Text style={styles.quantitaText} >Q.tà: </Text>
-                    <View style={{ backgroundColor: "#E9EBED", marginTop: 20, elevation: 2, borderRadius: 4, borderColor: "black", borderWidth: 0.5, height: 30, width: 90, }}>
+                    <View style={styles.viewSelect}>
                         <RNPickerSelect
 
                             pickerProps={{
@@ -48,11 +47,11 @@ const DettaglioProdotto = ({ navigation }) => {
                                     width: "100%",
                                     color: 'black',
                                     height: "100%",
-                                    
-
                                 }
                             }}
-                            onValueChange={(value) => console.log(value)}
+
+                            onValueChange={(value) => setPezzi(value)}
+
                             items={[
                                 { label: '1', value: 1 },
                                 { label: '2', value: 2 },
@@ -66,35 +65,31 @@ const DettaglioProdotto = ({ navigation }) => {
                                 { label: '10', value: 10 },
                                 { label: '11', value: 11 },
                                 { label: '12', value: 12 },
-
                             ]}
+
                             placeholder={{
-                                label: 'Q.tà',
+                                label: 'Q.tà (pacco)',
                                 value: null,
 
                             }}
-                            value={1}
+                            value={pezzi}
 
                         />
                     </View>
+
+                    <Text style={styles.quantitaText} > Tot pezzi: {pezzi*5} </Text>
+
                 </View>
 
                 <View style={{ marginTop: 10, flexDirection: "row" }}>
                     <Text style={styles.testoprezzo} >Prezzo: </Text>
-                    <Text style={styles.prezzo} >22.97 €</Text>
+                    <Text style={styles.prezzo} >{parseFloat(item.price*pezzi).toFixed(2)} €</Text>
 
 
                 </View>
-                <View
-                    style={{
-                        marginTop: 15,
-                        alignSelf: "center",
-                        borderBottomColor: '#70D0AE',
-                        borderBottomWidth: 2,
-                        width: "90%",
 
-                    }}
-                />
+                <View style={{ marginTop: 15, alignSelf: "center", borderBottomColor: '#70D0AE', borderBottomWidth: 2, width: "90%", }} />
+
                 <View>
 
                     <Text style={styles.desc} >Descrizione: </Text>
@@ -105,9 +100,8 @@ const DettaglioProdotto = ({ navigation }) => {
                     rimanendo sorprendentemente morbido al tatto. Oltre alla resistenza e
                     alla duttile morbidezza che lo caratterizzano, questo lenzuolo offre calore e traspirabilità.</Text>
                 </View>
-
                 <View style={styles.bottom}>
-                    <GenericButton testo="Aggiungi al carrello" onPress={() => addCarrello()} />
+                    <GenericButton testo="Aggiungi al carrello" onPress={() => Carrello.addArticolo({item})} />
                 </View>
 
             </ScrollView>
@@ -119,6 +113,17 @@ const DettaglioProdotto = ({ navigation }) => {
 }
 const styles = StyleSheet.create({
 
+    viewSelect: {
+        backgroundColor: "#E9EBED",
+        marginTop: 20,
+        elevation: 2,
+        borderRadius: 4,
+        borderColor: "black",
+        borderWidth: 0.5,
+        height: 30,
+        width: 90,
+    },
+
     imgProdotto: {
 
         width: "95%",
@@ -129,11 +134,11 @@ const styles = StyleSheet.create({
 
 
     },
-    sottoTitolo:{
-        color:"#3E4349",
-        marginHorizontal:"5%",
-        fontSize:18,
-        marginBottom:"5%",
+    sottoTitolo: {
+        color: "#3E4349",
+        marginHorizontal: "5%",
+        fontSize: 18,
+        marginBottom: "5%",
     },
     bottom: {
 
@@ -164,10 +169,10 @@ const styles = StyleSheet.create({
 
     nomeProdotto: {
         marginHorizontal: "5%",
-        marginTop:"5%",
+        marginTop: "5%",
         fontSize: 24,
         color: '#70D0AE',
-        fontWeight:"bold",
+        fontWeight: "bold",
         alignItems: "center",
 
     },

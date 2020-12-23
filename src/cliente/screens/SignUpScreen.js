@@ -9,28 +9,40 @@ import BackButton from '../components/BackButton';
 import Hr from '../components/HorizLine';
 import Select from '../components/SelectMY';
 const SignUpScreen = ({ navigation }) => {
+
   const [isSelected, setSelection] = useState(false);
   const [email, setEmail] = React.useState('');
   const [pasw, setPasw] = React.useState('');
+  const [sede, setSede] = React.useState('');
+  const [citta, setCitta] = React.useState('');
+  const [cap, setCap] = React.useState('');
   const [paswConfirm, setPaswConfirm] = React.useState('');
   const [nome, setNome] = React.useState('');
+  const [ragioneSociale, setRagioneSociale] = React.useState('');
   const [codFiscale, setCodFiscale] = React.useState('');
   const [numCarta, setNumCarta] = React.useState('');
   const [nomeAtt, setNomeAtt] = React.useState('');
   const [piva, setPiva] = React.useState('');
+  const [sdi, setSdi] = React.useState('');
+
   const registrazione = (email, pasw, paswConfirm, nome, codFiscale) => {
+
     const regE = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    
     if (regE.test(email)) {
       alert("email ok")
     } else {
       alert("email formato errato")
     }
+
     const regP = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/);
+
     const isOk = regP.test(pasw);
+
     if (isOk) {
       alert('pass');
       if (pasw === paswConfirm) {
-        navigation.navigate('ConfirmSignUp',{msg:"I suoi dati saranno presi in esame, riceverà un e-mail alla conferma."})
+        navigation.navigate('ConfirmSignUp', { msg: "I suoi dati saranno presi in esame, riceverà un e-mail alla conferma." })
       } else {
         alert("password diverse")
       }
@@ -38,6 +50,7 @@ const SignUpScreen = ({ navigation }) => {
       alert('fail');
     }
   }
+
   return (
     <View
       style={{ height: "100%", flexDirection: "column", flex: 1, backgroundColor: 'white' }}
@@ -59,22 +72,52 @@ const SignUpScreen = ({ navigation }) => {
           <PasswordTextInput placeholder="Password" value={pasw} onChangeText={pasw => setPasw(pasw)} />
           <PasswordTextInput value={paswConfirm} onChangeText={paswConfirm => setPaswConfirm(paswConfirm)} placeholder="Ripeti Password" />
           <Hr testo="Dati anagrafici" />
+          
           <TextInputCustomer
             placeholder="Nome e cognome"
             value={nome}
             onChangeText={nome => setNome(nome)} />
+
+          <TextInputCustomer
+            placeholder="Ragione sociale"
+            value={ragioneSociale}
+            onChangeText={ragioneSociale => setRagioneSociale(ragioneSociale)} />
+
           <TextInputCustomer
             placeholder="Codice fiscale"
             value={codFiscale}
             onChangeText={codFiscale => setCodFiscale(codFiscale)} />
+
           <TextInputCustomer
             placeholder="Nome attività"
             value={nomeAtt}
             onChangeText={nomeAtt => setNomeAtt(nomeAtt)} />
+
+          <TextInputCustomer
+            placeholder="Città"
+            value={citta}
+            onChangeText={citta => setCitta(citta)} />
+
+          <TextInputCustomer
+            placeholder="CAP"
+            value={cap}
+            onChangeText={cap => setCap(cap)} />
+
+          <TextInputCustomer
+            placeholder="Sede/indirizzo"
+            value={sede}
+            onChangeText={sede => setSede(sede)} />
+
           <TextInputCustomer
             placeholder="Partita IVA"
             value={piva}
             onChangeText={piva => setPiva(piva)} />
+
+          <TextInputCustomer
+            placeholder="Indirizzo fatturazione elettronica"
+            value={sdi}
+            onChangeText={sdi => setSdi(sdi)} />
+
           <Hr testo="Metodo di pagamento" />
           <TextInputCustomer placeholder="Numero Carta"
             value={numCarta}

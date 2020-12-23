@@ -6,6 +6,7 @@ import PasswordTextInput from '../components/PasswordTextInput';
 import GenericButton from '../components/GenericButton';
 import SignupButton from '../components/ReverseButton';
 import LogoNome from '../components/LogoNome';
+ 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [pasw, setPasw] = React.useState('');

@@ -47,6 +47,8 @@ export function getCategories() {
   ]
 };
 
+
+
 export function getProductsFromCategory(categoryID) {
   return [
     {
@@ -306,7 +308,64 @@ export function getConsegna(id) {
       id: '4',
       articolo: 'Asciugamano',
       quantità: '15',
-    }
-
+    },
+  
+    
   ]
 };
+
+
+export function getRitiro(id) {
+  return [
+    {
+      id: '1',
+      articolo: 'Lenzuola',
+      quantità: '3',
+
+    },
+    {
+      id: '2',
+      articolo: 'Federe',
+      quantità: '4',
+    },
+    {
+      id: '3',
+      articolo: 'Copripiumino',
+      quantità: '7',
+    },
+    {
+      id: '4',
+      articolo: 'Asciugamano',
+      quantità: '4',
+    },
+    {
+      id: '5',
+      articolo: 'Scendiletto',
+      quantità: '2',
+    },
+    
+  ]
+};
+
+export function getLuoghi(){
+  return [
+    {
+        latitude: 40.6639841,
+        longitude: 14.7934572,
+        title: "Piazza Caduti Di Brescia",
+        select: false,
+    },
+    {
+        latitude: 40.6601335,
+        longitude: 14.8026794,
+        title: "Parco del Mercatello",
+        select: true,
+    },
+    {
+        latitude: 40.6775525,
+        longitude: 14.753176,
+        title: "Chiosco di Santa Teresa",
+        select: false,
+    },
+  ]
+}

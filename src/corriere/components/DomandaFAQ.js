@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         fontSize:20,
         textAlign:"justify",
         color:"#3E4349",
-
+        backgroundColor:"#F8FFFC"
     },
 
 
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 
     sezioneFaq: {
         margin: "2%",
-
+        backgroundColor:"#F8FFFC",
         borderRadius: 10,
         borderWidth: 1,
         borderColor: "#E9EBED",

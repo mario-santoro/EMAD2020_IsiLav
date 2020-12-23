@@ -1,14 +1,17 @@
 import { setStatusBarHidden } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native';
 import { Header, SearchBar, Overlay, Icon, ListItem, Badge, withBadge } from 'react-native-elements';
+import Carrello from '../services/Carrello';
 
 
-
-const TopBar = ({ navigation, quantità }) => {
+const TopBar = ({ navigation }) => {
    
     const [text, setText] = useState("");
- 
+    const carrello= Carrello;
+    useEffect(()=>{
+        console.log("Ciauz");
+    },[carrello.articoli]);
     const list = [
         {
             name: 'Il mio profilo',
@@ -28,7 +31,7 @@ const TopBar = ({ navigation, quantità }) => {
         {
             name: 'Prenota reso',
             icon: 'redo',
-            link: ''
+            link: 'Reso'
         },
         {
             name: 'FAQ',
@@ -73,9 +76,9 @@ const TopBar = ({ navigation, quantità }) => {
                 rightComponent={
                     <View>
                         <Icon onPress={() => navigation.navigate("Cart")} name='shopping-cart' color='#F8FFFC'   size={40} ></Icon>
-                        {quantità>0 && (
+                        {carrello.articoli.length>0 && (
 
-                            <Badge value={quantità} status="error" containerStyle={{ position: 'absolute', top: -4, right: -4 }} />
+                            <Badge value={carrello.articoli.length} status="error" containerStyle={{ position: 'absolute', top: -4, right: -4 }} />
                         )
 
                         }

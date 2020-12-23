@@ -15,7 +15,11 @@ const TopBarCorriere = ({ navigation, quantità }) => {
             icon: 'perm-identity',
             link: 'MyProfileCorriere'
         },
-       
+        {
+            name: 'Scanner QR-code',
+            icon: 'qr-code-scanner',
+            link: 'ScannerQR'
+        },
         {
             name: 'FAQ',
             icon: 'help-outline',
@@ -56,32 +60,11 @@ const TopBarCorriere = ({ navigation, quantità }) => {
                     </View>
                 </TouchableOpacity></View>}
                 //centerComponent={{ text: 'IsiLav', style: { color: '#FFFFFF', fontSize: 25 } }}
-                rightComponent={
-                    <View>
-                        <Icon onPress={() => navigation.navigate("Cart")} name='shopping-cart' color='#F8FFFC'   size={40} ></Icon>
-                        {quantità>0 && (
-
-                            <Badge value={quantità} status="error" containerStyle={{ position: 'absolute', top: -4, right: -4 }} />
-                        )
-
-                        }
-
-                    </View>
-                }
+               
             />
 
 
-            <SearchBar
-                platform='ios'
-                containerStyle={{ backgroundColor: "#9de7cc", borderWidth: 0, marginTop: -11, paddingTop: 8 }}
-                inputStyle={{ backgroundColor: "#F8FFFC" }}
-                inputContainerStyle={{ backgroundColor: "#F8FFFC", color:"#3E4349", padding: 0, paddingBottom: 0 }}
-                cancelButtonTitle="Annulla"
-                placeholder="Cerca nel catalogo..."
-                cancelButtonProps={{ color: "#F8FFFC" }}
-                value={text}
-                onChangeText={(newText)=>setText(newText)}
-            />
+            
 
             <View>
 

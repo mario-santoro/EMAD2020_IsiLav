@@ -30,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
                             label="Codice fiscale" />
                      
                     </View>
-                    <GenericButton testo="Cambia" onPress={() => navigation.navigate('SuccessScreen')} />
+                    <GenericButton testo="Cambia" onPress={() => navigation.navigate('SuccessScreenCorriere')} />
                 </View>
             </ScrollView>
         </View>

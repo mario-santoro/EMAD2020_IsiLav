@@ -9,7 +9,7 @@ const MyProfileCorriere = ({ navigation }) => {
         <View
             style={{ height: "100%", flexDirection: "column", flex: 1, backgroundColor: "white" }}
         >
-            <View style={{ alignItems: "center", }}>
+            
                 <StatusBar
                     backgroundColor="#5f9747"
                     barStyle="light-content"
@@ -21,7 +21,7 @@ const MyProfileCorriere = ({ navigation }) => {
                 }}>
                     <Text style={styles.titolo}>Il mio profilo</Text>
                 </View>
-            </View>
+     
             <SafeAreaView style={styles.container}>
                 <TouchableOpacity  onPress={() => navigation.navigate('ChangePasswCorriere')}  style={styles.item}>
                     <View style={{ flexDirection: "row" }}>

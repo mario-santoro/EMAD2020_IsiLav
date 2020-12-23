@@ -40,7 +40,7 @@ const categories = [ //Da ottenere dinamicamente con API
 ];
 
 const HomeScreen = ({navigation}) => {
-
+ 
   return (
     <View 
     style={styles.container}

@@ -1,88 +1,95 @@
 import React, { useState } from 'react';
 import { Dimensions, Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { Icon, Button, ListItem } from 'react-native-elements';
+import { ButtonGroup, ListItem } from 'react-native-elements';
 
 import TopBar from '../components/TopBarCorriere';
 import GenericButton from '../../cliente/components/GenericButton';
 import * as API from '../../cliente/services/API';
 
-const { width, height } = Dimensions.get('window');
+
 const DettaglioCliente = ({ navigation, route }) => {
     const nome = route.params.nome;
     const operazione = route.params.operazione;
 
+    const buttons = ['Consegna', 'Ritiro']
+ 
+    const [index, updateIndex] = useState(0);
     const consegna = API.getConsegna();
+    const ritiro = API.getRitiro();
     return (
 
         <View style={styles.container}>
             <TopBar navigation={navigation} />
             <View style={styles.body}>
-                <View style={{ flexDirection: "column" }}>
+                <View style={{ flexDirection: "column", height: 30 }}>
                     <Text style={styles.title}>{nome}</Text>
                     <Text style={styles.subtitle}>operazione: {operazione}</Text>
 
                 </View>
 
             </View>
-            < View style={{ padding: 10, }}>
-                <View style={styles.line}>
-                    <Text style={styles.baseText} >Consegna</Text>
 
-                    <View
-                        style={{
-                            borderBottomColor: '#70D0AE',
-                            borderBottomWidth: 2,
-                            width: "80%",
+            <ButtonGroup
+                containerStyle={{ height: 50, justifyContent: "flex-start",  }}
+                innerBorderStyle={{ color: "#70D0AE", }}
+                buttonContainerStyle={{ backgroundColor: "white", }}
+                selectedTextStyle={{ color: "white" }}
+                textStyle={{ color: "#70D0AE", fontSize: 20 }}
+                onPress={(selectedIndex) => updateIndex(selectedIndex)}
+                selectedIndex={index}
+                buttons={buttons}
+                selectedButtonStyle={{ backgroundColor: "#70D0AE", }}
+            />
 
-                        }}></View>
-                </View>
-                <FlatList
-                    style={{ height: height * .25 }}
-                    data={consegna}
-                    renderItem={({ item }) => (
-                        <ListItem bottomDivider>
-
-                            <ListItem.Content>
-                                <ListItem.Title style={{ color: "#70D0AE", fontSize: 18, fontWeight: 'bold' }}>{item.articolo}</ListItem.Title>
+            <View style={{ padding: 10, marginBottom: 20 }}>
 
 
-                            </ListItem.Content>
-                            <ListItem.Title style={{ color: "#3E4349", }}>Quantità: <Text style={{ color: "#70D0AE", fontWeight: 'bold' }}> {item.quantità} </Text></ListItem.Title>
-                        </ListItem>
-                    )}
-                    keyExtractor={item => item.id}
-                />
-                <View style={styles.line}>
-                    <Text style={styles.baseText} >Ritiro</Text>
+                {index == 0 ?
+                    <FlatList
 
-                    <View
-                        style={{
-                            borderBottomColor: '#70D0AE',
-                            borderBottomWidth: 2,
-                            width: "80%",
+                        data={consegna}
+                        renderItem={({ item }) => (
+                            <ListItem bottomDivider>
 
-                        }}></View>
-                </View>
-                <FlatList
-                    style={{height: height * .25}}
-                    data={consegna}
-                    renderItem={({ item }) => (
-                        <ListItem bottomDivider>
-
-                            <ListItem.Content>
-                                <ListItem.Title style={{ color: "#70D0AE", fontSize: 18, fontWeight: 'bold' }}>{item.articolo}</ListItem.Title>
+                                <ListItem.Content>
+                                    <ListItem.Title style={{ color: "#70D0AE", fontSize: 18, fontWeight: 'bold' }}>{item.articolo}</ListItem.Title>
 
 
-                            </ListItem.Content>
-                            <ListItem.Title style={{ color: "#3E4349", }}>Quantità: <Text style={{ color: "#70D0AE", fontWeight: 'bold' }}> {item.quantità} </Text></ListItem.Title>
-                        </ListItem>
-                    )}
-                    keyExtractor={item => item.id}
-                />
+                                </ListItem.Content>
+                                <ListItem.Title style={{ color: "#3E4349", }}>Quantità: <Text style={{ color: "#70D0AE", fontWeight: 'bold' }}> {item.quantità} </Text></ListItem.Title>
+                            </ListItem>
+                        )}
+                        keyExtractor={item => item.id}
+                    />
+                    : null}
+
+
+
+                {index == 1 ?
+
+                    <FlatList
+
+                        data={ritiro}
+                        renderItem={({ item }) => (
+                            <ListItem bottomDivider>
+
+                                <ListItem.Content>
+                                    <ListItem.Title style={{ color: "#70D0AE", fontSize: 18, fontWeight: 'bold' }}>{item.articolo}</ListItem.Title>
+
+
+                                </ListItem.Content>
+                                <ListItem.Title style={{ color: "#3E4349", }}>Quantità: <Text style={{ color: "#70D0AE", fontWeight: 'bold' }}> {item.quantità} </Text></ListItem.Title>
+                            </ListItem>
+                        )}
+                        keyExtractor={item => item.id}
+                    />
+                    : null}
+
+
+
+
             </ View>
-            <View style={styles.bottom}>
-                <GenericButton testo="Scannerizza QR code" onPress={() => navigation.navigate('login')} />
-            </View>
+
 
         </View>
     );
@@ -93,24 +100,16 @@ const styles = StyleSheet.create({
     container: {
 
         backgroundColor: "white",
-        flex: 1,
+        flex:1,
     },
-    line: {
-        width: "100%", alignItems: "center", justifyContent: 'center',
-        flexDirection: "row", paddingHorizontal: 15, marginTop: 20
-    },
-    baseText: {
-        fontSize: 20,
-        color: '#70D0AE',
-        width: "28%"
-    },
+
     body: {
         margin: "2%",
         padding: "5%",
         alignSelf: "center",
         borderColor: "#262626",
         flexDirection: "row",
-        flex: 1,
+ 
     },
     bottom: {
 

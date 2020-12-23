@@ -5,9 +5,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 //import PercorsoCorriere from '../components/PercorsoCorriere';
 import GenericButton from '../../cliente/components/GenericButton';
 import TopBar from '../components/TopBarCorriere';
- 
+
 import * as API from '../../cliente/services/API';
- 
+
 const HomeCorriere = ({ navigation }) => {
     const oggi = new Date();
     const max = new Date().setDate(oggi.getDate() + 365); //es. oggi + 365 giorni
@@ -47,25 +47,34 @@ const HomeCorriere = ({ navigation }) => {
                     title={date.getDate().toString() + "/" + (date.getMonth() + 1).toString() + "/" + date.getFullYear()}
                     onPress={() => setShow(true)}
                 />
-               
+
             </View>
             <FlatList
-                    data={fermate}
-                    renderItem={({ item }) => (
-                        <ListItem  onPress={()=>navigation.navigate("DettaglioFermata", {via: item.via, ora: item.ora })} bottomDivider>
-                       
-                            <ListItem.Content>
-                                <ListItem.Title style={{ color: "#70D0AE", fontSize: 18, fontWeight: 'bold' }}>{item.via}</ListItem.Title>
-                                <ListItem.Subtitle>ora: {item.ora}</ListItem.Subtitle>
-                                <ListItem.Title style={{ color: "#3E4349", }}>Numero Clienti: <Text style={{ color: "#70D0AE", fontWeight: 'bold' }}> {item.numClienti} </Text></ListItem.Title>
-                            </ListItem.Content>
-                            <ListItem.Chevron name="navigate-next" color="#E9EBED" size={50} />
-                        </ListItem>
-                    )}
-                    keyExtractor={item => item.id}
-                />
+                data={fermate}
+                renderItem={({ item }) => (
+                    <ListItem onPress={() => navigation.navigate("DettaglioFermata", { via: item.via, ora: item.ora })} bottomDivider>
+
+                        <ListItem.Content>
+                            <ListItem.Title style={{ color: "#70D0AE", fontSize: 18, fontWeight: 'bold' }}>{item.via}</ListItem.Title>
+                            <ListItem.Subtitle>ora: {item.ora}</ListItem.Subtitle>
+                            <ListItem.Title style={{ color: "#3E4349", }}>Numero Clienti: <Text style={{ color: "#70D0AE", fontWeight: 'bold' }}> {item.numClienti} </Text></ListItem.Title>
+                        </ListItem.Content>
+                        <ListItem.Chevron name="navigate-next" color="#E9EBED" size={50} />
+                    </ListItem>
+                )}
+                keyExtractor={item => item.id}
+            />
             <View style={styles.bottom}>
-                <GenericButton testo="Visualizza Mappa Percorso" onPress={() => navigation.navigate('login')} />
+                <Button
+                    icon={<Icon size={24} name="location-on" color="#F8FFFC" style={{ paddingLeft: 90 }} />}
+                    iconRight={true}
+                    containerStyle={{ width: "90%", borderRadius: 5 }}
+                    buttonStyle={{ backgroundColor: "#9DE7CD", }}
+                    titleStyle={{ color: "#F8FFFC", paddingLeft: 90 }}
+
+                   onPress={()=>navigation.navigate("VisualizzaPercorso")}
+                    title="Visualizza percorso"
+                />
             </View>
 
         </View>
@@ -85,10 +94,10 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         borderColor: "#262626",
         flexDirection: "row",
-        flex: 1,
+
     },
     bottom: {
-
+        marginVertical: 15,
         justifyContent: 'flex-end',
         alignItems: "center",
 
