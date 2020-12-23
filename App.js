@@ -22,6 +22,10 @@ import Cart from './src/cliente/screens/Cart';
 import QrCode from './src/cliente/screens/QrCodeScreen';
 import DettaglioOrdine from './src/cliente/screens/DettaglioOrdine';
 import FAQ from './src/cliente/screens/FAQ';
+import Reso from './src/cliente/screens/ResoScreen';
+import ConfermaReso from './src/cliente/screens/ConfermaResoScreen';
+import EffettuaOrdine from './src/cliente/screens/EffettuaOrdine';
+import ModificaOrdine from './src/cliente/screens/ModificaOrdine';
 import HomeCorriere from './src/corriere/screens/HomeCorriere';
 import FAQCorriere from './src/corriere/screens/FAQCorriere';
 import MyProfileCorriere from './src/corriere/screens/MyProfileCorriere';
@@ -30,6 +34,11 @@ import DettaglioFermata from './src/corriere/screens/DettaglioFermata';
 import DettaglioCliente from './src/corriere/screens/DettaglioCliente';
 import SuccessScreenCorriere from './src/corriere/screens/SuccessScreenCorriere';
 import ChangePasswCorriere from './src/corriere/screens/ChangePasswCorriere';
+import ScannerQR from './src/corriere/screens/ScannerQR';
+import Map from './src/cliente/screens/MapScreen';
+import VisualizzaPercorso from './src/corriere/screens/VisualizzaPercorso';
+import SelectMap from './src/cliente/screens/SelectMap';
+import PayOrdine from './src/cliente/screens/PayOrdine';
 const RootStack = createStackNavigator();
  
 const App = () => {
@@ -64,7 +73,16 @@ const App = () => {
         <RootStack.Screen name="DettaglioCliente" component={DettaglioCliente} options={{headerShown: false}}/>
         <RootStack.Screen name="SuccessScreenCorriere" component={SuccessScreenCorriere} options={{headerShown: false}}/>
         <RootStack.Screen name="ChangePasswCorriere" component={ChangePasswCorriere} options={{headerShown: false}}/>
-      </RootStack.Navigator>
+        <RootStack.Screen name="Reso" component={Reso} options={{headerShown: false}}/>
+        <RootStack.Screen name="EffettuaOrdine" component={EffettuaOrdine} options={{headerShown: false}}/>
+        <RootStack.Screen name="ConfermaReso" component={ConfermaReso} options={{headerShown: false}}/>
+        <RootStack.Screen name="ModificaOrdine" component={ModificaOrdine} options={{headerShown: false}}/>
+        <RootStack.Screen name="ScannerQR" component={ScannerQR} options={{headerShown: false}}/>
+        <RootStack.Screen name="Map" component={Map} options={{headerShown: false}}/>
+        <RootStack.Screen name="VisualizzaPercorso" component={VisualizzaPercorso} options={{headerShown: false}}/>
+        <RootStack.Screen name="SelectMap" component={SelectMap} options={{headerShown: false}}/>
+        <RootStack.Screen name="PayOrdine" component={PayOrdine} options={{headerShown: false}}/>
+  </RootStack.Navigator>
     </NavigationContainer>
   );
 };
