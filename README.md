@@ -29,3 +29,4 @@ Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile
 <b>Date</b>: $ npm install @react-native-community/datetimepicker --save </br>
 <b>Scanner QR code</b>: $ expo install expo-camera e expo install expo-barcode-scanner</br>
 <b>Mapp</b>: $ expo install react-native-maps</br>
+<b>GPS</b>: $ expo install expo-location</br>
