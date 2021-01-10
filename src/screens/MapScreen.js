@@ -31,7 +31,7 @@ const MapScreen = ({ navigation, route }) => {
                     coordinate={{ latitude: marker.latitude, longitude: marker.longitude}}
                     title={marker.title}
                     onPress={() => setSelezionato(marker)}
-                    pinColor={selezionato!==null && marker.title === selezionato.title? "green" : null} //meglio usare gli id
+                    pinColor={selezionato!==null && marker.title === selezionato.title? "green" : null} //meglio usare gli id (marker.id === selezionato.id) per il confronto
                     />
                 )}
 
