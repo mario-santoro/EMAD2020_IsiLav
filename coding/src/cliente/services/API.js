@@ -47,6 +47,8 @@ export function getCategories() {
   ]
 };
 
+
+
 export function getProductsFromCategory(categoryID) {
   return [
     {
@@ -350,17 +352,20 @@ export function getLuoghi(){
     {
         latitude: 40.6639841,
         longitude: 14.7934572,
-        title: "Piazza Caduti Di Brescia"
+        title: "Piazza Caduti Di Brescia",
+        select: false,
     },
     {
         latitude: 40.6601335,
         longitude: 14.8026794,
-        title: "Parco del Mercatello"
+        title: "Parco del Mercatello",
+        select: true,
     },
     {
         latitude: 40.6775525,
         longitude: 14.753176,
-        title: "Chiosco di Santa Teresa"
+        title: "Chiosco di Santa Teresa",
+        select: false,
     },
   ]
 }

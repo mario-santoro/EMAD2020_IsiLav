@@ -171,7 +171,7 @@ const DettaglioOrdine = ({ route, navigation }) => {
                             buttonStyle={{ backgroundColor: "#9DE7CD", borderRadius: 15 }}
                             titleStyle={{ color: "#F8FFFC" }}
                             title="Mostra sulla mappa"
-                            onPress={() => navigation.navigate("Map", {luogo: null, schermata:"DettaglioOrdine"})}   
+                            onPress={() => navigation.navigate("SelectMap")}   
                         />
                     </View>
                 </View>

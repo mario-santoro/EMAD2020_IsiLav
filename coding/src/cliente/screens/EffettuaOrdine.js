@@ -204,7 +204,7 @@ const ResoScreen = ({ navigation, route }) => {
                     buttonStyle={{ backgroundColor: "#9DE7CD", borderRadius: 15 }}
                     titleStyle={{ color: "#F8FFFC", fontSize: 16 }}
                     title="CONTINUA"
-                    onPress={()=>navigation.navigate("SuccessScreen")}
+                    onPress={()=>navigation.navigate("PayOrdine")}
                 />
             </View>
 

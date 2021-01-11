@@ -4,7 +4,7 @@ import TopBar from '../components/TopBar';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon, Button, Overlay, ListItem } from 'react-native-elements';
 import * as API from '../services/API';
-import MapView, { Marker } from 'react-native-maps';
+import Map from '../components/Map';
 const giacenza = API.getGiacenza();
 const onDateChange = (event, selectedDate) => {
     const newDate = selectedDate || date;
@@ -12,7 +12,7 @@ const onDateChange = (event, selectedDate) => {
     setDate(newDate);
 };
 
-const ResoScreen = ({ navigation }) => {
+const ModificaOrdine = ({ navigation }) => {
     const oggi = new Date();
     const max = new Date().setDate(oggi.getDate() + 365); //es. oggi + 365 giorni
 
@@ -56,14 +56,10 @@ const ResoScreen = ({ navigation }) => {
 
                 <Text style={{ width: "80%", fontSize: 16, color: '#3E4349', alignItems: 'flex-start', marginTop: 10 }}>Cambia luogo per il ritiro:</Text>
 
-             
-
-
-
-
-
             </ScrollView>
-
+       
+            <Map/>
+         
 
             <View style={{ flexDirection: 'row', width: "100%", borderTopWidth: 0.5, borderColor: "#9DE7CD", marginTop: 10 }}>
                 <Button
@@ -94,9 +90,11 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         alignItems: 'center',
-        paddingTop: StatusBar.currentHeight / 2
+        paddingTop: StatusBar.currentHeight / 2,
+        
+  
     }
 
 });
 
-export default ResoScreen;
+export default ModificaOrdine;

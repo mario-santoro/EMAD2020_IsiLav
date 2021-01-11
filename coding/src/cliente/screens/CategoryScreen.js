@@ -20,7 +20,7 @@ const CategoryScreen = ({ navigation }) => {
       <FlatList
         data={categories}
         renderItem={({ item }) => (
-          <ListItem onPress={() => navigation.navigate("DettaglioProdotto")} bottomDivider>
+          <ListItem onPress={() => navigation.navigate("DettaglioProdotto", {item: item})} bottomDivider>
             <Image source={item.image} resizeMethod='auto' resizeMode='cover' style={{ width: 125, height: 128 }} />
             <ListItem.Content>
               <ListItem.Title style={{ color: "#70D0AE", fontSize:18, fontWeight: 'bold' }}>{item.name}</ListItem.Title>
