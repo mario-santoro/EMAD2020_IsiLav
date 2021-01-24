@@ -72,7 +72,7 @@ const HomeCorriere = ({ navigation }) => {
                     buttonStyle={{ backgroundColor: "#9DE7CD", }}
                     titleStyle={{ color: "#F8FFFC", paddingLeft: 90 }}
 
-                   onPress={()=>navigation.navigate("VisualizzaPercorso")}
+                   onPress={()=>navigation.navigate("Location")}
                     title="Visualizza percorso"
                 />
             </View>

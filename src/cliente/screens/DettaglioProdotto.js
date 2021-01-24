@@ -3,17 +3,25 @@ import { Dimensions, ScrollView, View, Text, StatusBar, StyleSheet, Image, } fro
 import GenericButton from '../components/GenericButton';
 import TopBar from '../components/TopBar';
 import RNPickerSelect from 'react-native-picker-select';
-import Carrello from '../services/Carrello';
-
+ 
+import { CartContext } from '../services/Carrello';
 const DettaglioProdotto = ({ navigation, route }) => {
     const [quantità, setQuantità] = useState(0);
     const [pezzi, setPezzi] = useState(1);
     const { width, height } = Dimensions.get('window');
     const item= route.params.item;
- 
-
+    var prodotto={
+    id: '6',
+    name: 'Lenzuola',
+    price: 22.97,
+    description: "Lenzuola matrimoniali bianche 100% cotone",
+    image: require("../../../image/lenzuola.jpg"),
+    quantity: 10,
+    piece: 30,
+}
     return (
-
+        <CartContext.Consumer>
+        {carrello =>
         <View
             style={{ flexDirection: "column", flex: 1, backgroundColor: 'white', }}
         >
@@ -101,12 +109,13 @@ const DettaglioProdotto = ({ navigation, route }) => {
                     alla duttile morbidezza che lo caratterizzano, questo lenzuolo offre calore e traspirabilità.</Text>
                 </View>
                 <View style={styles.bottom}>
-                    <GenericButton testo="Aggiungi al carrello" onPress={() => Carrello.addArticolo({item})} />
+                    <GenericButton testo="Aggiungi al carrello" onPress={()=>carrello.addProdotto(item)} />
                 </View>
 
             </ScrollView>
         </View>
-
+    }
+        </CartContext.Consumer>
     );
 
 

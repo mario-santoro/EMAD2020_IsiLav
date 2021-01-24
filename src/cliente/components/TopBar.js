@@ -1,18 +1,15 @@
-import { setStatusBarHidden } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native';
-import { Header, SearchBar, Overlay, Icon, ListItem, Badge, withBadge } from 'react-native-elements';
-import Carrello from '../services/Carrello';
+import React, { useState } from 'react';
+import { View, Text, Image, StatusBar, TouchableOpacity } from 'react-native';
+import { Header, SearchBar, Overlay, Icon, ListItem, Badge } from 'react-native-elements';
+import { CartContext } from '../services/Carrello';
+import { useNavigation } from '@react-navigation/native';
 
+const TopBar = ({showSearchBar=true }) => {
+    const navigation = useNavigation(); //Prop navigation da hook React
+    const [text, setText] = useState(""); //Stato per il testo della SearchBar
+    const [overlayVisible, setOverlayVisible] = useState(false); //Stato per l'overlay
 
-const TopBar = ({ navigation }) => {
-   
-    const [text, setText] = useState("");
-    const carrello= Carrello;
-    useEffect(()=>{
-        console.log("Ciauz");
-    },[carrello.articoli]);
-    const list = [
+    const screenList = [
         {
             name: 'Il mio profilo',
             icon: 'perm-identity',
@@ -31,7 +28,7 @@ const TopBar = ({ navigation }) => {
         {
             name: 'Prenota reso',
             icon: 'redo',
-            link: 'Reso'
+            link: ''
         },
         {
             name: 'FAQ',
@@ -44,51 +41,45 @@ const TopBar = ({ navigation }) => {
             link: 'Login'
         },
     ]
-    const [visible, setVisible] = useState(false);
-    function changeScreen(link) {
-        navigation.navigate(link)
-        setVisible(!visible);
 
+    
+    function changeScreen(link) {
+        setOverlayVisible(false);
+        navigation.navigate(link)
     }
-    const toggleOverlay = () => {
-        setVisible(!visible);
-    };
+
     return (
         <View>
-            <StatusBar
-                backgroundColor="#70D0AE"
-                barStyle="light-content"
-            />
+            <StatusBar backgroundColor="#70D0AE" barStyle="light-content" />
 
             <Header
-                backgroundColor="#9de7cc"
-                barStyle="light-content"
-
-                leftComponent={{ icon: 'menu', size: 40, color: '#F8FFFC', onPress: toggleOverlay }}
-                centerComponent={<View><TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            backgroundColor="#9de7cc"
+            barStyle="light-content"
+            leftComponent={{ icon: 'menu', size: 40, color: '#F8FFFC', onPress: ()=>setOverlayVisible(true)}}
+            centerComponent={
+                <View>
+                    <TouchableOpacity onPress={() => navigation.navigate("Home")}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                         <Image source={require('../../../image/icona-bianca.png')} style={{ height: 35, width: 35 }} />
                         <Text style={{ color: "#F8FFFC", marginLeft: 2, fontSize: 28, fontWeight: "bold" }}>IsiLav</Text>
-
                     </View>
-                </TouchableOpacity></View>}
-                //centerComponent={{ text: 'IsiLav', style: { color: '#FFFFFF', fontSize: 25 } }}
-                rightComponent={
+                    </TouchableOpacity>
+                </View>
+            }
+            rightComponent={
+                <CartContext.Consumer>
+                {carrello =>
                     <View>
-                        <Icon onPress={() => navigation.navigate("Cart")} name='shopping-cart' color='#F8FFFC'   size={40} ></Icon>
-                        {carrello.articoli.length>0 && (
-
-                            <Badge value={carrello.articoli.length} status="error" containerStyle={{ position: 'absolute', top: -4, right: -4 }} />
-                        )
-
-                        }
-
+                        <Icon onPress={() => navigation.navigate("Cart")} name='shopping-cart' color='#F8FFFC' size={40} />
+                        {carrello.getLunghezza()? <Badge value={carrello.getLunghezza()} status="error" containerStyle={{ position: 'absolute', top: -4, right: -4 }} /> : null}
                     </View>
                 }
+                </CartContext.Consumer>
+            }
             />
 
-
-            <SearchBar
+            {showSearchBar? 
+                <SearchBar
                 platform='ios'
                 containerStyle={{ backgroundColor: "#9de7cc", borderWidth: 0, marginTop: -11, paddingTop: 8 }}
                 inputStyle={{ backgroundColor: "#F8FFFC" }}
@@ -98,49 +89,36 @@ const TopBar = ({ navigation }) => {
                 cancelButtonProps={{ color: "#F8FFFC" }}
                 value={text}
                 onChangeText={(newText)=>setText(newText)}
-            />
+                />
+            : null }
+
 
             <View>
-
-
-                <Overlay animationType="fade" isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={{ backgroundColor: "white", borderRadius: 0, width: "85%", height: "100%", right: "7%" }}>
+                <Overlay
+                animationType="fade"
+                isVisible={overlayVisible}
+                onBackdropPress={() => setOverlayVisible(false)}
+                overlayStyle={{ backgroundColor: "white", borderRadius: 0, width: "80%", height: "100%", alignSelf: "flex-start"}}>
                     <View>
-                        <View style={{ flexDirection: "row", }}>
-                            <Icon onPress={toggleOverlay} name="chevron-left" color="#E9EBED" size={50} ></Icon>
-                            <Text style={styles.text}>Mario Rossi</Text>
+                        <View style={{flexDirection: "row"}}>
+                            <Icon onPress={() => setOverlayVisible(false)} name="chevron-left" color="#E9EBED" size={50} />
+                            <Text style={{flex: 1, fontSize: 20, color:"#3E4349", textAlign: 'center', textAlignVertical: 'center'}}>Mario Rossi</Text>
                         </View>
-                        <View  >
-                            {
-                                list.map((l, i) => (
-                                    <ListItem  onPress={() => changeScreen(l.link)} key={i} bottomDivider>
-
-                                        <Icon name={l.icon} color="#70D0AE" size={30} ></Icon>
-                                        <ListItem.Content >
-                                            <ListItem.Title style={{ paddingLeft: 50, }}>{l.name}</ListItem.Title>
-
-                                        </ListItem.Content>
-                                    </ListItem>
-                                ))
-                            }
+                        <View>
+                            { screenList.map((l, i) => (
+                                <ListItem onPress={() => changeScreen(l.link)} key={i} bottomDivider>
+                                    <Icon name={l.icon} color="#70D0AE" size={30} />
+                                    <ListItem.Content >
+                                        <ListItem.Title style={{fontSize:18}}>{l.name}</ListItem.Title>
+                                    </ListItem.Content>
+                                </ListItem>
+                            ))}
                         </View>
                     </View>
                 </Overlay>
             </View>
         </View>
-
     );
-
 };
-const styles = StyleSheet.create({
-
-    text: {
-        padding: 7,
-        paddingLeft: 50,
-        fontSize: 20,
-        color:"#3E4349"
-    },
-
-
-});
 
 export default TopBar;
