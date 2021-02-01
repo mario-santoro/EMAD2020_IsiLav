@@ -30,3 +30,5 @@ Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile
 <b>Scanner QR code</b>: $ expo install expo-camera e expo install expo-barcode-scanner</br>
 <b>Mapp</b>: $ expo install react-native-maps</br>
 <b>GPS</b>: $ expo install expo-location</br>
+<b> Azure Function</b>: $npm install -g azure-functions-core-tools@3
+<b> MySQL</b>: $ npm install sync-mysql --save
