@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../getOrdersByUser/index.ts"],"names":[],"mappings":";;;;;;;;;;;AACA,iDAAgD;AAEhD,MAAM,WAAW,GAAkB,UAAgB,OAAgB,EAAE,GAAgB;;QACjF,MAAM,KAAK,GAAG,GAAG,CAAC,KAAK,CAAC,KAAK,CAAA;QAG7B,OAAO,CAAC,GAAG,GAAG;YACV,qCAAqC;YACrC,IAAI,EAAE,QAAQ,CAAC,eAAe,CAAC,KAAK,CAAC;SACxC,CAAC;IAEN,CAAC;CAAA,CAAC;AAEF,kBAAe,WAAW,CAAC"}
