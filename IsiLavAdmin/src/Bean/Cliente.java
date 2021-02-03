@@ -5,8 +5,8 @@ public class Cliente extends Utente{
 	private String codFiscale;
 	private String nomeAttivita;
 	private String citta ;
-	private int telefono;
-	private int CAP;
+	private String telefono;
+	private String CAP;
 	private String sede;
 	private String pIVA;
 	private String IFE;
@@ -15,7 +15,7 @@ public class Cliente extends Utente{
 	private double costoReso;
 	private int percentualeRitardo;
 	
-	public Cliente(String email, String password, String nominativo, String ragSociale, String codFiscale, String nomeAttivita, String citta, int telefono, int CAP, String sede, String pIVA, String IFE) {
+	public Cliente(String email, String password, String nominativo, String ragSociale, String codFiscale, String nomeAttivita, String citta, String telefono, String CAP, String sede, String pIVA, String IFE) {
 		super(email, password, nominativo);
 		this.ragSociale=ragSociale;
 		this.codFiscale=codFiscale;
@@ -60,11 +60,11 @@ public class Cliente extends Utente{
 		this.citta = citta;
 	}
 
-	public int getCAP() {
+	public String getCAP() {
 		return CAP;
 	}
 
-	public void setCAP(int cAP) {
+	public void setCAP(String cAP) {
 		CAP = cAP;
 	}
 
@@ -122,10 +122,10 @@ public class Cliente extends Utente{
 	public void setPercentualeRitardo(int percentualeRitardo) {
 		this.percentualeRitardo = percentualeRitardo;
 	}
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	

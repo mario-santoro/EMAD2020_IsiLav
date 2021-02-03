@@ -17,7 +17,9 @@
 
 #icona {
 	width: 100px;
-	float: right;
+	float: left;
+	margin-right:5px;
+	margin-bottom:5px;
 	position: relative;
 }
 
@@ -85,6 +87,7 @@
 #infoNumDoc {
 	float: right;
 	background-color: #9DE7CD;
+	width: 100px;
 }
 
 #contDataDoc {
@@ -94,6 +97,7 @@
 #infoDataDoc {
 	float: right;
 	background-color: #9DE7CD;
+	width: 100px;
 }
 
 #contPag {
@@ -103,6 +107,7 @@
 #infoPag {
 	float: right;
 	background-color: #9DE7CD;
+	width: 100px;
 }
 
 #centrale {

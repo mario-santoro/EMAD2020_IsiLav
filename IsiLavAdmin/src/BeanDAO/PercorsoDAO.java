@@ -159,7 +159,7 @@ public class PercorsoDAO {
 
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			String sql = "INSERT INTO percorso(id_percorso,nome,lunedì,martedì, mercoledì, giovedì, venerdì, sabato, domenica, corriere) VALUES(?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO percorso(id_percorso,nome,lunedì,martedì, mercoledì, giovedì, venerdì, sabato, domenica) VALUES(?,?,?,?,?,?,?,?,?)";
 			cmd = (PreparedStatement) conn.prepareStatement(sql);
 			cmd.setInt(1, id);
 			cmd.setString(2, p.getNome());

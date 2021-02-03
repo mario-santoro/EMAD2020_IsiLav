@@ -53,21 +53,23 @@ public class InserimentoCliente extends HttpServlet {
 		int percentualeRitardo= Integer.parseInt(request.getParameter("percentualeRitardo"));
 		int premium=0;
 		String check = request.getParameter("checkPremium");	
+		 
 		if(check!=null) {
-			if(!check.equals("")) {
+			 
 				premium= Integer.parseInt(request.getParameter("premium"));
-			}
+		}
 			ClienteDAO cl=new ClienteDAO();
 			Cliente c=  (Cliente) request.getSession().getAttribute("cliente");
 			c.setAccettato(true);
 			c.setPercentualeRitardo(percentualeRitardo);
 			c.setCostoReso(costoReso);
 			c.setPremium(premium);
+			System.out.println("wewe");
 			cl.customerConfirmation(c);
 			mandaMail(c.getEmail(),c.getNominativo(),c.getNomeAttivita());
 			RequestDispatcher d= request.getRequestDispatcher("operazioneCompletata.jsp");
 			d.forward(request, response);
-		}
+		 
 	}
 
 
@@ -75,9 +77,10 @@ public class InserimentoCliente extends HttpServlet {
 
 		String destinatario=email;//request.getParameter("destinatario");
 		String subject="Iscrizione confermata - IsiLav";
-		String message="Salve " + nome + " con questa mail la informiamo che è stata "
-				+ "confermata dal sito Amministrativo di IsiLav la sua iscrizione alla paittafomra"
-				+ " e da oggi con la sua attività "+ attività +" potrà usufruire dei servizi offerti da SNB IsiLav s.r.l.";
+		String message="Salve " + nome + ",\nCon questa mail, la informiamo che è stata "
+				+ "confermata dal sito Amministrativo di IsiLav la sua iscrizione alla piattaforma.\n"
+				+ "Da oggi con la sua attività ("+ attività +") potrà usufruire dei servizi offerti "
+						+ "da SNB IsiLav s.r.l.\n\n Grazie per averci scelti.\n Cordiali Saluti.\n Il Team IsiLav.";
 		// Impostazioni SMTP
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -88,7 +91,7 @@ public class InserimentoCliente extends HttpServlet {
 
 		Session session= Session.getInstance(props, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("usernameExample", "passwordExample");  
+				return new PasswordAuthentication("isiLav2021@gmail.com", "IsiLav_2021!");  
 			}
 		});
 
@@ -97,7 +100,7 @@ public class InserimentoCliente extends HttpServlet {
 
 		try {
 			// Definisco mittente
-			InternetAddress addressFrom = new InternetAddress("emailExample@gmail.com");
+			InternetAddress addressFrom = new InternetAddress("isiLav2021@gmail.com");
 			msg.setFrom(addressFrom);
 			// Destinatari
 			InternetAddress[] addressTo = new InternetAddress[1]; 

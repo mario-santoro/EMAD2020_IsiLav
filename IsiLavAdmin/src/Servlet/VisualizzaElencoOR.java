@@ -46,19 +46,29 @@ public class VisualizzaElencoOR extends HttpServlet {
 
 		GregorianCalendar cal= new GregorianCalendar();
 		int giorno = cal.get(Calendar.DAY_OF_MONTH);
-		String mese =""+ cal.get(Calendar.MONTH)+1;			
+		int mese =cal.get(Calendar.MONTH)+1;			
 		int anno = cal.get(Calendar.YEAR);	
 		int i = cal.get(Calendar.DAY_OF_WEEK);
 		if(request.getSession().getAttribute("data")!=null) {
-
-			request.getSession().setAttribute("data", anno+"-"+mese+"-"+giorno);
+				String gg=""+giorno;
+				if(gg.length()==1) {
+					gg="0"+giorno;
+					
+				}
+				String m=""+mese;
+				if(m.length()==1) {
+					
+					m="0"+mese;
+				}
+			request.getSession().setAttribute("data", anno+"-"+m+"-"+gg);
+		 
 		}
 		ArrayList<Percorso> prenotazioni= null;
 		if(data!=null) {
-			System.out.println(data);
+			 
 			GregorianCalendar cal2= new GregorianCalendar(Integer.parseInt(data.substring(0,4)),Integer.parseInt(data.substring(5,7)),Integer.parseInt(data.substring(8,10)));
 			int j=cal2.get(Calendar.DAY_OF_WEEK);
-		System.out.println(j);
+		 
 			if(j == 2){
 				prenotazioni=od.prenotazioni(data, "lunedì");    
 		    } else if (j==3){

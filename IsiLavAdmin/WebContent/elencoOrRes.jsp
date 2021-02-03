@@ -186,7 +186,7 @@
 									}
 								%>
 							</td>
-							<td><a href="BollaAccompagnamento?email=<%=percorsi.get(i).getOperazioni().get(j).getCliente().getEmail()%>"><i class="fas fa-print"></i> </a></td>
+							<td><a href="BollaAccompagnamento?idOp=<%=percorsi.get(i).getOperazioni().get(j).getId_operazione()%>&email=<%=percorsi.get(i).getOperazioni().get(j).getCliente().getEmail()%>"><i class="fas fa-print"></i> </a></td>
 							<td><a
 								href="DettaglioOrRes?idOp=<%=percorsi.get(i).getOperazioni().get(j).getId_operazione()%>&nome=<%=percorsi.get(i).getOperazioni().get(j).getCliente().getNominativo()%>&attivita=<%=percorsi.get(i).getOperazioni().get(j).getCliente().getNomeAttivita()%>">
 									<i class="avanza fas fa-chevron-right"></i>

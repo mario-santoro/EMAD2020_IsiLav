@@ -33,8 +33,8 @@ public class ClienteDAO {
 				c.setCodFiscale(res.getString("codFiscale"));
 				c.setNomeAttivita(res.getString("nomeAttivita"));
 				c.setCitta(res.getString("citta"));
-				c.setTelefono(res.getInt("telefono"));
-				c.setCAP(res.getInt("CAP"));
+				c.setTelefono(res.getString("telefono"));
+				c.setCAP(res.getString("CAP"));
 				c.setSede(res.getString("sede"));
 				c.setpIVA(res.getString("pIVA"));
 				c.setIFE(res.getString("IFE"));
@@ -82,8 +82,8 @@ public class ClienteDAO {
 				c.setCodFiscale(res.getString("codFiscale"));
 				c.setNomeAttivita(res.getString("nomeAttivita"));
 				c.setCitta(res.getString("citta"));
-				c.setCAP(res.getInt("CAP"));
-				c.setTelefono(res.getInt("telefono"));
+				c.setCAP(res.getString("CAP"));
+				c.setTelefono(res.getString("telefono"));
 				c.setSede(res.getString("sede"));
 				c.setpIVA(res.getString("pIVA"));
 				c.setIFE(res.getString("IFE"));
@@ -135,8 +135,8 @@ public class ClienteDAO {
 					c.setCodFiscale(res.getString("codFiscale"));
 					c.setNomeAttivita(res.getString("nomeAttivita"));
 					c.setCitta(res.getString("citta"));
-					c.setTelefono(res.getInt("telefono"));
-					c.setCAP(res.getInt("CAP"));
+					c.setTelefono(res.getString("telefono"));
+					c.setCAP(res.getString("CAP"));
 					c.setSede(res.getString("sede"));
 					c.setpIVA(res.getString("pIVA"));
 					c.setIFE(res.getString("IFE"));

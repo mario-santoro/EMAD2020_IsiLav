@@ -55,7 +55,7 @@ public class HubDAO {
 		PreparedStatement cmd = null;
 
 		try {
-			
+				conn = DriverManagerConnectionPool.getConnection();
 				String registrazione = "INSERT INTO hub(città,via,cap,longitudine,latitudine) VALUES(?,?,?,?,?)";
 				cmd = (PreparedStatement) conn.prepareStatement(registrazione);
 				cmd.setString(1, h.getCitta());

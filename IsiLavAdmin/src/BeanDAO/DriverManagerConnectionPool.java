@@ -22,7 +22,8 @@ public class DriverManagerConnectionPool {
 	
 	private static synchronized Connection createDBConnection() throws SQLException {
 		Connection conn = null;
-		conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/isilav", "root", "");		
+	//	conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/isilav", "root", "");		
+		conn = (Connection) DriverManager.getConnection("jdbc:mysql://acanfora.homepc.it:3306/isilav", "isilav", "isilav");		
 		return conn;
 	}
 

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Bean.Cliente;
+import Bean.Operazione;
 import BeanDAO.ClienteDAO;
+import BeanDAO.OperazioneDAO;
 
 /**
  * Servlet implementation class BollaAccopagnamento
@@ -41,6 +43,11 @@ public class BollaAccompagnamento extends HttpServlet {
 		ClienteDAO cd= new ClienteDAO();
 		Cliente c= cd.doRetrieveByEmail(email);
 		request.getSession().setAttribute("cliente", c);
+		int id_op= Integer.parseInt(request.getParameter("idOp"));	
+		OperazioneDAO op=new OperazioneDAO();
+		Operazione o= op.getbollaAccompagnamento(id_op);
+		request.getSession().setAttribute("operazione",o);
+		
 		RequestDispatcher requestDIspatcher= request.getRequestDispatcher("bollaAccompagnamento.jsp");
 		requestDIspatcher.forward(request, response);
 	}

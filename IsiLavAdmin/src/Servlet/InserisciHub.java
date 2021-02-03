@@ -83,8 +83,8 @@ public class InserisciHub extends HttpServlet {
 	            l= coordinate2[1];
 	            coordinate=l.split("\"");
 	        }
-	        lat=coordinate2[0];
-	        lon=coordinate[0];	     
+	        lon=coordinate2[0];
+	        lat=coordinate[0];	     
 	   
 	        br.close();
 

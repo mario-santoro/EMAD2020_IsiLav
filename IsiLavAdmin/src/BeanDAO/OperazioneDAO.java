@@ -35,31 +35,38 @@ public class OperazioneDAO {
 		Operazione o=null;
 		Fermata f=null;
 		Cliente c=null;
-
+	 
 		try {
 			operazioni= new ArrayList<Operazione>();
 			conn = DriverManagerConnectionPool.getConnection();
 			switch(giorno) {
 			case "lunedì":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM percorso where lunedì=1 ORDER BY nome ASC ");
+				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where lunedì=1 and data_scelta=? ORDER BY nome ASC ");
+				ps.setString(1, data);
 				break;
 			case "martedì":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM percorso where martedì=1 ORDER BY nome ASC ");
+				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where martedì=1 and data_scelta=? ORDER BY nome ASC ");
+				ps.setString(1, data);
 				break;
 			case "mercoledì":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM percorso where mercoledì=1 ORDER BY nome ASC ");
+				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where mercoledì=1 and data_scelta=? ORDER BY nome ASC ");
+				ps.setString(1, data);
 				break;
 			case "giovedì":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM percorso where giovedì=1 ORDER BY nome ASC ");
+				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where giovedì=1 and data_scelta=? ORDER BY nome ASC");
+				ps.setString(1, data);
 				break;
 			case "venerdì":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM percorso where venerdì=1 ORDER BY nome ASC ");
+				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where venerdì=1 and data_scelta=? ORDER BY nome ASC ");
+				ps.setString(1, data);
 				break;
 			case "sabato":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM percorso where sabato=1 ORDER BY nome ASC "); 
+				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where sabato=1 and data_scelta=? ORDER BY nome ASC "); 
+				ps.setString(1, data);
 				break;
 			case "domenica":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM percorso where domenica=1 ORDER BY nome ASC ");
+				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where domenica=1 and data_scelta=? ORDER BY nome ASC ");
+				ps.setString(1, data);
 				break;
 			default: break;
 
@@ -87,7 +94,7 @@ public class OperazioneDAO {
 					c.setNomeAttivita(res2.getString("nomeAttivita"));
 					c.setNominativo(res2.getString("nominativo"));
 					o.setCliente(c);
-					o.setId_operazione(res2.getInt("id_operazione"));
+					o.setId_operazione(res.getInt("id_operazione"));
 					o.setVia(res2.getString("via"));
 					f= new Fermata();
 					f.setOre(res2.getInt("ore"));
