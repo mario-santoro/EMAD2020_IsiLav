@@ -12,7 +12,7 @@ const FAQ = ({navigation})=> {
 
         return (
             <View style={styles.container}>
-                <TopBar navigation={navigation} />
+                <TopBar />
                 <FlatList
                   data={faq}
                   renderItem={({ item }) => (

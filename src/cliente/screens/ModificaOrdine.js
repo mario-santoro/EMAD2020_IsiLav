@@ -5,7 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon, Button, Overlay, ListItem } from 'react-native-elements';
 import * as API from '../services/API';
 import Map from '../components/Map';
-const giacenza = API.getGiacenza();
+
 const onDateChange = (event, selectedDate) => {
     const newDate = selectedDate || date;
     setShow(Platform.OS === 'ios'); //provare su iphone a cosa serve
@@ -26,7 +26,7 @@ const ModificaOrdine = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: "#F8FFFC" }}>
-            <TopBar navigation={navigation} />
+            <TopBar />
 
             {show ? (
                 <DateTimePicker

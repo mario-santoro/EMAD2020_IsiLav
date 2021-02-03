@@ -17,7 +17,7 @@ const ChangePassword2 = ({ navigation }) => {
                     barStyle="light-content"
                 />
 
-                <TopBar navigation={navigation} />
+                <TopBar />
                 <Text style={styles.titolo}>Reimposta password</Text>
             </View>
 

@@ -20,7 +20,7 @@ const TextInputCustomer = ({placeholder, value, onChangeText}) => {
         selectionColor="lightgreen"
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onSubmitEditing={() => console.log("ciao")}
+        //onSubmitEditing={() => console.log("submit")}
         />
        
     </View>

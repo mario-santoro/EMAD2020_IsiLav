@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { View, Text } from 'react-native';
-import * as API from "../services/API";
 import { Button, Icon } from 'react-native-elements';
 
 const MapScreen = ({ navigation, route }) => {
     const [selezionato, setSelezionato] = useState(null);
     useEffect(() => {
-        if (route.params?.luogo) {
-          setSelezionato(route.params?.luogo)
+        if (route.params?.selezionato) {
+          setSelezionato(route.params?.selezionato)
         }
-      }, [route.params?.luogo]);
+      }, [route.params?.selezionato]);
 
-    const markers = API.getLuoghi();
-    const schermata= route.params.schermata;
+    const chiamante = route.params.chiamante;
+    const hubs = route.params.hubs;
+
     return (
         <View style={{ flexDirection: "column", flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <MapView
                 style={{ width: "100%", flex: 8 }}
                 initialRegion={{
-                    latitude: selezionato===null? 40.6748035 : selezionato.latitude,
-                    longitude: selezionato===null? 14.7576367 : selezionato.longitude,
-                    latitudeDelta: 0.0420,
-                    longitudeDelta: 0.0420,
+                    latitude: selezionato===null? 40.66603380035814 : parseFloat(selezionato.latitudine),
+                    longitude: selezionato===null? 14.793144967406988 : parseFloat(selezionato.longitudine),
+                    latitudeDelta: 0.010198750686598146,
+                    longitudeDelta: 0.007582940161226404,
                 }}
             >
-                {markers.map(marker =>
+                {hubs.map(marker =>
                     <Marker
-                    key={marker.title} //meglio l'id del luogo ottenuto dal db
-                    coordinate={{ latitude: marker.latitude, longitude: marker.longitude}}
-                    title={marker.title}
+                    key={marker.via+marker.id_percorso}
+                    coordinate={{ latitude: parseFloat(marker.latitudine), longitude: parseFloat(marker.longitudine)}}
+                    title={marker.via+" ("+marker.ore+":"+marker.minuti+")"}
                     onPress={() => setSelezionato(marker)}
-                    pinColor={selezionato!==null && marker.title === selezionato.title? "green" : null} //meglio usare gli id
+                    pinColor={selezionato!==null && marker.via === selezionato.via? "green" : null} //meglio usare gli id
                     />
                 )}
 
@@ -42,10 +42,10 @@ const MapScreen = ({ navigation, route }) => {
                     <Text style={{textAlign: 'center', justifyContent: 'center', color: "#9DE7CD", fontSize: 16, fontWeight: 'bold'}}>Seleziona un punto sulla mappa</Text>
                 :
                     <View style={{width: "100%", padding: 10}}>
-                        <Text style={{color: "#3E4349", fontSize: 16}}>Hai salezionato:</Text>
-                        <Text style={{color: "#9DE7CD", fontSize: 16, fontWeight: "bold"}}>{selezionato.title}</Text>
+                        <Text style={{color: "#3E4349", fontSize: 16}}>Hai selezionato:</Text>
+                        <Text style={{color: "#9DE7CD", fontSize: 16, fontWeight: "bold"}}>{selezionato.via+" ("+selezionato.ore+":"+selezionato.minuti+")"}</Text>
                         <Button
-                        onPress={()=> navigation.navigate(schermata.toString(), {luogo: selezionato})}
+                        onPress={()=> navigation.navigate(chiamante.toString(), {hub: selezionato})}
                         title="CONFERMA"
                         icon={<Icon size={20} name="done" color="#F8FFFC" />}
                         iconRight={true}

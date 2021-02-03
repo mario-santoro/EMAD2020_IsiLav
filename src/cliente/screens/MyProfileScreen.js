@@ -1,14 +1,33 @@
-import React from 'react';
-import { TouchableOpacity, Dimensions, StyleSheet, View, Text, SafeAreaView, StatusBar } from 'react-native';
+import React, { useState,useEffect ,useContext} from 'react';
+import { TouchableOpacity, Dimensions, StyleSheet, View, Text, SafeAreaView, StatusBar,ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import TopBar from '../components/TopBar';
 import Hr from '../components/HorizLine';
 import TextInputCustomer from '../components/TextInputCustomer';
 import GenericButton from '../components/GenericButton';
+import * as API from '../services/API';
+import { UserContext } from '../services/Utente';
 const MyProfileScreen = ({ navigation }) => {
-
+    const [cliente, setCliente] = useState([]);
+    const [sub, setSub] = useState("");
+    const sessione = useContext(UserContext);
+     
+    useEffect(() => {
+        API.getConsumer(sessione.getUser().email)
+        .then(response => response.json())
+        .then(json => {
+           
+          setCliente(json)
+          setSub(json.numeroCarta.substring(13,16))
+        })
+        .catch((error) => {
+          console.error(error)
+          alert("Si è verificato un errore !")
+        })
+      }, []);
+    
     return (
-        <View
+        <ScrollView
             style={{ height: "100%", flexDirection: "column", flex: 1, backgroundColor: "white" }}
         >
             <View style={{ alignItems: "center", }}>
@@ -31,7 +50,7 @@ const MyProfileScreen = ({ navigation }) => {
                         <Text style={styles.baseTextBold}>Credenziali utente:</Text>
                             <View style={{ flexDirection: "row" ,marginLeft:10}}>
                                
-                                <Text style={styles.baseText}>Password: ******</Text>
+                                <Text style={styles.baseText}>Password: ********</Text>
                             </View>
                         </View>
                         <View style={{ flex: 2, justifyContent: "center" }}>
@@ -45,10 +64,16 @@ const MyProfileScreen = ({ navigation }) => {
                         <Text style={styles.baseTextBold}>Dati anagrafici:</Text>
                             <View style={{ flexDirection: "column", marginLeft:10 }}>
                                
-                                <Text style={styles.baseText}>Nome e Cognome: Mario Rossi</Text>
-                                <Text style={styles.baseText}>Codice Fiscale: RSIMRA12FGR85</Text>
-                                <Text style={styles.baseText}>Nome attività: Hotel Fantastico</Text>
-                                <Text style={styles.baseText}>P.IVA: HDHF4385HF3J</Text>
+                                <Text style={styles.baseText}>Nome e Cognome: {cliente.nominativo}</Text>
+                                <Text style={styles.baseText}>Codice Fiscale: {cliente.codFiscale}</Text>
+                                <Text style={styles.baseText}>Ragione Sociale: {cliente.ragSociale}</Text>
+                                <Text style={styles.baseText}>Telefono: {cliente.telefono}</Text>
+                                <Text style={styles.baseText}>Nome attività: {cliente.nomeAttivita}</Text>
+                                <Text style={styles.baseText}>Sede: {cliente.sede}</Text>
+                                <Text style={styles.baseText}>Città: {cliente.citta}</Text>
+                                <Text style={styles.baseText}>CAP: {cliente.CAP}</Text>
+                                <Text style={styles.baseText}>P.IVA: {cliente.pIVA}</Text>
+                                <Text style={styles.baseText}>IFE: {cliente.IFE}</Text>
                             </View>
                         </View>
                         <View style={{ flex: 2, justifyContent: "center" }}>
@@ -62,8 +87,8 @@ const MyProfileScreen = ({ navigation }) => {
                         <Text style={styles.baseTextBold}>Metodo di pagamento:</Text>
                             <View style={{ flexDirection: "column" ,marginLeft:10}}>
                             <Text style={styles.baseText}>Tipo carta: Master Card</Text>
-                                <Text style={styles.baseText}>N° Carta: ********654</Text>
-                                <Text style={styles.baseText}>Data scadenza: 12/2025</Text>
+                                <Text style={styles.baseText}>N° Carta: *************{sub}</Text>
+                                <Text style={styles.baseText}>Data scadenza: {cliente.scadenzaCarta}</Text>
                             </View>
                         </View>
                         <View style={{ flex: 2, justifyContent: "center" }}>
@@ -72,7 +97,7 @@ const MyProfileScreen = ({ navigation }) => {
                     </View>                    
                 </TouchableOpacity>
             </SafeAreaView>
-        </View>
+        </ScrollView>
     );
 }
 const { width, height } = Dimensions.get('window');

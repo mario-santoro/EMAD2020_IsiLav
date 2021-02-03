@@ -1,87 +1,30 @@
-import React, { useState } from "react";
-import { Dimensions, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TopBar from '../components/TopBar';
 import { Icon } from 'react-native-elements';
- 
- 
- 
-const DATA = [
-  {
-    id: "bd7a-c1b1-46c2-aed5",
-    data: "01/12/2020",
-    tot: "100",
-    Stato: "IN PREPARAZIONE"
-
-  },
-  {
-    id: "3Oc6-c605-48d3-a4f8",
-    data: "01/12/2020",
-    tot: "100",
-    Stato: "IN PREPARAZIONE"
-  },
-  {
-    id: "1869-3da1-471f-bd96",
-    data: "01/12/2020",
-    tot: "100",
-    Stato: "IN PREPARAZIONE"
-  },
-  {
-    id: "3ac6-c605-48d3-a4f8",
-    data: "01/12/2020",
-    tot: "100",
-    Stato: "IN PREPARAZIONE"
-  },
-  {
-    id: "5819-3da1-471f-bd96",
-    data: "01/12/2020",
-    tot: "100",
-    Stato: "IN PREPARAZIONE"
-  },
-  {
-    id: "3ac9-c605-48d3-a4f8",
-    data: "01/12/2020",
-    tot: "100",
-    Stato: "IN PREPARAZIONE"
-  },
-  {
-    id: "5869-3da1-471f-bd96",
-    data: "01/12/2020",
-    tot: "100",
-    Stato: "IN PREPARAZIONE"
-  },
-  {
-    id: "3aM6-c605-48d-a4f8",
-    data: "01/12/2020",
-    tot: "100",
-    Stato: "IN PREPARAZIONE"
-  },
-  {
-    id: "52s69-3da1-471f-d961",
-    data: "01/12/2020",
-    tot: "100",
-    Stato: "IN PREPARAZIONE"
-  },
-];
+import * as API from '../services/API';
+import { UserContext } from "../services/Utente";
+import {datetoDDMMYYYY} from "../services/Utils";
 
 const Item = ({ item, onPress }) => (
   <TouchableOpacity  onPress={onPress} style={styles.item}>
     <View style={{ flexDirection: "row" }}>
       <View style={{ flexDirection: "column", flex: 8 }}>
         <View style={{ flexDirection: "column" }}>
-          <Text style={styles.baseTextBold}>N° Ordine:</Text>
-          <Text style={styles.baseText}>{item.id}</Text>
+          <Text style={styles.baseTextBold}>Num. ordine: </Text>
+          <Text style={styles.baseText}>{item.id_ordine}</Text>
         </View>
         <View style={{ flexDirection: "row" }}>
-          <Text style={styles.baseTextBold}>Data:</Text>
-          <Text style={styles.baseText}> {item.data}</Text>
+          <Text style={styles.baseTextBold}>Data: </Text>
+          <Text style={styles.baseText}>{datetoDDMMYYYY(new Date(item.data_operazione))}</Text>
         </View>
         <View style={{ flexDirection: "row" }}>
-          <Text style={styles.baseTextBold}>Totale:</Text>
-          <Text style={styles.baseText}> {item.tot}€</Text>
+          <Text style={styles.baseTextBold}>Totale: </Text>
+          <Text style={styles.baseText}>{item.totale}€</Text>
         </View>
         <View style={{ flexDirection: "row" }}>
-          <Text style={styles.baseTextBold}>Stato:</Text>
-          <Text style={styles.baseText}> {item.Stato}</Text>
+          <Text style={styles.baseTextBold}>Stato: </Text>
+          <Text style={styles.baseText}>{item.stato}</Text>
         </View>
       </View>
       <View style={{ flex: 2, justifyContent: "center" }}>
@@ -92,33 +35,39 @@ const Item = ({ item, onPress }) => (
 );
 
 const ListaOrdini = ({ navigation }) => {
-  const [selectedId, setSelectedId] = useState(null);
+  const [ordini, setOrdini] = useState([]);
+  const sessione = useContext(UserContext);
+
+  useEffect(() => {
+    API.getOrdersByUser(sessione.getUser().email)
+    .then(response => response.json())
+    .then(json => {
+      //console.log(json) //per vedere la struttura degli ordini
+      setOrdini(json)
+    })
+    .catch((error) => {
+      console.error(error)
+      alert("Si è verificato un errore durante la ricerca degli ordini!")
+    })
+  }, []);
   
   const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "white" : "white";
-
     return (
-
       <Item 
         item={item}
-      
-        onPress={()=>navigation.navigate("DettaglioOrdine", {id: item.id})}
-      
+        onPress={()=>navigation.navigate("DettaglioOrdine", {ordine: item})}
       />
-
     );
   };
 
   return (
-    <View
-      style={{ flexDirection: "column", flex: 1, backgroundColor: 'white' }}
-    >
+    <View style={{ flexDirection: "column", flex: 1, backgroundColor: 'white' }}>
       <View  >
         <StatusBar
           backgroundColor="#5f9747"
           barStyle="light-content"
         />
-        <TopBar navigation={navigation} />
+        <TopBar />
         <View style={{
           alignItems: "center", marginTop: 15,
         }}>
@@ -128,19 +77,15 @@ const ListaOrdini = ({ navigation }) => {
 
       <SafeAreaView style={styles.container}>
         <FlatList 
-          data={DATA}
+          data={ordini}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          extraData={selectedId}
+          keyExtractor={(item) => item.id_ordine.toString()}
         />
-
       </SafeAreaView>
-  
     </View>
-
   );
 };
-const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flex: 3,

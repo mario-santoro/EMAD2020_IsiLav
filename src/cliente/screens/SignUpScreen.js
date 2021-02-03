@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from '@react-navigation/native';
 import { CheckBox, Dimensions, StyleSheet, StatusBar, Text, View, ScrollView } from 'react-native';
 import EmailTextInput from '../components/EmailTextInput';
@@ -8,47 +8,95 @@ import GenericButton from '../components/GenericButton';
 import BackButton from '../components/BackButton';
 import Hr from '../components/HorizLine';
 import Select from '../components/SelectMY';
+import * as API from '../services/API';
 const SignUpScreen = ({ navigation }) => {
-
+ 
+ 
   const [isSelected, setSelection] = useState(false);
   const [email, setEmail] = React.useState('');
   const [pasw, setPasw] = React.useState('');
   const [sede, setSede] = React.useState('');
   const [citta, setCitta] = React.useState('');
   const [cap, setCap] = React.useState('');
+  const [telefono, setTelefono] = React.useState('');
   const [paswConfirm, setPaswConfirm] = React.useState('');
-  const [nome, setNome] = React.useState('');
+  const [nominativo, setNominativo] = React.useState('');
   const [ragioneSociale, setRagioneSociale] = React.useState('');
   const [codFiscale, setCodFiscale] = React.useState('');
   const [numCarta, setNumCarta] = React.useState('');
   const [nomeAtt, setNomeAtt] = React.useState('');
   const [piva, setPiva] = React.useState('');
   const [sdi, setSdi] = React.useState('');
-
-  const registrazione = (email, pasw, paswConfirm, nome, codFiscale) => {
+  const [month, setMonth] = React.useState( new Date().getMonth() + 1);
+  const [year, setYear] = React.useState(new Date().getFullYear());
+  const registrazione = (email, pasw, paswConfirm, nominativo, ragioneSociale, codFiscale, nomeAtt, citta, telefono, cap, sede, piva, sdi, numCarta) => {
 
     const regE = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    const regCodFiscale= new RegExp(/^[A-Z]{6}[A-Z0-9]{2}[A-Z][A-Z0-9]{2}[A-Z][A-Z0-9]{3}[A-Z]$/);
+    const regNominativo= new RegExp(/^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/);
+    const regTel= new RegExp(/^[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-/\s.]?[0-9]{4}$/);
+    const regPIVA= new RegExp(/^[0-9]{11}$/);
+    const regCap= new RegExp(/^[0-9]{5}$/);
+    const regCitta= new RegExp(/[a-zA-Z]*/);
+    const regSdi= new RegExp(/[a-zA-Z0-9]{7}$/); 
+    const regString= new RegExp(/[a-zA-Z0-9]*$/); 
+    const regCreditCard= new RegExp(/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/)
     
-    if (regE.test(email)) {
-      alert("email ok")
-    } else {
-      alert("email formato errato")
-    }
 
-    const regP = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/);
+   if (regE.test(email)) {
+     
+   
+
+    const regP = new  RegExp(/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/);
 
     const isOk = regP.test(pasw);
 
     if (isOk) {
-      alert('pass');
+      
       if (pasw === paswConfirm) {
-        navigation.navigate('ConfirmSignUp', { msg: "I suoi dati saranno presi in esame, riceverà un e-mail alla conferma." })
+      
+  
+          if(regCodFiscale.test(codFiscale)&&regNominativo.test(nominativo)&& regTel.test(telefono)&&regPIVA.test(piva) && regCap.test(cap)&& regCitta.test(citta) && regSdi.test(sdi)&& regCreditCard.test(numCarta)&& regString.test(sede)&& regString.test(ragioneSociale)&& regString.test(nomeAtt)){
+            if(isSelected){
+    
+          var data=month+"/"+year;
+                API.SignUp(email, pasw, nominativo, ragioneSociale, codFiscale, nomeAtt, citta, telefono, cap, sede, piva, sdi, numCarta, data)
+                .then(response => response.json())
+                .then(json => {
+                    if(json.status=="ok"){
+                      json.staus;
+                      navigation.navigate('ConfirmSignUp', { msg: "I suoi dati saranno presi in esame, riceverà un e-mail alla conferma." })
+                    }else{
+
+                        alert(json.status);
+
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
+                    alert("Si è verificato un errore durante la registrazione!")
+                })
+         
+             
+            }else{
+
+                     alert("Accettare termini e condizioni!")
+                } 
+            }else{
+
+              alert("formato errato in uno o più campi della form")
+          }
+      
       } else {
         alert("password diverse")
       }
     } else {
-      alert('fail');
+      alert('password in formato errato');
     }
+  } else {
+    alert("email formato errato")
+  }
+ 
   }
 
   return (
@@ -75,8 +123,8 @@ const SignUpScreen = ({ navigation }) => {
           
           <TextInputCustomer
             placeholder="Nome e cognome"
-            value={nome}
-            onChangeText={nome => setNome(nome)} />
+            value={nominativo}
+            onChangeText={nominativo => setNominativo(nominativo)} />
 
           <TextInputCustomer
             placeholder="Ragione sociale"
@@ -92,6 +140,11 @@ const SignUpScreen = ({ navigation }) => {
             placeholder="Nome attività"
             value={nomeAtt}
             onChangeText={nomeAtt => setNomeAtt(nomeAtt)} />
+
+          <TextInputCustomer
+            placeholder="Numero di telefono"
+            value={telefono}
+            onChangeText={telefono => setTelefono(telefono)} />
 
           <TextInputCustomer
             placeholder="Città"
@@ -123,7 +176,8 @@ const SignUpScreen = ({ navigation }) => {
             value={numCarta}
             onChangeText={numCarta => setNumCarta(numCarta)} />
           <View style={{ marginLeft: -80 }}>
-            <Select />
+           
+          <Select onMonthChange={setMonth} onYearChange={setYear} month={month} year={year}/>
 
           </View>
 
@@ -137,7 +191,7 @@ const SignUpScreen = ({ navigation }) => {
           </View>
           <GenericButton
             testo="Registrati"
-            onPress={() => registrazione(email, pasw, paswConfirm, nome, codFiscale)}
+            onPress={() => registrazione(email, pasw, paswConfirm, nominativo, ragioneSociale, codFiscale, nomeAtt, citta, telefono, cap, sede, piva, sdi, numCarta)}
           />
         </View>
       </ScrollView>

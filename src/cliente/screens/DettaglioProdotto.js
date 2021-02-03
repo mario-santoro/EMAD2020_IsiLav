@@ -3,22 +3,29 @@ import { Dimensions, ScrollView, View, Text, StatusBar, StyleSheet, Image, } fro
 import GenericButton from '../components/GenericButton';
 import TopBar from '../components/TopBar';
 import RNPickerSelect from 'react-native-picker-select';
- 
 import { CartContext } from '../services/Carrello';
+
 const DettaglioProdotto = ({ navigation, route }) => {
-    const [quantità, setQuantità] = useState(0);
-    const [pezzi, setPezzi] = useState(1);
+    const [quantità, setQuantità] = useState(1);
     const { width, height } = Dimensions.get('window');
-    const item= route.params.item;
-    var prodotto={
-    id: '6',
-    name: 'Lenzuola',
-    price: 22.97,
-    description: "Lenzuola matrimoniali bianche 100% cotone",
-    image: require("../../../image/lenzuola.jpg"),
-    quantity: 10,
-    piece: 30,
-}
+    const {prodotto} = route.params;
+
+    const generatePickerItems = (max) => {
+        let temp = []
+        let i;
+        for(i=1; i<=max; i++)
+            temp.push({ label: i.toString(), value: i })
+        return temp;
+    }
+
+    const fromBufferToText = (buffer) => {
+        let temp = "";
+        let i;
+        for(i=0; i<buffer.length; i++)
+            temp+=String.fromCharCode(buffer[i])
+        return temp;
+    }
+
     return (
         <CartContext.Consumer>
         {carrello =>
@@ -31,90 +38,66 @@ const DettaglioProdotto = ({ navigation, route }) => {
                     barStyle="light-content"
                 />
 
-                <TopBar navigation={navigation} />
+                <TopBar />
 
             </View>
-            <ScrollView style={{
-                height: height * .80, width: "100%",
-            }}>
-                <Text style={styles.nomeProdotto} >{item.name}</Text>
-                <Text style={styles.sottoTitolo}>{item.description}</Text>
+            <ScrollView style={{height: height * .80, width: "100%"}}>
+                <Text style={styles.nomeProdotto} >{prodotto.nome_prodotto}</Text>
+                <Text style={styles.sottoTitolo}>{prodotto.descrizione_breve}</Text>
                 <Image
                     resizeMode="center"
                     style={styles.imgProdotto}
-                    source={item.image}
+                    source={{uri: prodotto.immagine}}
                 />
 
                 <View style={{ flexDirection: "row", alignContent: "center" }}>
-                    <Text style={styles.quantitaText} >Q.tà: </Text>
+                    <Text style={styles.quantitaText}>Q.tà:</Text>
                     <View style={styles.viewSelect}>
                         <RNPickerSelect
-
-                            pickerProps={{
-                                style: {
-                                    width: "100%",
-                                    color: 'black',
-                                    height: "100%",
-                                }
-                            }}
-
-                            onValueChange={(value) => setPezzi(value)}
-
-                            items={[
-                                { label: '1', value: 1 },
-                                { label: '2', value: 2 },
-                                { label: '3', value: 3 },
-                                { label: '4', value: 4 },
-                                { label: '5', value: 5 },
-                                { label: '6', value: 6 },
-                                { label: '7', value: 7 },
-                                { label: '8', value: 8 },
-                                { label: '9', value: 9 },
-                                { label: '10', value: 10 },
-                                { label: '11', value: 11 },
-                                { label: '12', value: 12 },
-                            ]}
-
-                            placeholder={{
-                                label: 'Q.tà (pacco)',
-                                value: null,
-
-                            }}
-                            value={pezzi}
-
+                        pickerProps={{
+                            style: {
+                                width: "100%",
+                                color: 'black',
+                                height: "100%",
+                            }
+                        }}
+                        onValueChange={(value) => setQuantità(value)}
+                        items={generatePickerItems(10)} //prodotto.quantità
+                        placeholder={{
+                            label: 'Q.tà (confezioni)',
+                            value: 0,
+                        }}
+                        value={quantità}
                         />
                     </View>
-
-                    <Text style={styles.quantitaText} > Tot pezzi: {pezzi*5} </Text>
-
+                    <Text style={styles.quantitaText}>Tot. pezzi: {quantità*prodotto.pezzi}</Text>
                 </View>
 
                 <View style={{ marginTop: 10, flexDirection: "row" }}>
-                    <Text style={styles.testoprezzo} >Prezzo: </Text>
-                    <Text style={styles.prezzo} >{parseFloat(item.price*pezzi).toFixed(2)} €</Text>
-
-
+                    <Text style={styles.testoprezzo}>Prezzo:</Text>
+                    <Text style={styles.prezzo}>{parseFloat(prodotto.prezzo*quantità).toFixed(2)} €</Text>
                 </View>
 
-                <View style={{ marginTop: 15, alignSelf: "center", borderBottomColor: '#70D0AE', borderBottomWidth: 2, width: "90%", }} />
+                <View style={{marginTop: 15, alignSelf: "center", borderBottomColor: '#70D0AE', borderBottomWidth: 2, width: "90%"}} />
 
                 <View>
-
                     <Text style={styles.desc} >Descrizione: </Text>
-
-                    <Text style={styles.dettaglioText} >Lenzuolo contemporaneo dallo stile semplice,
-                    abbinabile senza fatica a piumini a tinta unita o fantasia e all’arredamento della camera da letto.
-                    Questo lenzuolo offre resistenza e durabilità, non si restringe e non si stropiccia,
-                    rimanendo sorprendentemente morbido al tatto. Oltre alla resistenza e
-                    alla duttile morbidezza che lo caratterizzano, questo lenzuolo offre calore e traspirabilità.</Text>
+                    <Text style={styles.dettaglioText}>{fromBufferToText(prodotto.descrizione.data)}</Text>
                 </View>
                 <View style={styles.bottom}>
-                    <GenericButton testo="Aggiungi al carrello" onPress={()=>carrello.addProdotto(item)} />
+                    <GenericButton testo="Aggiungi al carrello"
+                    onPress={()=>{
+                        if(quantità>0)
+                            carrello.addProdotto(prodotto, quantità)
+                        else
+                            alert("Selezionare prima la quantità")
+                    }}
+                    />
                 </View>
 
             </ScrollView>
         </View>
-    }
+        }
         </CartContext.Consumer>
     );
 

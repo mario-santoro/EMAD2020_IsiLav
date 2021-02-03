@@ -25,7 +25,7 @@ const HomeCorriere = ({ navigation }) => {
     return (
 
         <View style={styles.container}>
-            <TopBar navigation={navigation} />
+            <TopBar />
             <View style={styles.body}>
                 {show ? (
                     <DateTimePicker

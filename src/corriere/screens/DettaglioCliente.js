@@ -19,7 +19,7 @@ const DettaglioCliente = ({ navigation, route }) => {
     return (
 
         <View style={styles.container}>
-            <TopBar navigation={navigation} />
+            <TopBar />
             <View style={styles.body}>
                 <View style={{ flexDirection: "column", height: 30 }}>
                     <Text style={styles.title}>{nome}</Text>

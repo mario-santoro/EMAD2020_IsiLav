@@ -1,14 +1,11 @@
-import { setStatusBarHidden } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native';
-import { Header, SearchBar, Overlay, Icon, ListItem, Badge, withBadge } from 'react-native-elements';
+import { Header, Overlay, Icon, ListItem } from 'react-native-elements';
 
-
-
-const TopBarCorriere = ({ navigation, quantità }) => {
+const TopBarCorriere = ({ navigation }) => {
    
     const [text, setText] = useState("");
- 
+
     const list = [
         {
             name: 'Il mio profilo',

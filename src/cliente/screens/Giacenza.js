@@ -1,50 +1,44 @@
-import React, { useState } from 'react';
-import { SafeAreaView, Button, View, Text, StatusBar, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
-import { Avatar, ListItem } from 'react-native-elements';
-import { Icon } from 'react-native-elements';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Text, FlatList, StyleSheet} from 'react-native';
 import TopBar from '../components/TopBar';
 import * as API from '../services/API';
 import Lis from '../components/ListaGiacenza';
-
-//Ottengo le categorie disponibili dall'API
-const giacenza = API.getGiacenza();
-
-
+import { UserContext } from '../services/Utente';
 
 const Giacenza = ({ navigation }) => {
- 
+    const [giacenza, setGiacenza] = useState([])
+    const sessione = useContext(UserContext);
+
+    useEffect(() => {
+        API.getGiacenza(sessione.getUser().email)
+        .then(response => response.json())
+        .then(json => {
+            setGiacenza(json)
+        })
+        .catch((error) => {
+            console.error(error)
+            alert("Si è verificato un errore durante la ricerca della giacenza!")
+        })
+    }, []);
+
 
     return (
-        <View  
-            style={styles.container}
-        >
-
-            <TopBar navigation={navigation} />
-            <View style={{
-                alignItems: "center", marginTop: 15,
-            }}>
+        <View style={styles.container}>
+            <TopBar />
+            <View style={{alignItems: "center", marginTop: 15}}>
                 <Text style={styles.titolo}>La mia giacenza</Text>
             </View>
 
             <FlatList 
                 data={giacenza}
                 renderItem={({ item }) => (
-                    
-                   <Lis item={item}/>
-
-                )
-
-                }
-                keyExtractor={item => item.id}
-
+                   <Lis prodotto={item}/>
+                )}
+                keyExtractor={item => item.nome_prodotto}
             />
-
-
         </View>
     );
 };
-
-
 
 const styles = StyleSheet.create({
     containerP: {

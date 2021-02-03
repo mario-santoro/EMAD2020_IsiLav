@@ -20,7 +20,6 @@ const EmailTextInput = ({placeholder, ic,  value, onChangeText}) => {
         onChangeText={onChangeText}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onSubmitEditing={() => console.log("ciao")}
         />
         <Icon style={styles.icon} name={ic} color="#9DE7CD"/>
     </View>

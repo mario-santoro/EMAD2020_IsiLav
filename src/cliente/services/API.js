@@ -1,178 +1,51 @@
 //Funzioni API
+const APIURL = "http://192.168.1.9:7071/api/"
 
-import React from 'react';
-//import axios from 'axios';
-
-export function login() {
-  //TODO
+export function login(email, password) {
+  return fetch(APIURL+"login?email="+email+"&password="+password, {
+    //method: "GET",
+    //body: "formbody"
+  });
 };
 
 export function logout() {
   //TODO
 };
 
-//Restituisce una lista di categorie contenente oggetti {id: STRING, nome: STRING, image: require}
 export function getCategories() {
-  return [
-    {
-      id: '0',
-      name: 'Bagno',
-      image: require("../../../image/bagno.jpg")
-    },
-    {
-      id: '1',
-      name: 'Letto',
-      image: require("../../../image/letto.jpg")
-    },
-    {
-      id: '2',
-      name: 'Tavola',
-      image: require("../../../image/tavola.jpg")
-    },
-    {
-      id: '3',
-      name: 'CategoriaX',
-      image: require("../../../image/bagno.jpg")
-    },
-    {
-      id: '4',
-      name: 'CategoriaY',
-      image: require("../../../image/letto.jpg")
-    },
-    {
-      id: '5',
-      name: 'CategoriaZ',
-      image: require("../../../image/tavola.jpg")
-    },
-  ]
+  return fetch(APIURL+"getCategories", {});
+};
+
+export function getProductsFromCategory(categoryName) {
+  return fetch(APIURL+"getProductsFromCategory?categoria="+categoryName, {});
 };
 
 
-
-export function getProductsFromCategory(categoryID) {
-  return [
-    {
-      id: '5',
-      name: 'Lenzuola',
-      price: 22.97,
-      description: "Lenzuola matrimoniali bianche 100% cotone",
-      image: require("../../../image/lenzuola.jpg")
-    },
-    {
-      id: '0',
-      name: 'Copripiumino',
-      price: 39.90,
-      description: "Copripiumino Matrimoniale, Singolo, Una Piazza e Mezza, Paris",
-      image: require("../../../image/copripiumino.jpg")
-    },
-    {
-      id: '4',
-      name: 'Federa',
-      price: 2.63,
-      description: "Federa colorata Americana con Bottoni",
-      image: require("../../../image/federa2.jpg")
-    },
-    {
-      id: '1',
-      name: 'Federa',
-      price: 1.70,
-      description: "Federa cotone semplice senza pattella",
-      image: require("../../../image/federa.jpg")
-    },
-    {
-      id: '2',
-      name: 'Scendiletto',
-      price: 37.99,
-      description: "Scendiletto shaggy, aspetto lanoso",
-      image: require("../../../image/scendiletto.jpg")
-    },
-    {
-      id: '3',
-      name: 'Copripiumino',
-      price: 18.99,
-      description: "Sacco Copripiumino in Microfibra con Motivo di Rami",
-      image: require("../../../image/copripiumino2.jpg")
-    },
-
-  ]
+export function getGiacenza(email) { //OTTENERE LA MAIL COME VARIABILE GLOBALE DELL'UTENTE########################################
+  return fetch(APIURL+"getGiacenzaByUser?email="+email, {});
 };
 
-
-export function getGiacenza(giacenzaID) {
-  return [
-    {
-      id: '5',
-      name: 'Lenzuola',
-      quantità: 28,
-      image: require("../../../image/lenzuola.jpg")
-    },
-    {
-      id: '0',
-      name: 'Copripiumino',
-      quantità: 17,
-      description: "Copripiumino Matrimoniale, Singolo, Una Piazza e Mezza, Paris",
-      image: require("../../../image/copripiumino.jpg")
-    },
-    {
-      id: '4',
-      name: 'Federa',
-      quantità: 5,
-      image: require("../../../image/federa2.jpg")
-    },
-    {
-      id: '1',
-      name: 'Federa',
-      quantità: 10,
-      image: require("../../../image/federa.jpg")
-    },
-    {
-      id: '2',
-      name: 'Scendiletto',
-      quantità: 35,
-      image: require("../../../image/scendiletto.jpg")
-    },
-    {
-      id: '3',
-      name: 'Copripiumino',
-      quantità: 15,
-      image: require("../../../image/copripiumino2.jpg")
-    },
-
-  ]
+export function getOrdersByUser(email) {
+  return fetch(APIURL+"getOrdersByUser?email="+email, {});
 };
 
+export function getHubsByDate(date) {
+  return fetch(APIURL+"getHubsByDate?data="+date, {});
+}
 
-export function getDate(dateID) {
-  return [
-    {
-      id: '5',
-      data: '25/09/2020',
-      quantità: 4,
-
-    },
-    {
-      id: '0',
-      data: '05/10/2020',
-      quantità: 7,
-    },
-    {
-      id: '4',
-      data: '15/10/2020',
-      quantità: 12,
-    },
-    {
-      id: '1',
-      data: '23/10/2020',
-      quantità: 5,
-    },
-
-
-  ]
-
-};
-
-
-
+export function placeOrder(email, data_scelta, hub, prodotti, prodotti_reso) {
+  return fetch(APIURL+"placeOrder", {
+    method: "POST",
+    body: JSON.stringify({
+      email: email,
+      data_scelta: data_scelta,
+      hub: hub,
+      prodotti: prodotti,
+      prodotti_reso: prodotti_reso
+    })
+  });
+}
+/*
 export function getCart(itemID) {
   return [
     {
@@ -207,7 +80,7 @@ export function getCart(itemID) {
 
   ]
 };
-
+*/
 export function getFAQ(id) {
   return [
     { id: '1', domanda: 'Come si fa un reso?', risposta: 'Per effettuare un reso cliccare sulla barra del menù e cliccare su prenota reso, poi scegliendo la data e il luogo di consegna più la merce da restituire dallo stock, sarà possibile prenotare il reso' },
@@ -368,4 +241,86 @@ export function getLuoghi(){
         select: false,
     },
   ]
+}
+
+
+export function SignUp(email, passw, nominativo, ragSociale, codFiscale, nomeAttivita, citta, telefono, cap, sede,pIVA, ife, numeroCarta, scadenzaCarta) {
+  
+  return fetch(APIURL+"SignUp", {
+    method: "POST",
+    body: JSON.stringify({
+      email: email,
+      passw: passw,
+      nominativo: nominativo,
+      ragSociale: ragSociale,
+      codFiscale: codFiscale,
+      nomeAttivita: nomeAttivita,
+      citta: citta,
+      telefono: telefono,
+      cap: cap,
+      sede:sede,
+      pIVA: pIVA,
+      ife:ife,
+      numeroCarta: numeroCarta,
+      scadenzaCarta: scadenzaCarta
+    })
+  });
+}
+
+export function getConsumer(email ) {
+   
+  return fetch(APIURL+"GetCliente", {
+    method: "POST",
+    body: JSON.stringify({
+      email: email
+       
+    })
+  });
+}
+
+export function ChangeCustomer(email, nominativo, ragSociale, codFiscale, nomeAttivita, citta, telefono, cap, sede,pIVA, ife) {
+  console.log(email+"-"+nominativo+"-"+ragSociale+"-"+codFiscale+"-"+nomeAttivita+"-"+citta+"-"+telefono+"-"+cap+"-"+sede+"-"+pIVA+"-"+ife)
+  return fetch(APIURL+"ChangeCustomer", {
+    method: "POST",
+    body: JSON.stringify({
+      email: email,
+      nominativo: nominativo,
+      ragSociale: ragSociale,
+      codFiscale: codFiscale,
+      nomeAttivita: nomeAttivita,
+      citta: citta,
+      telefono: telefono,
+      cap: cap,
+      sede:sede,
+      pIVA: pIVA,
+      ife:ife
+    })
+  });
+}
+
+
+export function ChangePassw(email, vecchiaPassw, nuovaPassw) {
+  
+  return fetch(APIURL+"ChangePassword", {
+    method: "POST",
+    body: JSON.stringify({
+      
+     email: email,
+     vecchiaPassword:vecchiaPassw,
+     nuovaPassword: nuovaPassw
+    })
+  });
+}
+
+export function ChangePayMethod(email,  numCarta, scadenzaCarta) {
+  
+  return fetch(APIURL+"ChangePayMethod", {
+    method: "POST",
+    body: JSON.stringify({
+      
+     email: email,
+     numeroCarta:numCarta,
+     scadenzaCarta:scadenzaCarta
+    })
+  });
 }

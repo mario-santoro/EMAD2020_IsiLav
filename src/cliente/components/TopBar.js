@@ -3,6 +3,7 @@ import { View, Text, Image, StatusBar, TouchableOpacity } from 'react-native';
 import { Header, SearchBar, Overlay, Icon, ListItem, Badge } from 'react-native-elements';
 import { CartContext } from '../services/Carrello';
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../services/Utente';
 
 const TopBar = ({showSearchBar=true }) => {
     const navigation = useNavigation(); //Prop navigation da hook React
@@ -28,7 +29,7 @@ const TopBar = ({showSearchBar=true }) => {
         {
             name: 'Prenota reso',
             icon: 'redo',
-            link: ''
+            link: 'Reso'
         },
         {
             name: 'FAQ',
@@ -102,7 +103,11 @@ const TopBar = ({showSearchBar=true }) => {
                     <View>
                         <View style={{flexDirection: "row"}}>
                             <Icon onPress={() => setOverlayVisible(false)} name="chevron-left" color="#E9EBED" size={50} />
-                            <Text style={{flex: 1, fontSize: 20, color:"#3E4349", textAlign: 'center', textAlignVertical: 'center'}}>Mario Rossi</Text>
+                            <UserContext.Consumer>
+                                {sessione =>
+                                    <Text style={{flex: 1, fontSize: 18, color:"#3E4349", textAlign: 'center', textAlignVertical: 'center'}}>{sessione.getUser().nominativo}</Text>
+                                }
+                            </UserContext.Consumer>
                         </View>
                         <View>
                             { screenList.map((l, i) => (

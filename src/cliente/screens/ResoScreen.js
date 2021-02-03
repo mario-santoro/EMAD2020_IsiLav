@@ -5,9 +5,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon, Button, Overlay, ListItem } from 'react-native-elements';
 import * as API from '../services/API';
 
-const giacenza = API.getGiacenza();
 
 const ResoScreen = ({ navigation, route }) => {
+    const giacenza = API.getGiacenza();
     var luogo = null;
     if (route.params?.luogo) {
         luogo = route.params.luogo;
@@ -69,7 +69,7 @@ const ResoScreen = ({ navigation, route }) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: "#F8FFFC" }}>
-            <TopBar navigation={navigation} />
+            <TopBar />
 
             {show ? (
                 <DateTimePicker
@@ -131,7 +131,7 @@ const ResoScreen = ({ navigation, route }) => {
                     buttonStyle={{ backgroundColor: "#9DE7CD", borderRadius: 15 }}
                     titleStyle={{ color: "#F8FFFC" }}
                     title="Scegli sulla mappa"
-                    onPress={() => navigation.navigate("Map", {luogo: luogo, schermata: "Reso"})}     
+                    onPress={() => navigation.navigate("Map", {selezionato: luogo, chiamante: "Reso"})}     
                 />
               <Text style={{width: "80%", fontSize: 16, fontWeight: 'bold', color: '#70D0AE', alignItems: 'flex-start', marginTop: 0}}>Selezionato: {luogo===null? "NESSUNO" : luogo.title}</Text>
 

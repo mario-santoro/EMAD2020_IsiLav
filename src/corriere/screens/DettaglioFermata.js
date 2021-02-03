@@ -14,7 +14,7 @@ const DettaglioFermata = ({ navigation, route }) => {
     return (
 
         <View style={styles.container}>
-            <TopBar navigation={navigation} />
+            <TopBar />
             <View style={styles.body}>
                 <View style={{ flexDirection: "column" }}>
                     <Text style={styles.title}>{via}</Text>

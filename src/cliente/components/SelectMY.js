@@ -1,17 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select';
-const SelectYM = () => {
+const SelectYM = ({onYearChange,onMonthChange, month, year}) => {
 
-  var date = new Date().getDate(); //To get the Current Date
-  var month = new Date().getMonth() + 1; //To get the Current Month
-  var year = new Date().getFullYear(); //To get the Current Year
-  var hours = new Date().getHours(); //To get the Current Hours
-  var min = new Date().getMinutes(); //To get the Current Minutes
-  var sec = new Date().getSeconds(); //To get the Current Seconds
-
+  
   let elementi = [];
   var i = 0;
+  console.log("year: "+ year+ "month: "+month)
   for (i = 0; i <= 20; i++) {
     elementi.push({ label: (year + i).toString(), value: year + i });
 
@@ -19,7 +14,7 @@ const SelectYM = () => {
 
 
 
-  console.log(year)
+   
   return (
     <View style={{ marginTop: 5, alignSelf: "flex-start", }}>
       <Text style={{ fontWeight: "bold", fontSize: 20, color: "#3E4349" }}>Data scadenza:</Text>
@@ -37,7 +32,7 @@ const SelectYM = () => {
 
               }
             }}
-            onValueChange={(value) => console.log(value)}
+            onValueChange={(value) =>onMonthChange(value)}
             items={[
               { label: '1', value: 1 },
               { label: '2', value: 2 },
@@ -76,7 +71,7 @@ const SelectYM = () => {
             }}
 
 
-            onValueChange={(value) => console.log(value)}
+            onValueChange={(value) => onYearChange(value)}
             items={elementi}
             placeholder={{
               label: 'Anno',

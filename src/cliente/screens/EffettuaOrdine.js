@@ -1,31 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, FlatList, StyleSheet, Text, ScrollView, StatusBar, Image } from 'react-native';
 import TopBar from '../components/TopBar';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { CheckBox, Icon, Button, Overlay, ListItem } from 'react-native-elements';
 import * as API from '../services/API';
+import { CartContext } from '../services/Carrello';
+import {datetoDDMMYYYY, dateToYYYYMMDD} from '../services/Utils';
+import { UserContext } from '../services/Utente';
 
-const giacenza = API.getGiacenza();
+const EffettuaOrdine = ({ navigation, route }) => {
+    const [giacenza, setGiacenza] = useState([])
+    const sessione = useContext(UserContext);
 
-const ResoScreen = ({ navigation, route }) => {
-    var luogo = null;
-    if (route.params?.luogo){
-        luogo = route.params.luogo;
-    }
+    useEffect(() => {
+        API.getGiacenza(sessione.getUser().email)
+        .then(response => response.json())
+        .then(json => {
+            setGiacenza(json)
+        })
+        .catch((error) => {
+            console.error(error)
+            alert("Si è verificato un errore durante la ricerca della giacenza!")
+        })
+    }, []);
+
+
+    useEffect(() => {
+        if(route.params?.hub)
+            setHub(route.params.hub)
+    }, [route.params?.hub]);
 
     const oggi = new Date();
-    const max = new Date().setDate(oggi.getDate() + 365); //es. oggi + 365 giorni
+    const max = new Date(oggi)
+    max.setDate(max.getDate() + 365); //es. oggi + 365 giorni
 
     const [date, setDate] = useState(oggi);
     const [show, setShow] = useState(false);
     const [overlay, setOverlay] = useState(false);
-    const [selezionati, setSelezionati] = useState([]);
+    const [selezionati, setSelezionati] = useState([]); //articoli dalla giacenza scelti per essere restituiti
+    const [hub, setHub] = useState(null) //hub selezionato per la consegna
 
     const [isSelected, setSelection] = useState(false);
     const onDateChange = (event, selectedDate) => {
         const newDate = selectedDate || date;
-        setShow(Platform.OS === 'ios'); //provare su iphone a cosa serve
+        setShow(false);
         setDate(newDate);
+        setHub(null); //resetta l'hub selezionato quando cambia la data scelta
     };
 
     const addItemToSelezionati = (item) => {
@@ -37,27 +57,27 @@ const ResoScreen = ({ navigation, route }) => {
     };
 
     const removeItemFromSelezionati = (toDelete) => {
-        setSelezionati(selezionati.filter(item => item.id !== toDelete.id));
+        setSelezionati(selezionati.filter(item => item.nome_prodotto !== toDelete.nome_prodotto));
     };
 
-    const decreaseItem = (id) => {
+    const decreaseItem = (nome_prodotto) => {
         //Per ogni item nella lesta dei selezionati
-        //se l'id corrisponde a quello cliccato
+        //se il nome corrisponde a quello cliccato
         //decremento di uno
         setSelezionati(selezionati.map(item => {
-            if (item.id === id && item.quantità > 1) {
+            if (item.nome_prodotto === nome_prodotto && item.quantità > 1) {
                 item.quantità -= 1;
             }
             return item;
         }))
     };
 
-    const increaseItem = (id) => {
+    const increaseItem = (nome_prodotto) => {
         //Per ogni item nella lesta dei selezionati
-        //se l'id corrisponde a quello cliccato
+        //se il nome corrisponde a quello cliccato
         //incremento di uno
         setSelezionati(selezionati.map(item => {
-            if (item.id === id && item.quantità < item.max) {
+            if (item.nome_prodotto === nome_prodotto && item.quantità < item.max) {
                 item.quantità += 1;
             }
             return item;
@@ -66,7 +86,7 @@ const ResoScreen = ({ navigation, route }) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
-            <TopBar navigation={navigation} />
+            <TopBar showSearchBar={false} />
 
             {show ? (
                 <DateTimePicker
@@ -84,12 +104,13 @@ const ResoScreen = ({ navigation, route }) => {
                 <View>
                     <FlatList
                         style={{ height: "90%", width: "100%" }}
-                        data={giacenza.filter(item => selezionati.every(selezionato => item.id !== selezionato.id))} //mostro solo quelli non ancora selezionati da restituire
+                        //mostro solo quelli non ancora selezionati da restituire
+                        data={giacenza.filter(prodotto => selezionati.every(selezionato => prodotto.nome_prodotto !== selezionato.nome_prodotto))}
                         renderItem={({ item }) => (
                             <ListItem bottomDivider>
-                                <Image source={item.image} resizeMethod='auto' resizeMode='cover' style={{ width: 64, height: 64 }} />
+                                <Image source={item.immagine} resizeMethod='auto' resizeMode='cover' style={{ width: 64, height: 64 }} />
                                 <ListItem.Content>
-                                    <ListItem.Title style={{ color: "#9DE7CD", fontWeight: 'bold' }}>{item.name}</ListItem.Title>
+                                    <ListItem.Title style={{ color: "#9DE7CD", fontWeight: 'bold' }}>{item.nome_prodotto}</ListItem.Title>
                                     <ListItem.Title style={{ color: "#3E4349" }}>In magazzino: <Text style={{ fontWeight: 'bold' }}>{item.quantità}</Text></ListItem.Title>
                                 </ListItem.Content>
                                 <ListItem.Chevron name="playlist-add" color="#9DE7CD" size={40} onPress={() => addItemToSelezionati(item)} />
@@ -116,7 +137,7 @@ const ResoScreen = ({ navigation, route }) => {
                     containerStyle={{ width: "80%" }}
                     buttonStyle={{ backgroundColor: "#9DE7CD", borderRadius: 15 }}
                     titleStyle={{ color: "#F8FFFC" }}
-                    title={date.getDate().toString() + "/" + (date.getMonth() + 1).toString() + "/" + date.getFullYear()}
+                    title={datetoDDMMYYYY(date)}
                     onPress={() => setShow(true)}
                 />
 
@@ -128,9 +149,26 @@ const ResoScreen = ({ navigation, route }) => {
                     buttonStyle={{ backgroundColor: "#9DE7CD", borderRadius: 15 }}
                     titleStyle={{ color: "#F8FFFC" }}
                     title="Scegli sulla mappa"
-                    onPress={() => navigation.navigate("Map", {luogo: luogo, schermata:"EffettuaOrdine"})}     
+                    onPress={() => {
+                        API.getHubsByDate(dateToYYYYMMDD(date))
+                        .then(response => response.json())
+                        .then(array => {
+                            if(array.length>0){
+                                navigation.navigate("Map", {hubs: array, selezionato: hub, chiamante:"EffettuaOrdine"})
+                            }
+                            else{
+                                alert("Non ci sono fermate disponibili per tale giorno. Scegliere una nuova data.")
+                            }
+                        })
+                        .catch((error) => {
+                            console.error(error)
+                            alert("Si è verificato durante la ricerca dei punti di consegna!")
+                        })
+                        
+                    }}
+
                 />
-              <Text style={{width: "80%", fontSize: 16, fontWeight: 'bold', color: '#70D0AE', alignItems: 'flex-start', marginTop: 0}}>Selezionato: {luogo===null? "NESSUNO" : luogo.title}</Text>
+              <Text style={{width: "80%", fontSize: 16, fontWeight: 'bold', color: '#70D0AE', alignItems: 'flex-start', marginTop: 0}}>Selezionato: {hub===null? "NESSUNO" : hub.via+" ("+hub.ore+":"+hub.minuti+")"}</Text>
 
                 <Text style={{ width: "80%", fontSize: 16, color: '#3E4349', alignItems: 'flex-start', marginTop: 10 }}>Articoli che vuoi restituire:</Text>
 
@@ -138,7 +176,12 @@ const ResoScreen = ({ navigation, route }) => {
                     center
                     title='Vuoi abbinare un reso?'
                     checked={isSelected}
-                    onPress={() => setSelection(!isSelected)}
+                    onPress={() => {
+                        if(isSelected===true){
+                            setSelezionati([]);
+                        }
+                        setSelection(!isSelected)
+                    }}
                     checkedColor="#70D0AE"
                     checkedIcon="toggle-on"
                     uncheckedIcon="toggle-off"
@@ -147,22 +190,16 @@ const ResoScreen = ({ navigation, route }) => {
                 />
 
                 {isSelected ? (
-
-
-
-
-                  
-                      
                         <View style={{ width: "95%", alignItems: 'center' }}>
                             {selezionati.map(item =>
-                                <View key={item.id} style={{ flexDirection: 'row', alignItems: 'center', width: "100%", marginVertical: 5, borderColor: "#9DE7CD", borderWidth: 1, padding: 2, borderRadius: 5, backgroundColor: "#F8FFFC" }}>
+                                <View key={item.nome_prodotto} style={{ flexDirection: 'row', alignItems: 'center', width: "100%", marginVertical: 5, borderColor: "#9DE7CD", borderWidth: 1, padding: 2, borderRadius: 5, backgroundColor: "#F8FFFC" }}>
                                     <View style={{ flex: 2, flexDirection: 'row', alignItems: 'center', paddingRight: 10 }}>
                                         <Icon size={36} name="delete-forever" color="#9DE7CD" onPress={() => removeItemFromSelezionati(item)} />
-                                        <Text style={{ color: "#9DE7CD", fontWeight: 'bold', fontSize: 16 }}>{item.name}</Text>
+                                        <Text style={{ color: "#9DE7CD", fontWeight: 'bold', fontSize: 16 }}>{item.nome_prodotto}</Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                                         <Button
-                                            onPress={() => decreaseItem(item.id)}
+                                            onPress={() => decreaseItem(item.nome_prodotto)}
                                             title=""
                                             icon={<Icon size={20} name="remove" color="#9DE7CD" />}
                                             buttonStyle={{ backgroundColor: "#F8FFFC", borderColor: "#9DE7CD", borderWidth: 2 }}
@@ -170,7 +207,7 @@ const ResoScreen = ({ navigation, route }) => {
                                         />
                                         <Text style={{ flex: 1, textAlign: 'center', color: "#3E4349" }}>{item.quantità}</Text>
                                         <Button
-                                            onPress={() => increaseItem(item.id)}
+                                            onPress={() => increaseItem(item.nome_prodotto)}
                                             title=""
                                             icon={<Icon size={20} name="add" color="#F8FFFC" />}
                                             buttonStyle={{ backgroundColor: "#9DE7CD", borderColor: "#F8FFFC" }}
@@ -197,15 +234,20 @@ const ResoScreen = ({ navigation, route }) => {
             </ScrollView>
 
             <View style={{ width: "100%", borderTopWidth: 0.5, borderColor: "#9DE7CD", marginTop: 10 }}>
-                <Button
-                    icon={<Icon size={24} name="keyboard-arrow-right" color="#F8FFFC" />}
-                    iconRight={true}
-                    containerStyle={{ width: "45%", alignSelf: 'flex-end', padding: 5 }}
-                    buttonStyle={{ backgroundColor: "#9DE7CD", borderRadius: 15 }}
-                    titleStyle={{ color: "#F8FFFC", fontSize: 16 }}
-                    title="CONTINUA"
-                    onPress={()=>navigation.navigate("PayOrdine")}
-                />
+                <CartContext.Consumer>
+                {carrello =>
+                    <Button
+                        icon={<Icon size={24} name="keyboard-arrow-right" color="#F8FFFC" />}
+                        iconRight={true}
+                        containerStyle={{ width: "45%", alignSelf: 'flex-end', padding: 5 }}
+                        buttonStyle={{ backgroundColor: "#9DE7CD", borderRadius: 15 }}
+                        titleStyle={{ color: "#F8FFFC", fontSize: 16 }}
+                        title="CONTINUA"
+                        disabled={hub===null}
+                        onPress={()=>navigation.navigate("PayOrdine", {data_scelta: dateToYYYYMMDD(date), hub: hub, prodotti: carrello.getArticoli(), prodotti_reso: selezionati})}
+                    />
+                }
+                </CartContext.Consumer>
             </View>
 
         </View>
@@ -221,4 +263,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ResoScreen;
+export default EffettuaOrdine;

@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const CategoryItem = ({ name, image, onPress }) => (
     <TouchableOpacity style={styles.item} onPress={onPress}>
-        <Image style={styles.image} source={image} />
+        <Image style={styles.image} source={{uri: image}} />
         <Text style={styles.name}>{name}</Text>
     </TouchableOpacity>
   );

@@ -7,7 +7,7 @@ const ResoScreen = ({navigation, route}) => {
     const selezionati = route.params.selezionati;
     return (
     <View style={{flex: 1, backgroundColor: "#F8FFFC"}}>
-      <TopBar navigation={navigation} />
+      <TopBar />
 
       <ScrollView contentContainerStyle={{alignItems: "center"}}>
         <View style={{backgroundColor: "orange", marginTop: 0, alignItems: 'center', width: "100%", padding: 5, elevation: 5}}>

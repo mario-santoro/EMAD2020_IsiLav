@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, StatusBar, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { CheckBox, Button, Icon } from 'react-native-elements'
 import TopBar from '../components/TopBar';
 import Select from '../components/SelectMY';
 import InputElement from '../components/InputElement';
 import { ScrollView } from 'react-native-gesture-handler';
-const PayOrdine = ({ navigation }) => {
+import * as API from "../services/API";
+import { UserContext } from '../services/Utente';
+import { CartContext } from '../services/Carrello';
+import { CommonActions } from '@react-navigation/native';
 
+const PayOrdine = ({ navigation, route }) => {
     const [isSelected1, setSelection1] = useState(false);
     const [isSelected2, setSelection2] = useState(false);
     const [isSelected3, setSelection3] = useState(false);
@@ -74,7 +78,7 @@ const PayOrdine = ({ navigation }) => {
         <View
             style={styles.container}
         >
-            <TopBar navigation={navigation} />
+            <TopBar showSearchBar={false} />
             <Text style={styles.titolo}>Pagamento</Text>
             <ScrollView>
                 <View style={styles.body}>
@@ -177,25 +181,48 @@ const PayOrdine = ({ navigation }) => {
           type="outline"
           onPress={() => navigation.goBack()}
           />
-          <Button
-          icon={<Icon size={24} name="done" color="#F8FFFC" />}
-          iconRight={true}
-          containerStyle={{flex:1, alignSelf: 'flex-end', padding: 5}}
-          buttonStyle={{backgroundColor: "#9DE7CD", borderRadius: 15}}
-          titleStyle={{color: "#F8FFFC", fontSize: 16}}
-          title="PROCEDI"
-          onPress={() => navigation.navigate("SuccessScreen")}
-          />
+          
+            <CartContext.Consumer>
+            {carrello =>
+            
+            <UserContext.Consumer>
+                {sessione =>
+                    <Button
+                    icon={<Icon size={24} name="done" color="#F8FFFC" />}
+                    iconRight={true}
+                    containerStyle={{flex:1, alignSelf: 'flex-end', padding: 5}}
+                    buttonStyle={{backgroundColor: "#9DE7CD", borderRadius: 15}}
+                    titleStyle={{color: "#F8FFFC", fontSize: 16}}
+                    title="PROCEDI"
+                    onPress={() => {
+                        //console.log(route.params.prodotti) //per capire cosa arriva al backend
+                        API.placeOrder(sessione.getUser().email, route.params.data_scelta, route.params.hub, route.params.prodotti, route.params.prodotti_reso)
+                        .then(response => response.json())
+                        .then(json => {
+                            carrello.svuota();
+                            //pulizia stack navigation
+                            navigation.dispatch(
+                                CommonActions.reset({
+                                  index: 1,
+                                  routes: [{ name: "Home" }, { name: "SuccessScreen" }]
+                                }));
+                            //navigation.navigate("SuccessScreen")
+                        })
+                        .catch((error) => {
+                            console.error(error)
+                            alert("Si è verificato un errore durante l'ordine!")
+                        })
+                    }}
+                    />
+                }
+            </UserContext.Consumer>
+            }
+            </CartContext.Consumer>
         </View>
         </View>
 
     );
 };
-
-const onPress = (itemID) => {
-    alert(itemID);
-};
-
 
 const styles = StyleSheet.create({
     container: {

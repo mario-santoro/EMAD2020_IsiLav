@@ -15,7 +15,7 @@ const LoginScreen = ({ navigation }) => {
                     barStyle="light-content"
                 />
 
-                <TopBar navigation={navigation} />
+                <TopBar />
                 <Text style={styles.titolo}>Cambia anagrafica</Text>
             </View>
 
