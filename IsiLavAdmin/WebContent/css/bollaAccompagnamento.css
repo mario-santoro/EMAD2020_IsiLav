@@ -1,0 +1,137 @@
+#invoice {
+	padding: 40px;
+	width: 700px;
+	height: 950px;
+	font-size: 13px;
+}
+
+#tabellaSup {
+	width: 100%;
+	height: 20%;
+	text-align: left;
+}
+
+#header {
+	position: aboslute;
+}
+
+#icona {
+	width: 100px;
+	float: right;
+	position: relative;
+}
+
+#titolo {
+	font-size: 15px;
+	position: relative;
+}
+
+#contenitore {
+	display: block;
+	position: aboslute;
+}
+
+#consegna {
+	display: block;
+	border-style: solid;
+	border-width: 1px;
+	float: left;
+	padding: 10px;
+	width: 45%;
+	height: 100px;
+	position: relative;
+}
+
+#intestatario {
+	display: block;
+	border-style: solid;
+	border-width: 1px;
+	float: right;
+	padding: 10px;
+	width: 45%;
+	height: 100px;
+	position: relative;
+}
+
+#infoDocumento {
+	display: block;
+	border-style: solid;
+	border-width: 1px;
+	position: aboslute;
+}
+
+#numDoc {
+	border-style: solid;
+	border-width: 1px;
+	position: relative;
+}
+
+#dataDoc {
+	border-style: solid;
+	border-width: 1px;
+	position: relative;
+}
+
+#pag {
+	border-style: solid;
+	border-width: 1px;
+	position: relative;
+}
+
+#contNumDoc {
+	float: left;
+}
+
+#infoNumDoc {
+	float: right;
+	background-color: #9DE7CD;
+}
+
+#contDataDoc {
+	float: left;
+}
+
+#infoDataDoc {
+	float: right;
+	background-color: #9DE7CD;
+}
+
+#contPag {
+	float: left;
+}
+
+#infoPag {
+	float: right;
+	background-color: #9DE7CD;
+}
+
+#centrale {
+	height: 53%;
+}
+
+#listaArticoli{
+	width: 100%; 
+	text-align: left;
+	
+}
+
+.lsitaArt{
+	border-style: solid;
+	border-width: 1px;
+}
+
+#tabellaInf {
+	width: 100%; 
+	text-align: left;
+	bottom: 0;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 5px;
+}
+
+#firme {
+	width: 100%; 
+	bottom: 0;
+	border-style: solid;
+	border-width: 1px;
+}
