@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../GetCliente/index.ts"],"names":[],"mappings":";;;;;;;;;;;AACA,iDAAgD;AAChD,MAAM,WAAW,GAAkB,UAAgB,OAAgB,EAAE,GAAgB;;QACjF,MAAM,KAAK,GAAG,GAAG,CAAC,IAAI,CAAC,KAAK,CAAC;QAC7B,OAAO,CAAC,GAAG,GAAG;YACV,qCAAqC;YACrC,IAAI,EAAE,QAAQ,CAAC,WAAW,CAAC,KAAK,CAAC;SACpC,CAAC;IAEN,CAAC;CAAA,CAAC;AAEF,kBAAe,WAAW,CAAC"}
