@@ -34,4 +34,4 @@ Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile
 <b> Azure Function</b>: $npm install -g azure-functions-core-tools@3</br>
 <b> MySQL</b>: $ npm install sync-mysql --save</br>
 ## Brochure
-<img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/master/Documentazione/IsiLavBrochure.png" height="500">
+<img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/main/Documentazione/IsiLavBrochure.png" height="500">
