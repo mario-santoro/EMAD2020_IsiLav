@@ -40,24 +40,24 @@ public class OperazioneDAO {
 			operazioni= new ArrayList<Operazione>();
 			conn = DriverManagerConnectionPool.getConnection();
 			switch(giorno) {
-			case "lunedÏ":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where lunedÏ=1 and data_scelta=? ORDER BY nome ASC ");
+			case "luned√¨":
+				ps = (PreparedStatement) conn.prepareStatement("SELECT DISTINCT operazione.id_percorso, percorso.nome FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where luned√¨=1 and data_scelta=? ORDER BY nome ASC ");
 				ps.setString(1, data);
 				break;
-			case "martedÏ":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where martedÏ=1 and data_scelta=? ORDER BY nome ASC ");
+			case "marted√¨":
+				ps = (PreparedStatement) conn.prepareStatement("SELECT DISTINCT operazione.id_percorso, percorso.nome FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where marted√¨=1 and data_scelta=? ORDER BY nome ASC ");
 				ps.setString(1, data);
 				break;
-			case "mercoledÏ":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where mercoledÏ=1 and data_scelta=? ORDER BY nome ASC ");
+			case "mercoled√¨":
+				ps = (PreparedStatement) conn.prepareStatement("SELECT DISTINCT operazione.id_percorso, percorso.nome FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where mercoled√¨=1 and data_scelta=? ORDER BY nome ASC ");
 				ps.setString(1, data);
 				break;
-			case "giovedÏ":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where giovedÏ=1 and data_scelta=? ORDER BY nome ASC");
+			case "gioved√¨":
+				ps = (PreparedStatement) conn.prepareStatement("SELECT DISTINCT operazione.id_percorso, percorso.nome FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where gioved√¨=1 and data_scelta=? ORDER BY nome ASC");
 				ps.setString(1, data);
 				break;
-			case "venerdÏ":
-				ps = (PreparedStatement) conn.prepareStatement("SELECT * FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where venerdÏ=1 and data_scelta=? ORDER BY nome ASC ");
+			case "venerd√¨":
+				ps = (PreparedStatement) conn.prepareStatement("SELECT DISTINCT operazione.id_percorso FROM operazione join fermata on operazione.id_percorso=fermata.id_percorso and operazione.via= fermata.via join percorso on fermata.id_percorso= percorso.id_percorso where venerd√¨=1 and data_scelta=? ORDER BY nome ASC ");
 				ps.setString(1, data);
 				break;
 			case "sabato":
@@ -94,7 +94,7 @@ public class OperazioneDAO {
 					c.setNomeAttivita(res2.getString("nomeAttivita"));
 					c.setNominativo(res2.getString("nominativo"));
 					o.setCliente(c);
-					o.setId_operazione(res.getInt("id_operazione"));
+					o.setId_operazione(res2.getInt("id_operazione"));
 					o.setVia(res2.getString("via"));
 					f= new Fermata();
 					f.setOre(res2.getInt("ore"));
@@ -145,8 +145,8 @@ public class OperazioneDAO {
 		Prodotto p=null;
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			ps = (PreparedStatement) conn.prepareStatement("SELECT prodotto.descrizione_breve, operazione.via, hub.citt‡, hub.cap, operazione.data_scelta, "
-					+ "noleggiato.nome_prodotto as 'prodotto_noleggiato', noleggiato.quantit‡ as 'quantita_noleggiato' FROM `operazione` join ordine on "
+			ps = (PreparedStatement) conn.prepareStatement("SELECT prodotto.descrizione_breve, operazione.via, hub.citt√†, hub.cap, operazione.data_scelta, "
+					+ "noleggiato.nome_prodotto as 'prodotto_noleggiato', noleggiato.quantit√† as 'quantita_noleggiato' FROM `operazione` join ordine on "
 					+ "operazione.id_ordine=ordine.id_ordine join noleggiato on ordine.id_ordine= noleggiato.id_ordine join fermata on operazione.via= fermata.via "
 					+ "and operazione.id_percorso=fermata.id_percorso join hub on fermata.via=hub.via join prodotto on noleggiato.nome_prodotto=prodotto.nome_prodotto "
 					+ "where operazione.id_operazione=?");
@@ -155,7 +155,7 @@ public class OperazioneDAO {
 
 			while (res.next()) {
 				h.setCap(res.getString("cap"));
-				h.setCitta(res.getString("citt‡"));
+				h.setCitta(res.getString("citt√†"));
 				h.setVia(res.getString("via"));
 				f.setHub(h);
 				o.setFermata(f);
@@ -200,7 +200,7 @@ public class OperazioneDAO {
 		Prodotto p=null;
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			ps = (PreparedStatement) conn.prepareStatement("SELECT restituito.id_reso as 'id_restituito', restituito.confermato as 'confermato', restituito.nome_prodotto as 'prodotto_restituito', restituito.quantit‡ as 'quantita_restituito', noleggiato.nome_prodotto as 'prodotto_noleggiato', noleggiato.quantit‡ as 'quantita_noleggiato'   FROM `operazione` left join ordine on operazione.id_ordine=ordine.id_ordine left join reso on operazione.id_reso=reso.id_reso left join noleggiato on ordine.id_ordine= noleggiato.id_ordine left join restituito on reso.id_reso= restituito.id_reso where operazione.id_operazione=?");
+			ps = (PreparedStatement) conn.prepareStatement("SELECT restituito.id_reso as 'id_restituito', restituito.confermato as 'confermato', restituito.nome_prodotto as 'prodotto_restituito', restituito.quantit√† as 'quantita_restituito', noleggiato.nome_prodotto as 'prodotto_noleggiato', noleggiato.quantit√† as 'quantita_noleggiato'   FROM `operazione` left join ordine on operazione.id_ordine=ordine.id_ordine left join reso on operazione.id_reso=reso.id_reso left join noleggiato on ordine.id_ordine= noleggiato.id_ordine left join restituito on reso.id_reso= restituito.id_reso where operazione.id_operazione=?");
 			ps.setInt(1,id_operazione);
 			ResultSet res = ps.executeQuery();
 
@@ -256,21 +256,21 @@ public class OperazioneDAO {
 		try {
 
 			conn = DriverManagerConnectionPool.getConnection();
-			ps = (PreparedStatement) conn.prepareStatement("select id_noleggio, quantit‡_rimasta from noleggiato join ordine on noleggiato.id_ordine=ordine.id_ordine where  noleggiato.quantit‡_rimasta>0 and noleggiato.nome_prodotto=? order by ordine.data_scadenza asc");
+			ps = (PreparedStatement) conn.prepareStatement("select id_noleggio, quantit√†_rimasta from noleggiato join ordine on noleggiato.id_ordine=ordine.id_ordine where  noleggiato.quantit√†_rimasta>0 and noleggiato.nome_prodotto=? order by ordine.data_scadenza asc");
 			ps.setString(1,prodotto);
 			ResultSet res = ps.executeQuery();
 
 			while (res.next()) {
 
-				if(res.getInt("quantit‡_rimasta")>=quant) {
-					String sql = " UPDATE noleggiato SET quantit‡_rimasta=? where id_noleggio=?";
+				if(res.getInt("quantit√†_rimasta")>=quant) {
+					String sql = " UPDATE noleggiato SET quantit√†_rimasta=? where id_noleggio=?";
 					ps2 = (PreparedStatement) conn.prepareStatement(sql);
-					ps2.setInt(1, res.getInt("quantit‡_rimasta")-quant);
+					ps2.setInt(1, res.getInt("quantit√†_rimasta")-quant);
 					ps2.setInt(2, res.getInt("id_noleggio"));
 					ps2.executeUpdate();
 
 
-					String sql2 = " UPDATE restituito SET confermato=?, quantit‡=? where id_reso=?";
+					String sql2 = " UPDATE restituito SET confermato=?, quantit√†=? where id_reso=?";
 					ps2 = (PreparedStatement) conn.prepareStatement(sql2);
 					ps2.setBoolean(1, true);
 					ps2.setInt(2, quantIniziale);
@@ -278,13 +278,13 @@ public class OperazioneDAO {
 					ps2.executeUpdate();					
 					return true;
 				}else {
-					String sql = "UPDATE noleggiato SET quantit‡_rimasta=? where id_noleggio=?";
+					String sql = "UPDATE noleggiato SET quantit√†_rimasta=? where id_noleggio=?";
 					ps2 = (PreparedStatement) conn.prepareStatement(sql);
 					ps2.setInt(1, 0);
 					ps2.setInt(2, res.getInt("id_noleggio"));
 					ps2.executeUpdate();
 
-					quant=quant- res.getInt("quantit‡_rimasta");
+					quant=quant- res.getInt("quantit√†_rimasta");
 
 				}
 
@@ -314,17 +314,17 @@ public class OperazioneDAO {
 
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			ps = (PreparedStatement) conn.prepareStatement("SELECT SUM(noleggiato.quantit‡_rimasta) AS quantit‡_stock, noleggiato.nome_prodotto "
+			ps = (PreparedStatement) conn.prepareStatement("SELECT SUM(noleggiato.quantit√†_rimasta) AS quantit√†_stock, noleggiato.nome_prodotto "
 					+ "FROM noleggiato JOIN ordine ON noleggiato.id_ordine = ordine.id_ordine JOIN operazione ON ordine.id_ordine = operazione.id_ordine "
-					+ "WHERE operazione.email=? GROUP BY noleggiato.nome_prodotto ");
+					+ "WHERE operazione.email=? AND ordine.stato='CONSEGNATO' GROUP BY noleggiato.nome_prodotto ");
 
 			ps.setString(1,email);
 			ResultSet res = ps.executeQuery();
 
 			while (res.next()) {
 				ArrayList<ProdottiOrdinati> po = new ArrayList<ProdottiOrdinati>();
-				ps2 = (PreparedStatement) conn.prepareStatement("SELECT ordine.data_scadenza, noleggiato.quantit‡_rimasta FROM noleggiato "
-						+ "JOIN ordine ON noleggiato.id_ordine = ordine.id_ordine JOIN operazione ON ordine.id_ordine = operazione.id_ordine WHERE operazione.email=? AND noleggiato.quantit‡_rimasta>0 "
+				ps2 = (PreparedStatement) conn.prepareStatement("SELECT ordine.data_scadenza, noleggiato.quantit√†_rimasta FROM noleggiato "
+						+ "JOIN ordine ON noleggiato.id_ordine = ordine.id_ordine JOIN operazione ON ordine.id_ordine = operazione.id_ordine WHERE operazione.email=? AND noleggiato.quantit√†_rimasta>0 "
 						+ "AND noleggiato.nome_prodotto=?");
 				ps2.setString(1,email);
 				ps2.setString(2,res.getString("noleggiato.nome_prodotto"));
@@ -346,13 +346,13 @@ public class OperazioneDAO {
 					// conversione in giorni con la divisione intera
 					int dayElapsed = (int) (millisElapsed / (24*60* 60 * 1000));
 					if(dayElapsed<=3) {
-						po.add(new ProdottiOrdinati(res2.getString("ordine.data_scadenza"),res2.getInt("noleggiato.quantit‡_rimasta"),true));
+						po.add(new ProdottiOrdinati(res2.getString("ordine.data_scadenza"),res2.getInt("noleggiato.quantit√†_rimasta"),true));
 					}else {
-						po.add(new ProdottiOrdinati(res2.getString("ordine.data_scadenza"),res2.getInt("noleggiato.quantit‡_rimasta"),false));
+						po.add(new ProdottiOrdinati(res2.getString("ordine.data_scadenza"),res2.getInt("noleggiato.quantit√†_rimasta"),false));
 					}
 				}
 
-				stocks.add(new Stock(res.getString("noleggiato.nome_prodotto"),res.getInt("quantit‡_stock"),po));
+				stocks.add(new Stock(res.getString("noleggiato.nome_prodotto"),res.getInt("quantit√†_stock"),po));
 
 			}
 
@@ -453,7 +453,7 @@ public class OperazioneDAO {
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 
-			ps= (PreparedStatement) conn.prepareStatement("SELECT noleggiato.nome_prodotto, noleggiato.quantit‡, operazione.data_scelta, operazione.id_ordine FROM operazione "
+			ps= (PreparedStatement) conn.prepareStatement("SELECT noleggiato.nome_prodotto, noleggiato.quantit√†, operazione.data_scelta, operazione.id_ordine FROM operazione "
 					+ "JOIN ordine ON operazione.id_ordine = ordine.id_ordine JOIN noleggiato ON ordine.id_ordine = noleggiato.id_ordine WHERE operazione.email=?"
 					+ " ORDER BY operazione.data_operazione DESC");
 			ps.setString(1,email);
@@ -461,17 +461,17 @@ public class OperazioneDAO {
 
 			while (res.next()) {
 				int quantRest=0;
-				ps2= (PreparedStatement) conn.prepareStatement("SELECT restituito.quantit‡ FROM operazione JOIN reso on operazione.id_reso = reso.id_reso JOIN restituito "
+				ps2= (PreparedStatement) conn.prepareStatement("SELECT restituito.quantit√† FROM operazione JOIN reso on operazione.id_reso = reso.id_reso JOIN restituito "
 						+ "ON reso.id_reso = restituito.id_reso WHERE operazione.email=? AND operazione.id_ordine=?");
 				ps2.setString(1,email);
 				ps2.setInt(2,res.getInt("operazione.id_ordine"));
 				ResultSet res2 = ps2.executeQuery();
 
 				while (res2.next()) {
-					quantRest=res2.getInt("restituito.quantit‡");
+					quantRest=res2.getInt("restituito.quantit√†");
 				}
 
-				mov.add(new Movimenti(res.getString("noleggiato.nome_prodotto"),res.getInt("noleggiato.quantit‡"),quantRest,res.getString("operazione.data_scelta")));
+				mov.add(new Movimenti(res.getString("noleggiato.nome_prodotto"),res.getInt("noleggiato.quantit√†"),quantRest,res.getString("operazione.data_scelta")));
 
 			}
 
