@@ -22,6 +22,7 @@ Attualmente la lavanderia industriale “SNB S.R.L.” è sprovvista di un appli
 ## Obiettivo
 Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile, che permetta ai clienti dell’azienda in maniera rapida e user friendly di noleggiare i loro prodotti. Per la parte amministrativa invece verrà realizzato un applicativo web che permetta la gestione e amministrazione dei clienti, delle forniture e di tenere traccia degli ordini ricevuti e gli eventuali ritardi sulle restituzioni da parte dei clienti.
 ## Tecnologie
+<img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/master/Documentazione/isilav-tecnologie.png" height="200">
 ### Pacchetti
 <b>Select</b>: $ npm install react-native-picker-select </br>
 <b>React Native Element</b>: $ npm install react-native-elements </br>
@@ -32,3 +33,5 @@ Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile
 <b>GPS</b>: $ expo install expo-location</br>
 <b> Azure Function</b>: $npm install -g azure-functions-core-tools@3</br>
 <b> MySQL</b>: $ npm install sync-mysql --save</br>
+## Brochure
+<img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/master/Documentazione/IsiLavBrochure.png" height="500">
