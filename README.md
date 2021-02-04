@@ -1,5 +1,5 @@
 
-# <img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/main/Documentazione/isilav-logo.png" width="400" height="100"> 
+# <img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/main/Documentazione/isilav-logo.png" width="300" height="100"> 
 
 Progetto per l'esame Enterprise Mobile Application Devolopment del corso di laurea magistrale di Informatica.
 ## Team
