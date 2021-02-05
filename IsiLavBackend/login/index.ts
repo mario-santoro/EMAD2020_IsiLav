@@ -32,7 +32,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         }
         else //controllare se l'utente è un corriere
         {
-            const corriere = db.query("SELECT * FROM cliente WHERE email='"+email+"';")
+            const corriere = db.query("SELECT * FROM corriere WHERE email='"+email+"';")
             if (corriere.length>0){ //è un corriere
                 context.res = {
                     body: {

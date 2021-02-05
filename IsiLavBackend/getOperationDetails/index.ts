@@ -2,11 +2,10 @@ import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import * as database from "../database/database"
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
-    const email = req.query.email
+    const operazione = req.query.operazione
 
     context.res = {
-        // status: 200, /* Defaults to 200 */
-        body: database.getOrdersByUser(email)
+        body: database.getOperationDetails(operazione)
     };
 
 };

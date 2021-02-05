@@ -40,14 +40,16 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     }
     database.placeOrder(ordine);
 
-    //reso ######################################################################################################################################## DA FARE
+    //reso
     var reso = null;
     if(prodotti_reso.length>0){
+        //console.log(prodotti_reso)
         reso = {
             id: database.getIDReso(),
-            //costo: database.getCostoReso(email)
+            prodotti: prodotti_reso,
+            costo: 0 //database.getCostoReso(email)
         }
-        //database.placeReturn(reso);
+        database.placeReturn(reso);
     }
 
     //operazione

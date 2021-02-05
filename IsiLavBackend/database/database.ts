@@ -3,9 +3,9 @@ export const getDatabase = () => {
     const MySql = require('sync-mysql');
     
     var connection = new MySql({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'root',
+    host     : 'acanfora.homepc.it',
+    user     : 'isilav',
+    password : 'isilav',
     database : 'isilav'
     });
 
@@ -32,7 +32,7 @@ export const getProductsFromCategory = (categoryName) => {
 export const getOrdersByUser = (userEmail) => {
     const db = getDatabase();
 
-    const ordini = db.query("SELECT * FROM operazione INNER JOIN ordine ON operazione.id_ordine=ordine.id_ordine INNER JOIN hub ON operazione.via=hub.via WHERE email=? ORDER BY data_operazione DESC;", [userEmail]);
+    const ordini = db.query("SELECT * FROM operazione INNER JOIN ordine ON operazione.id_ordine=ordine.id_ordine INNER JOIN hub ON operazione.via=hub.via WHERE email=? ORDER BY data_operazione DESC, ordine.id_ordine DESC;", [userEmail]);
     return ordini
 }
 
@@ -41,7 +41,7 @@ export const getOrdersByUser = (userEmail) => {
 export const getGiacenzaByUser = (userEmail) => {
     const db = getDatabase();
 
-    const prodotti = db.query("SELECT prodotto.nome_prodotto, prodotto.immagine, quantità_rimasta, data_operazione, noleggiato.id_noleggio FROM prodotto INNER JOIN noleggiato ON noleggiato.nome_prodotto=prodotto.nome_prodotto INNER JOIN ordine ON ordine.id_ordine=noleggiato.id_ordine INNER JOIN operazione ON operazione.id_ordine=ordine.id_ordine WHERE operazione.email=? AND stato LIKE 'CONSEGNATO' ORDER BY data_operazione DESC;", [userEmail])
+    const prodotti = db.query("SELECT prodotto.nome_prodotto, prodotto.immagine, quantità_rimasta, data_operazione, noleggiato.id_noleggio FROM prodotto INNER JOIN noleggiato ON noleggiato.nome_prodotto=prodotto.nome_prodotto INNER JOIN ordine ON ordine.id_ordine=noleggiato.id_ordine INNER JOIN operazione ON operazione.id_ordine=ordine.id_ordine WHERE noleggiato.quantità_rimasta>0 AND operazione.email=? AND stato LIKE 'CONSEGNATO' ORDER BY data_operazione DESC;", [userEmail])
     
     //giacenza di test, è ciò che si deve restituire dai results della query
     /*const temp = 
@@ -91,7 +91,7 @@ export const getGiacenzaByUser = (userEmail) => {
         }
     }
     
-    console.log(temp)
+    //console.log(temp)
     return temp
 }
 
@@ -127,7 +127,7 @@ export const getHubsByDate = (data) => {
             giorno = null;
     }
 
-    const hubs = db.query("SELECT * FROM hub INNER JOIN fermata ON hub.via = fermata.via INNER JOIN percorso ON fermata.id_percorso = percorso.id_percorso WHERE "+giorno+" = 1;")
+    const hubs = db.query("SELECT * FROM hub INNER JOIN fermata ON hub.via = fermata.via INNER JOIN percorso ON fermata.id_percorso = percorso.id_percorso WHERE "+giorno+" = 1 ORDER BY fermata.ore ASC, fermata.minuti ASC;")
     return hubs
 }
 
@@ -135,7 +135,7 @@ export const getHubsByDate = (data) => {
 export const searchProductsByName = (name) => {
     const db = getDatabase();
 
-    const prodotti = db.query("SELECT * FROM prodotto WHERE nome_prodotto LIKE '%?%';", [name])
+    const prodotti = db.query("SELECT * FROM prodotto WHERE nome_prodotto LIKE '%"+name+"%';")
     return prodotti
 }
 
@@ -143,11 +143,21 @@ export const searchProductsByName = (name) => {
 export const placeOrder = (ordine) => {
     const db = getDatabase();
 
-    db.query("INSERT INTO ordine VALUE (?, 'IN PREPARAZIONE', ?, ?, '', ?, ?);", [ordine.id, ordine.totale, ordine.data_scadenza, ordine.metodo_pagamento, ordine.n_carta])
+    db.query("INSERT INTO ordine VALUE (?, 'IN PREPARAZIONE', ?, ?, ?, ?);", [ordine.id, ordine.totale, ordine.data_scadenza, ordine.metodo_pagamento, ordine.n_carta])
     var idNoleggio = getIDNoleggio();
     for(var i=0; i<ordine.prodotti.length; i++){
         db.query("INSERT INTO noleggiato VALUE (?, ?, ?, ?, ?, ?);", [idNoleggio, ordine.prodotti[i].nome_prodotto, ordine.id, ordine.prodotti[i].prezzo, ordine.prodotti[i].quantità_scelta, ordine.prodotti[i].quantità_scelta])
         idNoleggio+=1;
+    }
+    return true
+}
+
+export const placeReturn = (reso) => {
+    const db = getDatabase();
+
+    db.query("INSERT INTO reso VALUE (?, ?);", [reso.id, reso.costo])
+    for(var i=0; i<reso.prodotti.length; i++){
+        db.query("INSERT INTO restituito VALUE (?, ?, ?, 0);", [reso.prodotti[i].nome_prodotto, reso.id, reso.prodotti[i].quantità])
     }
     return true
 }
@@ -205,5 +215,225 @@ export const getIDReso = () => {
     }
     else{
         return 0;
+    }
+}
+
+//Ritorna la lista dei prodotti noleggiati e la lista dei prodotti restituiti dall'id di un'operazione
+export const getOperationDetails = (id_operazione) => {
+    const db = getDatabase();
+
+    const operazione = db.query("SELECT id_ordine, id_reso FROM operazione WHERE id_operazione = ?", [id_operazione])
+    let temp = {
+        noleggiato: [], //prodotti ordinati in quell'operazione
+        restituito: [] //prodotti restituiti in quell'operazione
+    }
+
+    if (operazione.length>0){
+        let id_ordine = operazione[0].id_ordine
+        let id_reso = operazione[0].id_reso
+
+        if (id_ordine !== null){ //nell'operazione è compresa l'ordine di nuovi prodotti
+            const noleggiato = db.query("SELECT * FROM noleggiato WHERE id_ordine = ?", [id_ordine])
+            temp.noleggiato = noleggiato;
+        }
+
+        if (id_reso !== null){ //nell'operazione è compresa la restituizione di vecchi prodotti
+            const restituito = db.query("SELECT * FROM restituito WHERE id_reso = ?", [id_reso])
+            temp.restituito = restituito;
+        }
+    }
+
+    return temp;
+}
+
+//Ottieni i percorsi definiti in un particolare giorno
+export const getPercorsiByDate = (data) => {
+    const db = getDatabase();
+
+    var giorno = null;
+    switch (new Date(data).getDay()){
+        case 0:
+            giorno = "domenica"
+            break;
+        case 1:
+            giorno = "lunedì"
+            break;
+        case 2:
+            giorno = "martedì"
+            break;
+        case 3:
+            giorno = "mercoledì"
+            break;
+        case 4:
+            giorno = "giovedì"
+            break;
+        case 5:
+            giorno = "venerdì"
+            break;
+        case 6:
+            giorno = "sabato"
+            break;
+        default:
+            giorno = null;
+    }
+
+    const percorsi = db.query("SELECT * FROM percorso WHERE "+giorno+" = 1 ORDER BY nome;")
+    return percorsi
+}
+
+//Ottieni le fermate di un percorso dal suo id
+export const getFermateByPercorso = (id_percorso) => {
+    const db = getDatabase();
+
+    const fermate = db.query("SELECT * FROM fermata INNER JOIN hub ON fermata.via = hub.via WHERE fermata.id_percorso = ? ORDER BY fermata.ore ASC, fermata.minuti ASC;", [id_percorso])
+    return fermate
+}
+
+export const getClientiByFermata = (via, id_percorso) => {
+    const db = getDatabase();
+
+    const fermate = db.query("SELECT * FROM ordine INNER JOIN operazione ON operazione.id_ordine=ordine.id_ordine INNER JOIN cliente ON operazione.email = cliente.email WHERE via = ? AND id_percorso = ?;", [via, id_percorso])
+    return fermate
+}
+
+export const confirmOrderByID = (id_ordine) => {
+    const db = getDatabase();
+
+    db.query("UPDATE ordine SET stato = 'CONSEGNATO' WHERE id_ordine = ?", [id_ordine])
+    return true
+}
+
+export const getOrderDetailsByID = (id_ordine) => {
+    const db = getDatabase();
+
+    const ordine = db.query("SELECT * FROM ordine INNER JOIN operazione ON operazione.id_ordine=ordine.id_ordine INNER JOIN cliente ON operazione.email = cliente.email WHERE ordine.id_ordine = ?;", [id_ordine])
+    if(ordine.length>0){
+        return {
+            status: "ok",
+            ordine: ordine[0]
+        }
+    }
+    else{
+        return {status: "Codice ordine non trovato!"}
+    }
+}
+
+
+
+//Mario
+//Registrazione
+export const SignUp = (cliente) => {
+    console.log(cliente);
+    const db = getDatabase();
+    const f=db.query("SELECT * from utente where email=? ;", [cliente.email])
+    if(f==0){
+        db.query("INSERT INTO utente (email, passw, nominativo) VALUES (?, SHA1(?), ?);", [cliente.email,cliente.passw,cliente.nominativo])
+     
+        db.query("INSERT INTO cliente (`email`, `ragSociale`, `codFiscale`, `nomeAttivita`, `citta`, `telefono`, `CAP`, `sede`, `pIVA`, `IFE`, `numeroCarta`, `scadenzaCarta`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",[cliente.email, cliente.ragSociale, cliente.codFiscale, cliente.nomeAttivita, cliente.citta, cliente.telefono, cliente.cap, cliente.sede, cliente.pIVA, cliente.ife, cliente.numeroCarta, cliente.scadenzaCarta])
+        return true;
+    }else{
+
+        return false;
+    } 
+    
+}
+//prendere oggetto cliente
+export const getCostumer = (email) => {
+    const db = getDatabase();
+
+    const cliente = db.query("SELECT * FROM utente join cliente on utente.email=cliente.email WHERE utente.email=?;", [email])
+    return cliente[0]
+}
+
+//Cambia Password
+export const ChangePassword = (vecchiapassword, nuovaPassword, email) => {
+    const db = getDatabase();
+
+    const passw= db.query("SELECT passw from utente WHERE email=? and passw=SHA1(?) ;", [email,vecchiapassword])
+    if (passw.length>0){
+
+        db.query("UPDATE utente SET passw=SHA1(?) WHERE email=? ;", [nuovaPassword,email])
+        return true
+    }else{
+
+        return false;
+    }
+}
+
+//Cambia Metodo di pagamento
+export const PaymentMethod = (numeroCarta, scadenzaCarta, email) => {
+    const db = getDatabase();
+
+        db.query("UPDATE cliente SET numeroCarta=?, scadenzaCarta=? WHERE email=? ;", [numeroCarta, scadenzaCarta, email])
+        return true
+   
+}
+
+
+//Cambia Anagrafica cliente
+export const UpdateCustomer = (cliente) => {
+    const db = getDatabase();
+        db.query("UPDATE utente SET  nominativo=? WHERE email=? ;", [cliente.nominativo,cliente.email])
+        
+        db.query("UPDATE cliente SET ragSociale=?, codFiscale=?, nomeAttivita=?, citta=?, telefono=?, CAP=?, sede=?, pIVA=?, IFE=? WHERE email=? ;", [cliente.ragSociale, cliente.codFiscale, cliente.nomeAttivita, cliente.citta, cliente.telefono, cliente.cap, cliente.sede, cliente.pIVA, cliente.ife, cliente.email])
+        return true
+   
+}
+
+
+//Trigger in consegna
+export const inConsegna = (data) => {
+    const db = getDatabase();
+    const id=    db.query("select ordine.id_ordine from operazione join ordine on operazione.id_operazione=ordine.id_ordine where operazione.data_scelta=?;", [data])
+    for(var i=0;i<id.length;i++){
+
+        db.query("UPDATE ordine SET stato='IN CONSEGNA' WHERE id_ordine=? ;", [id[i].id_ordine])
+      
+    }
+       return true
+   
+}
+export const getIDRitardo = () => {
+    const db = getDatabase();
+
+    const id = db.query("SELECT MAX(id_ritardo) as id FROM addebito_ritardo LIMIT 1")
+    if(id.length>0){
+        return id[0].id+1;
+    }
+    else{
+        return 0;
+    }
+}
+
+export const addebitoRitardo= (data)=>{   
+    const db= getDatabase();
+    var oggi= new Date(data);
+    const o= db.query("SELECT sum(noleggiato.quantità_rimasta) as Type, ordine.data_scadenza, cliente.premium, cliente.percentualeRitardo, operazione.email, ordine.totale, ordine.id_ordine FROM cliente join operazione on cliente.email=operazione.email join `ordine` on operazione.id_ordine=ordine.id_ordine join noleggiato on ordine.id_ordine=noleggiato.id_ordine where ordine.data_scadenza<? group by ordine.id_ordine Having Type>0", [data])
+
+    //console.log(o)
+
+    for(var i=0; i<o.length;i++){
+        var scadenza= new Date(o[i].data_scadenza)
+        var scadenzaPremium=new Date(scadenza)
+            scadenzaPremium.setDate(scadenza.getDate() + (7*o[i].premium))
+            
+        if(scadenzaPremium<oggi){
+            const prodotti= db.query("SELECT id_noleggio, quantità_rimasta, prodotto.prezzo FROM `noleggiato` join prodotto on noleggiato.nome_prodotto=prodotto.nome_prodotto WHERE id_ordine=? ",[o[i].id_ordine])
+            
+            for(var j=0;j<prodotti.length;j++){
+                    var percentuale=(prodotti[j].prezzo * o[i].percentualeRitardo)/100
+                    var costo =  prodotti[j].quantità_rimasta *percentuale
+            
+                    if(costo>0){
+
+                        var idRitardo = getIDRitardo();
+                        console.log(idRitardo )
+                        db.query("INSERT INTO  addebito_ritardo (id_ritardo,importo_ritardo, data_ritardo, id_noleggio) VALUES(?,?,?,?)",[idRitardo, costo, data, prodotti[j].id_noleggio])
+                    }
+                
+        
+            }
+            
+        }
     }
 }
