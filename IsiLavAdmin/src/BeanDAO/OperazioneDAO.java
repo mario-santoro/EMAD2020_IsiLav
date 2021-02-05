@@ -191,7 +191,7 @@ public class OperazioneDAO {
 
 		Connection conn = null;
 		PreparedStatement ps = null; 
-
+		PreparedStatement ps2 = null; 
 		Operazione o= new Operazione();
 		Ordine or= new Ordine();
 		Reso r= new Reso();
@@ -200,13 +200,12 @@ public class OperazioneDAO {
 		Prodotto p=null;
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			ps = (PreparedStatement) conn.prepareStatement("SELECT restituito.id_reso as 'id_restituito', restituito.confermato as 'confermato', restituito.nome_prodotto as 'prodotto_restituito', restituito.quantità as 'quantita_restituito', noleggiato.nome_prodotto as 'prodotto_noleggiato', noleggiato.quantità as 'quantita_noleggiato'   FROM `operazione` left join ordine on operazione.id_ordine=ordine.id_ordine left join reso on operazione.id_reso=reso.id_reso left join noleggiato on ordine.id_ordine= noleggiato.id_ordine left join restituito on reso.id_reso= restituito.id_reso where operazione.id_operazione=?");
+			ps = (PreparedStatement) conn.prepareStatement("SELECT restituito.id_reso as 'id_restituito', restituito.confermato as 'confermato', restituito.nome_prodotto as 'prodotto_restituito', restituito.quantità as 'quantita_restituito'  FROM `operazione` join reso on operazione.id_reso=reso.id_reso join  restituito on reso.id_reso= restituito.id_reso where operazione.id_operazione=?");
 			ps.setInt(1,id_operazione);
 			ResultSet res = ps.executeQuery();
 
 			while (res.next()) {
-
-				if(res.getString("prodotto_restituito")!=null) {								
+ 					
 					p=new Prodotto();
 					p.setNomeArticolo(res.getString("prodotto_restituito"));
 					p.setQuant(res.getInt("quantita_restituito"));
@@ -214,13 +213,15 @@ public class OperazioneDAO {
 					r.setConfermato(res.getBoolean("confermato"));
 					restituiti.add(p);														
 				}
-				if(res.getString("prodotto_noleggiato")!=null) {
-
+				ps2 = (PreparedStatement) conn.prepareStatement("SELECT  noleggiato.nome_prodotto as 'prodotto_noleggiato', noleggiato.quantità as 'quantita_noleggiato'   FROM `operazione`  join ordine on operazione.id_ordine=ordine.id_ordine  join noleggiato on ordine.id_ordine= noleggiato.id_ordine  where operazione.id_operazione=?");
+				ps2.setInt(1,id_operazione);
+				ResultSet res2 = ps2.executeQuery();
+				while (res2.next()) {
 					p=new Prodotto();
-					p.setNomeArticolo(res.getString("prodotto_noleggiato"));
-					p.setQuant(res.getInt("quantita_noleggiato"));
+					p.setNomeArticolo(res2.getString("prodotto_noleggiato"));
+					p.setQuant(res2.getInt("quantita_noleggiato"));
 					noleggiati.add(p);
-				}					
+				 	
 			}
 			if(restituiti.size()!=0) {
 
