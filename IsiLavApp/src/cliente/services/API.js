@@ -1,5 +1,5 @@
 //Funzioni API
-const APIURL = "http://192.168.0.10:7071/api/"
+const APIURL = "URLAPI/"
 
 export function login(email, password) {
   return fetch(APIURL+"login?email="+email+"&password="+password, {});
