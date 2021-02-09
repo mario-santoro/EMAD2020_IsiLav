@@ -6,13 +6,13 @@ Progetto per l'esame Enterprise Mobile Application Devolopment del corso di laur
 ## Indice
 <ul>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#team">Team</a></li>
-	<li> <a href="https://github.com/mario-santoro/RecognitionNote#descrizione">Current System</a></li>
- 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#currentsystem">Obiettivo</a></li>
-	<li> <a href="https://github.com/mario-santoro/RecognitionNote#architettura">Architettura</a></li>
- 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#installation">Installation</a></li>
-	<li> <a href="https://github.com/mario-santoro/RecognitionNote#risorse">Risorse Cloud "Microsoft Azure"</a></li>
-	<li> <a href="https://github.com/mario-santoro/RecognitionNote#usage">Usage</a></li>
- 	<li> <a href="https://github.com/mario-santoro/RecognitionNote#brochure">Brochure</a></li>
+	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#currentsystem">Current System</a></li>
+ 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#obiettivo">Obiettivo</a></li>
+	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#architettura">Architettura</a></li>
+ 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#installation">Installation</a></li>
+	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#risorse">Risorse Cloud "Microsoft Azure"</a></li>
+	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#usage">Usage</a></li>
+ 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#brochure">Brochure</a></li>
 </ul>
 
 
