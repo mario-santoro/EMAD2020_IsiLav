@@ -9,6 +9,7 @@ Progetto per l'esame Enterprise Mobile Application Devolopment del corso di laur
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#current-system">Current System</a></li>
  	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#obiettivo">Obiettivo</a></li>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#architettura">Architettura</a></li>
+	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#prerequisiti">Prerequisiti</a></li>
  	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#installation">Installation</a></li>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#risorse-cloud-microsoft-azure">Risorse Cloud Microsoft Azure</a></li>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#usage">Usage</a></li>
@@ -40,17 +41,54 @@ Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile
 ## Architettura
 <img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/main/Documentazione/isilav-tecnologie.png" height="300">
 
-### Installation
-<b>Select</b>: $ npm install react-native-picker-select </br>
-<b>React Native Element</b>: $ npm install react-native-elements </br>
-<b>Qr code</b>: $ npm install react-native-svg --save e $ npm install react-native-qrcode-svg --save </br>
-<b>Date</b>: $ npm install @react-native-community/datetimepicker --save </br>
-<b>Scanner QR code</b>: $ expo install expo-camera e expo install expo-barcode-scanner</br>
-<b>Mapp</b>: $ expo install react-native-maps</br>
-<b>GPS</b>: $ expo install expo-location</br>
-<b> Azure Function</b>: $npm install -g azure-functions-core-tools@3</br>
-<b> MySQL</b>: $ npm install sync-mysql --save</br>
+## Prerequisiti
+<ul>
+	<li>Sottoscrizione Azure</li>
+	<li>Key API Google Maps</li>
+	<li>Java</li>
+	<li>Node.js</li>
+	<li>Email senza autenticazione a 2 fattori per l'invio di email automatiche</li>	
+</ul>
 
+## Installation
+<b>Select</b>:
+```console
+$ npm install react-native-picker-select 
+```
+<b>React Native Element</b>: 
+```console
+$ npm install react-native-elements  
+```
+<b>Qr code</b>: 
+```console
+$ npm install react-native-svg --save
+$ npm install react-native-qrcode-svg --save  
+```
+<b>Date</b>: 
+```console
+$ npm install @react-native-community/datetimepicker --save  
+```
+<b>Scanner QR code</b>:
+```
+$ expo install expo-camera
+$ expo install expo-barcode-scanner 
+```
+<b>Mapp</b>: 
+```console
+$ expo install react-native-maps 
+```
+<b>GPS</b>:
+```console
+$ expo install expo-location
+```
+<b> Azure Function</b>: 
+```console
+$ npm install -g azure-functions-core-tools@3 
+```
+<b> MySQL</b>: 
+```console
+$ npm install sync-mysql --save</br>
+```
 ## Risorse Cloud "Microsoft Azure"
 
 ## Usage
