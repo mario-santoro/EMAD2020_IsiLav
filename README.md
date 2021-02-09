@@ -116,7 +116,21 @@ $ npm install sync-mysql --save
                     <li>Selezionare Rivedi e crea nella parte inferiore della pagina.</li>
                 </ul>
             </li>
-            <li>Web App:</li>
+            <li>Web App:
+		    <ul>
+		    	<li>In Gruppo di risorse selezionare un gruppo di risorse (o crearlo se inesistente) quindi fare clic su OK</li>
+                    <li>In Nome immettere il nome da dare all'app web</li>
+			    <li>In Pubblica lasciare selezionato "Codice"</li>
+                    <li>Stack di runtime selezionare "Java 8"</li>
+			    <li>Stack server Web Java selezionare "Tomcat 8.0"</li>
+                    <li>Sistema operativo lasciare selezionato "Windows"</li>
+			    <li>In area geografica selezionare "West Europe"</li>
+                    <li>In SKU e dimensioni cliccare su "Modifica dimensioni" e selezionare il piano tariffario F1 con Infrastruttura condivisa 1GB di memoria e 60 minuti al giorno di calcolo Gratuito</li>
+			    <li>Infine andare nella sezione "Rivedi e crea" e premere il bottone "Crea"</li>
+			    <li>Per importare il codice dell'applicativo web, andare sulla risorsa appena creata e nella sezione "Distribuzione" premere su "Deployment Center (Classic)". In questa sezione usare tramie un software FTP client (ad esempio FileZilla) è possibile connettersi inserendo l'endpoint, nome utente e password del servizio reperibili cliccando su FTP e poi dashboard.</li>
+			    <li>In FileZilla, dopo aver collegato con l'endpoint il servizio, aprire le cartelle fino a webapps e caricare il file ROOT.war e dopo pochi minuti sarà pronto al funzionamento.</li>
+		    </ul>
+	    </li>
             <li>Azure Functions:</li>
         </ul>
     </li>
