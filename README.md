@@ -118,6 +118,9 @@ $ npm install sync-mysql --save
 		<li>Selezionare Avanti: Impostazioni aggiuntive nella parte inferiore della pagina.</li>
 		<li>Selezionare Rivedi e crea nella parte inferiore della pagina</li>		
 	</ul>
+		
+		<li>Web App</li>
+	</ul>
 	<li>Installazione dei pacchetti (inseriti nella sezione apposita) da terminale</li>	
 	<li>Sostituzione key, url, database, email</li>
 </ul>
