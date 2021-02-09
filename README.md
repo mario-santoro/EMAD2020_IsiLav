@@ -97,24 +97,18 @@ $ npm install sync-mysql --save
 ## Usage
 <ul style="list-style-type: disc;">
     <li>Configurazione risorse Azure:<ul style="list-style-type: square;">
-            <li><a href="https://docs.microsoft.com/it-it/azure/azure-sql/database/single-database-create-quickstart?tabs=azure-portal">Database SQL</a>: &nbsp;Una volta recatosi sul portale Azure di Microsoft l&apos;utente dovr&agrave; creare la risorsa SQL, accedendo prima al pannello di creazione di un Database SQL presente nella pagina &quot;Risorse&quot; di Azure, successivamente creare la risorsa cliccando sul bottone &quot;crea risorsa&quot; e andare a settare i seguenti parametri:<ul>
-                    <li>In Gruppo di risorse selezionare Crea nuovo, immettere myResourceGroup e quindi fare clic su OK</li>
-                    <li>In Nome database immettere il nome del database</li>
-                    <li>In server selezionare Crea nuovo e compilare il modulo Nuovo server con i valori seguenti:<ul>
-                            <li>Nome server: immettere mysqlserver e aggiungere alcuni caratteri per l&apos;univocit&agrave;. Non &egrave; possibile specificare un nome di server esatto da usare perch&eacute; i nomi di tutti i server di Azure devono essere univoci a livello globale, non solo univoci all&apos;interno di una sottoscrizione. Immettere quindi un valore come mysqlserver12345 e il portale segnala se &egrave; disponibile o meno.</li>
-                            <li>Account di accesso amministratore server: digitare azureuser.</li>
-                            <li>Password: immettere una password che soddisfi i requisiti e immetterla di nuovo nel campo Conferma password.</li>
-                            <li>Localit&agrave;: selezionare una localit&agrave; dall&apos;elenco a discesa.</li>
-                        </ul>
-                    </li>
-                    <li>Lasciare l&apos;opzione Usare il pool elastico SQL? impostata su No.</li>
-                    <li>In Calcolo e archiviazione selezionare Configura database.</li>
-                    <li>Questo argomento di avvio rapido usa un database serverless, quindi selezionare Basic e quindi Applica.</li>
-                    <li>Selezionare Avanti: Rete nella parte inferiore della pagina.</li>
-                    <li>In Regole del firewall impostare Aggiungi indirizzo IP client corrente su S&igrave;. Lasciare l&apos;opzione Consenti alle risorse e ai servizi di Azure di accedere a questo server impostata su No.</li>
-                    <li>Selezionare Avanti: Impostazioni aggiuntive nella parte inferiore della pagina.</li>
-                    <li>Selezionare Rivedi e crea nella parte inferiore della pagina.</li>
-                </ul>
+            <li>Database MySQL:  Una volta recatosi sul portale Azure di Microsoft l'utente dovrà creare la risorsa MySQL, accedendo prima al pannello di creazione di un Database MySQL presente nella pagina "Risorse" di Azure, successivamente creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
+	<ul>
+		<li>In Gruppo di risorse selezionare Crea nuovo, immettere nome del person group e quindi fare clic su OK</li>
+		<li>In Nome del server immettere il nome del database</li>
+		<li>In località selezionare "Europa Occidentale"</li>		
+		<li>Versione 5.7</li>
+		<li>Calcolo e archiviazione selezionare lo spazio e V.core che si intende utilizzare, (Basic 1vCore, 5GB al costo di 25,43 EUR al mese è stata la nostra scelta)</li>
+		<li>In Nome amministratore settare il nome dell'amministratore</li>
+		<li>Dopodiché settare la password del DB e confermarla</li>
+		<li>Infine in rivedi e crea premere su "Crea"</li>
+			
+	</ul>
             </li>
             <li>Web App:
 		    <ul>
