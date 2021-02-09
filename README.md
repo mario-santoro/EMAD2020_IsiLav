@@ -91,7 +91,7 @@ $ npm install sync-mysql --save</br>
 <ul>
 	<li>Database SQL: per memorizzare in maniera persistente i dati</li>
 	<li>Web App: caricamento dell'applicazione Web</li>
-	<li>Azure Functions: piattaforma di elaborazione serverless basata su eventi<li>
+	<li>Azure Functions: piattaforma di elaborazione serverless basata su eventi</li>
 </ul>
 
 ## Usage
