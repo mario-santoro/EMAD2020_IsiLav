@@ -11,7 +11,7 @@ Progetto per l'esame Enterprise Mobile Application Devolopment del corso di laur
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#architettura">Architettura</a></li>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#prerequisiti">Prerequisiti</a></li>
  	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#installation">Installation</a></li>
-	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#risorse-cloud-microsoft-azure">Risorse Cloud Microsoft Azure</a></li>
+	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#risorse-cloud-microsoft-azure">Risorse Cloud "Microsoft Azure"</a></li>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#usage">Usage</a></li>
  	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#brochure">Brochure</a></li>
 </ul>
@@ -90,8 +90,20 @@ $ npm install -g azure-functions-core-tools@3
 $ npm install sync-mysql --save</br>
 ```
 ## Risorse Cloud "Microsoft Azure"
+<ul>
+	<li>Database SQL: per memorizzare in maniera persistente i dati</li>
+	<li>Web App: caricamento dell'applicazione Web</li>
+	<li>Azure Functions: piattaforma di elaborazione serverless basata su eventi<li>
+</ul>
 
 ## Usage
+<ul>
+	<li>Configurazione risorse Azure:<li>
+	
+	<li>Installazione pacchetti<li>
+	
+	<li>Sostituzione key, url, database, email<li>
+</ul>
 
 ## Brochure
 
