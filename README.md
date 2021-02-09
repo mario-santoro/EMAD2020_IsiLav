@@ -97,8 +97,8 @@ $ npm install sync-mysql --save
 ## Usage
 <ul>
 	<li>Configurazione risorse Azure:</li>
+	 
 	<ol>
-	<ul>
 	<li><a href="https://docs.microsoft.com/it-it/azure/azure-sql/database/single-database-create-quickstart?tabs=azure-portal">Database SQL</a>:  Una volta recatosi sul portale Azure di Microsoft l'utente dovrà creare la risorsa SQL, accedendo prima al pannello di creazione di un Database SQL presente nella pagina "Risorse" di Azure, successivamente creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
 	<ul>
 		<li>In Gruppo di risorse selezionare Crea nuovo, immettere myResourceGroup e quindi fare clic su OK</li>
@@ -119,9 +119,9 @@ $ npm install sync-mysql --save
 		<li>Selezionare Avanti: Impostazioni aggiuntive nella parte inferiore della pagina.</li>
 		<li>Selezionare Rivedi e crea nella parte inferiore della pagina</li>		
 	</ul>
-		
-		<li>Web App</li>
-	</ol>
+	
+	<li>prova</li>
+</ol>
 	<li>Installazione dei pacchetti (inseriti nella sezione apposita) da terminale</li>	
 	<li>Sostituzione key, url, database, email</li>
 </ul>
