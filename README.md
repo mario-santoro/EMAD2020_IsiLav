@@ -6,7 +6,7 @@ Progetto per l'esame Enterprise Mobile Application Devolopment del corso di laur
 ## Indice
 <ul>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#team">Team</a></li>
-	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#currentsystem">Current System</a></li>
+	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#current system">Current System</a></li>
  	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#obiettivo">Obiettivo</a></li>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#architettura">Architettura</a></li>
  	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#installation">Installation</a></li>
@@ -51,7 +51,7 @@ Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile
 <b> Azure Function</b>: $npm install -g azure-functions-core-tools@3</br>
 <b> MySQL</b>: $ npm install sync-mysql --save</br>
 
-## Resources
+## Risorse Cloud "Microsoft Azure"
 
 ## Usage
 
