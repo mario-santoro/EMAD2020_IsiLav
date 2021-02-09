@@ -85,7 +85,7 @@ $ npm install -g azure-functions-core-tools@3
 ```
 <b> MySQL</b>: 
 ```console
-$ npm install sync-mysql --save</br>
+$ npm install sync-mysql --save
 ```
 ## Risorse Cloud "Microsoft Azure"
 <ul>
