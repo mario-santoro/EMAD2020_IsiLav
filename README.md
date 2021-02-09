@@ -44,9 +44,7 @@ Lo scopo del progetto “IsiLav” è quello di realizzare un applicativo mobile
 ## Prerequisiti
 <ul>
 	<li>Sottoscrizione Azure</li>
-	<li>Key API Google Maps</li>
-	<li>Java</li>
-	<li>Node.js</li>
+	<li>Key API Google Maps</li>	 
 	<li>Email senza autenticazione a 2 fattori per l'invio di email automatiche</li>	
 </ul>
 
@@ -98,10 +96,8 @@ $ npm install sync-mysql --save</br>
 
 ## Usage
 <ul>
-	<li>Configurazione risorse Azure:</li>
-	
-	<li>Installazione pacchetti</li>
-	
+	<li>Configurazione risorse Azure:</li>	
+	<li>Installazione pacchetti</li>	
 	<li>Sostituzione key, url, database, email</li>
 </ul>
 
