@@ -10,7 +10,7 @@ Progetto per l'esame Enterprise Mobile Application Devolopment del corso di laur
  	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#obiettivo">Obiettivo</a></li>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#architettura">Architettura</a></li>
  	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#installation">Installation</a></li>
-	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#risorse-cloud-"microsoft-azure"">Risorse Cloud "Microsoft Azure"</a></li>
+	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#risorse-cloud-microsoft-azure">Risorse Cloud Microsoft Azure</a></li>
 	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#usage">Usage</a></li>
  	<li> <a href="https://github.com/mario-santoro/EMAD2020_IsiLav#brochure">Brochure</a></li>
 </ul>
