@@ -24,10 +24,10 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.davideacanfora.isilav",
+      "package": "com.isilav",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyAAXHgi05fSUICvj-R23AfZb4CkOQ4CpiM"
+          "apiKey": "KEY"
         }
       }
     },
