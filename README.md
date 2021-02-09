@@ -123,9 +123,10 @@ $ npm install sync-mysql --save
                 </ol>
             </li>
         </ul>
-        <li>Installazione dei pacchetti (inseriti nella sezione apposita) da terminale.</li>
-        <li>Sostituzione key, url, database, email</li>
+      
     </ul>
+      <li>Installazione dei pacchetti (inseriti nella sezione apposita) da terminale.</li>
+        <li>Sostituzione key, url, database, email</li>
 </ul>
 <p><br></p>
  
