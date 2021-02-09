@@ -98,11 +98,11 @@ $ npm install sync-mysql --save</br>
 
 ## Usage
 <ul>
-	<li>Configurazione risorse Azure:<li>
+	<li>Configurazione risorse Azure:</li>
 	
-	<li>Installazione pacchetti<li>
+	<li>Installazione pacchetti</li>
 	
-	<li>Sostituzione key, url, database, email<li>
+	<li>Sostituzione key, url, database, email</li>
 </ul>
 
 ## Brochure
