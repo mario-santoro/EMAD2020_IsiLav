@@ -3,10 +3,10 @@ export const getDatabase = () => {
     const MySql = require('sync-mysql');
     
     var connection = new MySql({
-    host     : 'acanfora.homepc.it',
-    user     : 'isilav',
-    password : 'isilav',
-    database : 'isilav'
+    host     : 'HOST',
+    user     : 'USERNAME',
+    password : 'PASSWORD',
+    database : 'DATABASE'
     });
 
     return connection
