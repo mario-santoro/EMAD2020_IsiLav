@@ -148,12 +148,7 @@ $ npm install sync-mysql --save
         </ol>
     </li>
 </ul>
-<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:18.0pt;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
-<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:18.0pt;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
-<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:18.0pt;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
-<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:18.0pt;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
-<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
- 
+
 ## Brochure
 
 <img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/main/Documentazione/IsiLavBrochure.png" height="500">
