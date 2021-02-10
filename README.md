@@ -95,43 +95,64 @@ $ npm install sync-mysql --save
 </ul>
 
 ## Usage
-<ul style="list-style-type: disc;">
-    <li>Configurazione risorse Azure:<ul style="list-style-type: square;">
-            <li>Database MySQL:  Una volta recatosi sul portale Azure di Microsoft l'utente dovrà creare la risorsa MySQL, accedendo prima al pannello di creazione di un Database MySQL presente nella pagina "Risorse" di Azure, successivamente creare la risorsa cliccando sul bottone "crea risorsa" e andare a settare i seguenti parametri: </li>
-	<ul>
-		<li>In Gruppo di risorse selezionare Crea nuovo, immettere nome del person group e quindi fare clic su OK</li>
-		<li>In Nome del server immettere il nome del database</li>
-		<li>In località selezionare "Europa Occidentale"</li>		
-		<li>Versione 5.7</li>
-		<li>Calcolo e archiviazione selezionare lo spazio e V.core che si intende utilizzare, (Basic 1vCore, 5GB al costo di 25,43 EUR al mese è stata la nostra scelta)</li>
-		<li>In Nome amministratore settare il nome dell'amministratore</li>
-		<li>Dopodiché settare la password del DB e confermarla</li>
-		<li>Infine in rivedi e crea premere su "Crea"</li>
-			
-	</ul>
-            </li>
-            <li>Web App:
-		    <ul>
-		    	<li>In Gruppo di risorse selezionare un gruppo di risorse (o crearlo se inesistente) quindi fare clic su OK</li>
-                    <li>In Nome immettere il nome da dare all'app web</li>
-			    <li>In Pubblica lasciare selezionato "Codice"</li>
-                    <li>Stack di runtime selezionare "Java 8"</li>
-			    <li>Stack server Web Java selezionare "Tomcat 8.0"</li>
-                    <li>Sistema operativo lasciare selezionato "Windows"</li>
-			    <li>In area geografica selezionare "West Europe"</li>
-                    <li>In SKU e dimensioni cliccare su "Modifica dimensioni" e selezionare il piano tariffario F1 con Infrastruttura condivisa 1GB di memoria e 60 minuti al giorno di calcolo Gratuito</li>
-			    <li>Infine andare nella sezione "Rivedi e crea" e premere il bottone "Crea"</li>
-			    <li>Per importare il codice dell'applicativo web, andare sulla risorsa appena creata e nella sezione "Distribuzione" premere su "Deployment Center (Classic)". In questa sezione usare tramie un software FTP client (ad esempio FileZilla) è possibile connettersi inserendo l'endpoint, nome utente e password del servizio reperibili cliccando su FTP e poi dashboard.</li>
-			    <li>In FileZilla, dopo aver collegato con l'endpoint il servizio, aprire le cartelle fino a webapps e caricare il file ROOT.war e dopo pochi minuti sarà pronto al funzionamento.</li>
-		    </ul>
-	    </li>
-            <li>Azure Functions:</li>
-        </ul>
+<ul style="list-style-type: disc;margin-left:8px;">
+    <li>Installazione dei pacchetti (inseriti nella sezione apposita) da terminale per l&rsquo;app mobile</li>
+    <li>Sostituzione key, url, database, email:<ol style="list-style-type: circle;">
+            <li>Inserire le proprie credenziali del DB MySQL nel progetto IsiLavAdmin (pannello amministrativo) nella classe &ldquo;IsiLavAdmin\src\BeanDAO\DriverManagerConnectionPool.java&rdquo;</li>
+            <li>Inserire le proprie credenziali del DB MySQL nel progetto IsiLavBackend (backend applicativo mobile) in &ldquo;IsiLavBackend\database\database.ts&rdquo;</li>
+            <li>Nel progetto IsiLavApp sostituire l&rsquo;URL API per le azure function in &ldquo;IsiLavApp\src\cliente\services\API.js&rdquo;</li>
+            <li>Nel progetto IsiLav App inserire in &ldquo;IsiLav\app.json&rdquo; le proprie Google API key</li>
+            <li>Sostituire nel progetto IsiLavAdmin nella classe &ldquo;IsiLavAdmin\src\Servlet\SendMail.java&rdquo; l&rsquo;email e la password mittente</li>
+            <li>Sostituire nel progetto IsiLavAdmin nella classe &ldquo;IsiLavAdmin\src\Servlet\InserimentoCliente.java&rdquo; l&rsquo;email e la password mittente</li>
+        </ol>
     </li>
-    <li>Installazione dei pacchetti (inseriti nella sezione apposita) da terminale.</li>
-    <li>Sostituzione key, url, database, email</li>
+    <li>Configurazione risorse Azure:<ol style="list-style-type: circle;">
+            <li>Database MySQL: &nbsp; Una volta recatosi sul portale Azure di Microsoft l&apos;utente dovr&agrave; creare la risorsa MySQL, accedendo prima al pannello di creazione di un Database MySQL presente nella pagina &quot;Risorse&quot; di Azure, successivamente creare la risorsa cliccando sul bottone &quot;crea risorsa&quot; e andare a settare i seguenti parametri:<ul class="decimal_type" style="list-style-type: square;">
+                    <li>In Gruppo di risorse selezionare Crea nuovo, immettere nome del person group e quindi fare clic su OK</li>
+                    <li>In Nome del server immettere il nome del database</li>
+                    <li>In localit&agrave; selezionare &quot;Europa Occidentale&quot;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;</li>
+                    <li>Versione 5.7</li>
+                    <li>Calcolo e archiviazione selezionare lo spazio e V.core che si intende utilizzare, (Basic 1vCore, 5GB al costo di 25,43 EUR al mese &egrave; stata la nostra scelta)</li>
+                    <li>In Nome amministratore settare il nome dell&apos;amministratore</li>
+                    <li>Dopodich&eacute; settare la password del DB e confermarla</li>
+                    <li>Infine in rivedi e crea premere su &quot;Crea&quot;</li>
+                    <li>Per fare l&rsquo;import del Database &ldquo;isilav.sql&rdquo; presente in questo progetto, recarsi nella risorsa e&hellip;</li>
+                </ul>
+            </li>
+            <li>Web App:&nbsp; &nbsp;<ul class="decimal_type" style="list-style-type: square;">
+                    <li>In Gruppo di risorse selezionare un gruppo di risorse (o crearlo se inesistente) quindi fare clic su OK</li>
+                    <li>In Nome immettere il nome da dare all&apos;app web</li>
+                    <li>In Pubblica lasciare selezionato &quot;Codice&quot;</li>
+                    <li>Stack di runtime selezionare &quot;Java 8&quot;</li>
+                    <li>Stack server Web Java selezionare &quot;Tomcat 8.0&quot;</li>
+                    <li>Sistema operativo lasciare selezionato &quot;Windows&quot;</li>
+                    <li>In area geografica selezionare &quot;West Europe&quot;</li>
+                    <li>In SKU e dimensioni cliccare su &quot;Modifica dimensioni&quot; e selezionare il piano tariffario F1 con Infrastruttura condivisa 1GB di memoria e 60 minuti al giorno di calcolo Gratuito</li>
+                    <li>Infine andare nella sezione &quot;Rivedi e crea&quot; e premere il bottone &quot;Crea&quot;</li>
+                    <li>Per importare il codice dell&apos;applicativo web, andare sulla risorsa appena creata e nella sezione &quot;Distribuzione&quot; premere su &quot;Deployment Center (Classic)&quot;</li>
+                    <li>&nbsp;In questa sezione usare tramite un software FTP client (ad esempio FileZilla) &egrave; possibile connettersi inserendo l&apos;endpoint, nome utente e password del servizio reperibili cliccando su FTP e poi dashboard</li>
+                    <li>In FileZilla, dopo aver collegato con l&apos;endpoint il servizio, aprire le cartelle fino a webapps e caricare il file ROOT.war presente in questa repository e dopo pochi minuti sar&agrave; pronto al funzionamento</li>
+                </ul>
+            </li>
+            <li>Azure Functions:<ul style="list-style-type: square;">
+                    <li>In Gruppo di risorse selezionare un gruppo di risorse (o crearlo se inesistente) quindi fare clic su OK</li>
+                    <li>In nome immettere il nome dell&rsquo;app funzioni</li>
+                    <li>In Pubblica lasciare selezionato &quot;Codice&quot;</li>
+                    <li>Stack di runtime selezionare &quot;Node.js&quot;</li>
+                    <li>In versione lasciare selezionato 14LTS</li>
+                    <li>aerea geografica selezionare Europa occidentale</li>
+                    <li>Infine andare nella sezione &quot;Rivedi e crea&quot; e premere il bottone &quot;Crea&quot;</li>
+                    <li>In Visual studio code, nell&apos;estensione di Azure (loggare con l&apos;account Azure)e cliccare Deploy the function App (icona: blu freccia su), selezionare la risorsa Azure function creata, premere su deploy</li>
+                </ul>
+            </li>
+        </ol>
+    </li>
 </ul>
-<p><br></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:18.0pt;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:18.0pt;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:18.0pt;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:18.0pt;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
  
 ## Brochure
 
