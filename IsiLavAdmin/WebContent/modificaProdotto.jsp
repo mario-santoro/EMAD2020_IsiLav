@@ -159,7 +159,7 @@
 
 					<div id="imgContainer" class="col-sm-8 text-left"
 						style="width: 100%; height: 50%;">
-						<img width=50% height=50% src='img/<%=p.getPathImg()%>'
+						<img width=50% height=50% src='<%=p.getPathImg()%>'
 							id="visualizzaImg" />
 					</div>
 

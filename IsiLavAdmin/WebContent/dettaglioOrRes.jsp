@@ -255,7 +255,7 @@
 
 				<div class="alert alert-warning">
 					<strong>Nota!</strong> La quantità restituita dal cliente deve
-					essere accetatta o modificata dopo il controllo con gli RFID, una
+					essere accettata o modificata dopo il controllo con gli RFID, una
 					volta modificata non sarà più possibile modificarla.
 
 				</div>
