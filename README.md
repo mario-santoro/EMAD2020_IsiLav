@@ -116,7 +116,9 @@ $ npm install sync-mysql --save
                     <li>In Nome amministratore settare il nome dell&apos;amministratore</li>
                     <li>Dopodich&eacute; settare la password del DB e confermarla</li>
                     <li>Infine in rivedi e crea premere su &quot;Crea&quot;</li>
-                    <li>Per fare l&rsquo;import del Database &ldquo;isilav.sql&rdquo; presente in questo progetto, recarsi nella risorsa e&hellip;</li>
+                    <li>Dopodiché per importare il DB, andare sulla risorsa e in sicurezza delle connessioni: disabilitare “imponi connessione SSl” e premere su Aggiungere 0.0.0.0 - 255.255.255.255</li>
+<li>Poi con un qualsiasi programma di gestione Database (ad esempio Navicat) collegarsi all’istanza del DB con le credenziali scritte precedentemente importare il file "isilav.sql" presente nella repository
+</li>
                 </ul>
             </li>
             <li>Web App:&nbsp; &nbsp;<ul class="decimal_type" style="list-style-type: square;">
