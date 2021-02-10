@@ -73,13 +73,13 @@ public class InserimentoCliente extends HttpServlet {
 	}
 
 
-	private void mandaMail(String email, String nome, String attivit‡) {
+	private void mandaMail(String email, String nome, String attivit√†) {
 
 		String destinatario=email;//request.getParameter("destinatario");
 		String subject="Iscrizione confermata - IsiLav";
-		String message="Salve " + nome + ",\nCon questa mail, la informiamo che Ë stata "
+		String message="Salve " + nome + ",\nCon questa mail, la informiamo che √® stata "
 				+ "confermata dal sito Amministrativo di IsiLav la sua iscrizione alla piattaforma.\n"
-				+ "Da oggi con la sua attivit‡ ("+ attivit‡ +") potr‡ usufruire dei servizi offerti "
+				+ "Da oggi con la sua attivit√† ("+ attivit√† +") potr√† usufruire dei servizi offerti "
 						+ "da SNB IsiLav s.r.l.\n\n Grazie per averci scelti.\n Cordiali Saluti.\n Il Team IsiLav.";
 		// Impostazioni SMTP
 		Properties props = new Properties();
@@ -91,7 +91,7 @@ public class InserimentoCliente extends HttpServlet {
 
 		Session session= Session.getInstance(props, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("isiLav2021@gmail.com", "IsiLav_2021!");  
+				return new PasswordAuthentication("email@example", "passwordExample***");  
 			}
 		});
 
@@ -100,7 +100,7 @@ public class InserimentoCliente extends HttpServlet {
 
 		try {
 			// Definisco mittente
-			InternetAddress addressFrom = new InternetAddress("isiLav2021@gmail.com");
+			InternetAddress addressFrom = new InternetAddress("email@example");
 			msg.setFrom(addressFrom);
 			// Destinatari
 			InternetAddress[] addressTo = new InternetAddress[1]; 
