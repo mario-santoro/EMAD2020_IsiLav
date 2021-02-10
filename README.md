@@ -131,7 +131,7 @@ $ npm install sync-mysql --save
                     <li>Infine andare nella sezione &quot;Rivedi e crea&quot; e premere il bottone &quot;Crea&quot;</li>
                     <li>Per importare il codice dell&apos;applicativo web, andare sulla risorsa appena creata e nella sezione &quot;Distribuzione&quot; premere su &quot;Deployment Center (Classic)&quot;</li>
                     <li>&nbsp;In questa sezione usare tramite un software FTP client (ad esempio FileZilla) &egrave; possibile connettersi inserendo l&apos;endpoint, nome utente e password del servizio reperibili cliccando su FTP e poi dashboard</li>
-                    <li>In FileZilla, dopo aver collegato con l&apos;endpoint il servizio, aprire le cartelle fino a webapps e caricare il file ROOT.war presente in questa repository e dopo pochi minuti sar&agrave; pronto al funzionamento</li>
+                    <li>In FileZilla, dopo aver collegato con l&apos;endpoint il servizio, aprire le cartelle fino a webapps e caricare il file ROOT.war creato dal progetto IsiLavAdmin in questa repository e dopo pochi minuti sar&agrave; pronto al funzionamento</li>
                 </ul>
             </li>
             <li>Azure Functions:<ul style="list-style-type: square;">
