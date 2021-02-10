@@ -90,7 +90,7 @@ public class ModificaImmagine extends HttpServlet {
 			bos.flush();
 			bos.close();
 			is.close();
-			pd.doUpdateImage(nomeFile, p.getNomeArticolo());
+			pd.doUpdateImage("https://isilav.azurewebsites.net/img/"+nomeFile, p.getNomeArticolo());
 	}
 	
 		

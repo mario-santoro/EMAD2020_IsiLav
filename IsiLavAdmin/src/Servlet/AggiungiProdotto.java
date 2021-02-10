@@ -91,7 +91,7 @@ public class AggiungiProdotto extends HttpServlet {
     bos.close();
     is.close();
 
-		Prodotto p = new Prodotto(nomeArticolo,categoria,descBreve,prezzo,nomeFile,quant,pezzi,desc,false);
+		Prodotto p = new Prodotto(nomeArticolo,categoria,descBreve,prezzo,"https://isilav.azurewebsites.net/img/"+nomeFile,quant,pezzi,desc,false);
 
 	
 			ProdottoDAO pDAO = new ProdottoDAO();

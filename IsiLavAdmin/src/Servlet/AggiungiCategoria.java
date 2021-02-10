@@ -82,7 +82,7 @@ public class AggiungiCategoria extends HttpServlet {
 		is.close();
 		
 		
-		p.addCategoria(nuovaCategoria,nomeFile);
+		p.addCategoria(nuovaCategoria,"https://isilav.azurewebsites.net/img/"+nomeFile);
 
 		ArrayList<String> categorie = p.getCategorie();
 		
