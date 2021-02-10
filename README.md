@@ -89,7 +89,7 @@ $ npm install sync-mysql --save
 ```
 ## Risorse Cloud "Microsoft Azure"
 <ul>
-	<li>Database SQL: per memorizzare in maniera persistente i dati</li>
+	<li>Database MySQL: per memorizzare in maniera persistente i dati</li>
 	<li>Web App: caricamento dell'applicazione Web</li>
 	<li>Azure Functions: piattaforma di elaborazione serverless basata su eventi</li>
 </ul>
