@@ -153,4 +153,4 @@ $ npm install sync-mysql --save
 
 ## Brochure
 
-<img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/main/Documentazione/IsiLavBrochure.png" height="500">
+<img src="https://github.com/mario-santoro/EMAD2020_IsiLav/blob/main/Documentazione/IsiLavBroch.png" height="500">
